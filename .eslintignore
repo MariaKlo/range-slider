@@ -1,0 +1,6 @@
+tsconfig.json
+node_modules
+dist
+webpack.config.js
+webpack.prod.js
+jest.config.js
