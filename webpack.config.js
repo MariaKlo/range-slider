@@ -8,8 +8,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: 'development',
     entry: {
-        main: './src/range-slider/index.ts',
-        Model: './src/range-slider/Model/Model.ts'
+        Main: './src/range-slider/index.ts',
+        Model: './src/range-slider/Model/Model.ts',
+        View: './src/range-slider/View/View.ts',
+        Presenter: './src/range-slider/Presenter/Presenter.ts'
     },
     devtool: 'inline-source-map',
     output: {
