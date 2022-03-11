@@ -53,14 +53,20 @@ input, input:hover, input:focus, input:active {
   height: 15px;
   margin: 35px;
 
-  &__thumb {
-    width: 10px;
-    height: 25px;
-    border-radius: 3px;
-    position: relative;
-    left: 10px;
-    top: -5px;
-    background: blue;
-    cursor: pointer;
+  &__label {
+    background-color: beige;
+    border: 2px solid darkblue;
+    width: 6.25rem;
+    height: 3.125rem;
+  }
+}
+
+.label {
+  &__max-value {
+    border: 1px solid palevioletred;
+  }
+
+  &__min-value {
+    border: 1px solid greenyellow;
   }
 }

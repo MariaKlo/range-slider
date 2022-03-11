@@ -9,5 +9,7 @@ html
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
     title TOXIN
   body 
-    div.range-slider
-      div.range-slider__thumb
+    input(type="range" min="0" max="300" value="0").range-slider#range-slider
+    div.range-slider__label
+     span.label__max-value
+      span.label__min-value
