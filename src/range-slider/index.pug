@@ -9,10 +9,10 @@ html
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
     title TOXIN
   body 
-    - let min = 0, max = 300
-    - let a = 10, b = 100;
+    - let min = -50, max = 50
+    - let a = -30, b = 20;
 
-    .wrap(role='group' aria-labelledby='multi-lbl' style=`a: ${a}; b: ${b}; min: ${min}; max: ${max}`)
+    .wrap(role='group' aria-labelledby='multi-lbl' style=`--a: ${a}; --b: ${b}; --min: ${min}; --max: ${max}`)
       #multi-lbl Multi thumb slider:
       label.sr-only(for='a') Value A:
       input#a(type='range' min=min value=a max=max)
