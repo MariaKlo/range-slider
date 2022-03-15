@@ -9,14 +9,22 @@ html
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
     title TOXIN
   body 
-    - let min = -50, max = 50
-    - let a = -30, b = 20;
+    - let min = -50, max = 50;
+    - let thumbs = [
+    - { val: -15, lbl: 'Value A' }, 
+    - { val: 20, lbl: 'Value B' }, 
+    - { val: -35, lbl: 'Value C' }, 
+    - { val: 45, lbl: 'Value D' }
+    - ];
+    - let nv = thumbs.length;
+    - let layers = thumbs.map((c, i) => `linear-gradient(90deg, red calc(var(--r) + (var(--v${i}) - var(--min))/var(--dif)*var(--uw)), transparent 0)`);
 
-    .wrap(role='group' aria-labelledby='multi-lbl' style=`--a: ${a}; --b: ${b}; --min: ${min}; --max: ${max}`)
+    .wrap(role='group' aria-labelledby='multi-lbl' 
+    style=`${thumbs.map((c, i) => `--v${i}: ${c.val}`).join('; ')}; 
+    --min: ${min}; --max: ${max};
+    --fill: ${layers.join(', ')}`)
       #multi-lbl Multi thumb slider:
-      label.sr-only(for='a') Value A:
-      input#a(type='range' min=min value=a max=max)
-      output(for='a' style='--c: var(--a)')
-      label.sr-only(for='b') Value B:
-      input#b(type='range' min=min value=b max=max)
-      output(for='b' style='--c: var(--b)')
+      - for(let i = 0; i < nv; i++)
+        label.sr-only(for=`v${i}`) #{thumbs[i].lbl}
+        input(type='range' id=`v${i}` min=min value=thumbs[i].val max=max)
+        output(for=`v${i}` style=`--c: var(--v${i})`)
