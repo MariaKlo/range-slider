@@ -7,9 +7,9 @@ html
     meta(name="description", content="range-slider")
     meta(name="keywords", content="plugin, plugins, range, range-slider, jquery-plugin")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
-    title TOXIN
+    title Range-slider plugin
   body 
-    - let min = -50, max = 50;
+    - let min = -50, max = 50, step = 5;
     - let thumbs = [
     - { val: -15, lbl: 'Value A' }, 
     - { val: 20, lbl: 'Value B' }, 
@@ -26,5 +26,5 @@ html
       #multi-lbl Multi thumb slider:
       - for(let i = 0; i < nv; i++)
         label.sr-only(for=`v${i}`) #{thumbs[i].lbl}
-        input(type='range' id=`v${i}` min=min value=thumbs[i].val max=max)
+        input(type='range' id=`v${i}` min=min value=thumbs[i].val max=max step=step)
         output(for=`v${i}` style=`--c: var(--v${i})`)
