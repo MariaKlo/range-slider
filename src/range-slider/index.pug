@@ -8,23 +8,6 @@ html
     meta(name="keywords", content="plugin, plugins, range, range-slider, jquery-plugin")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
     title Range-slider plugin
-  body 
-    - let min = -50, max = 50, step = 5;
-    - let thumbs = [
-    - { val: -15, lbl: 'Value A' }, 
-    - { val: 20, lbl: 'Value B' }, 
-    - { val: -35, lbl: 'Value C' }, 
-    - { val: 45, lbl: 'Value D' }
-    - ];
-    - let nv = thumbs.length;
-    - let layers = thumbs.map((c, i) => `linear-gradient(90deg, red calc(var(--r) + (var(--v${i}) - var(--min))/var(--dif)*var(--uw)), transparent 0)`);
-
-    .wrap(role='group' aria-labelledby='multi-lbl' 
-    style=`${thumbs.map((c, i) => `--v${i}: ${c.val}`).join('; ')}; 
-    --min: ${min}; --max: ${max};
-    --fill: ${layers.join(', ')}`)
-      #multi-lbl Multi thumb slider:
-      - for(let i = 0; i < nv; i++)
-        label.sr-only(for=`v${i}`) #{thumbs[i].lbl}
-        input(type='range' id=`v${i}` min=min value=thumbs[i].val max=max step=step)
-        output(for=`v${i}` style=`--c: var(--v${i})`)
+  body
+    input(type="range" min="0" max="50" step="1").range-slider#range-slider
+    div.label 25

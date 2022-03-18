@@ -1,6 +1,7 @@
-// store values in labels
-addEventListener('input', (event: Event) => {
-    const parents = ( <HTMLElement>event.target ).parentElement;
-    const t = event.target as HTMLInputElement;
-    parents?.style.setProperty(`--${t.id}`, t.value);
-}, false);
+const rangeSlider = document.querySelector(".range-slider") as HTMLElement;
+
+// store values in label
+rangeSlider.addEventListener('input', () => {
+    const label = document.querySelector(".label") as HTMLElement;
+    label.innerHTML = (<HTMLInputElement>rangeSlider).value;
+});
