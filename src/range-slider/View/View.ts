@@ -1,7 +1,15 @@
-const rangeSlider = document.querySelector(".range-slider") as HTMLElement;
+class View {
+    $label: HTMLDivElement;
+    $rangeSlider: HTMLInputElement;
+    constructor($label: HTMLDivElement, $rangeSlider: HTMLInputElement) {
+        this.$label = $label;
+        this.$rangeSlider = $rangeSlider;
+    }
+    storeValues (): void {
+        this.$rangeSlider.addEventListener('input', () => {
+            this.$label.innerHTML = (<HTMLInputElement>this.$rangeSlider).value;
+        });
+    } 
+}
 
-// store values in label
-rangeSlider.addEventListener('input', () => {
-    const label = document.querySelector(".label") as HTMLElement;
-    label.innerHTML = (<HTMLInputElement>rangeSlider).value;
-});
+export { View };
