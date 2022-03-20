@@ -1,7 +1,7 @@
 import './index.scss';
 // import $ from "jquery";
 // import Model from './Model/Model';
-import {View} from './View/View';
+// import {View} from './View/View';
 // import Presenter from './Presenter/Presenter';
 
 // (function($) {

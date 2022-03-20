@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es5",                                 
+    "target": "es5", 
+    "types": ["jquery"],                                
     "useDefineForClassFields": true,                 
     /* Modules */
     "module": "es6",                                
