@@ -1,8 +1,17 @@
+$w: 20em;
+$h: 1em;
+$unit: 10px;
+
 * { 
   font: inherit;
+  box-sizing: border-box;
 }
 
 body {
+  font-family: sans-serif;
+  font-size: $unit * 2;
+  line-height: $unit * 2;
+  background: white;
   padding: 0;
   margin: 0;
   background-color: #fff;
@@ -43,20 +52,17 @@ button, button:hover, button:focus, button:active {
   cursor: pointer;
 }
 
-$w: 20em;
-$h: 1em;
-
 @mixin track() {
   width: 100%; height: 100%;
-  background: none /* get rid of Firefox track background */
+  background: none;
 }
 
 @mixin thumb() {
-  border: none; /* get rid of Firefox thumb border */
+  border: none; 
   width: $h; height: $h;
-  border-radius: 0; /* get rid of Firefox corner rounding */
+  border-radius: 0; 
   background: currentcolor;
-  pointer-events: auto
+  pointer-events: auto;
 }
 
 .wrap {
@@ -78,9 +84,9 @@ $h: 1em;
   grid-column: 1;
   grid-row: 2;
   margin: 0;
-  background: none; /* get rid of white Chrome background */
+  background: none;
   color: #000;
-  font: inherit; /* fix too small font-size in both Chrome & Firefox */
+  font: inherit;
   pointer-events: none;
   
   &::-webkit-slider-runnable-track { @include track }
@@ -88,4 +94,29 @@ $h: 1em;
   
   &::-webkit-slider-thumb { @include thumb }
   &::-moz-range-thumb { @include thumb }
+}
+
+// use it for vertical display
+.range-slider_vertical {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  width: 8px;
+  height: 175px;
+  padding: 0 5px;
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 7px;
+}
+.tick {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 1px;
+  background: gray;
+  height: 10px;
+  padding-bottom: 7px;
 }
