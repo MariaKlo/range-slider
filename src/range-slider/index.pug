@@ -1,0 +1,22 @@
+doctype html 
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(name="description", content="range-slider")
+    meta(name="keywords", content="plugin, plugins, range, range-slider, jquery-plugin")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+    title Range-slider plugin
+  body
+    - var n = 1;
+    div.wrap
+      input(type="range" min="1" max="10" step="1" orient="vertical").range-slider.js-range-slider#range-slider
+      div.ticks
+        while n <= 10
+          span.tick= n++ 
+      input(type="range" min="1" max="10" step="1" value="1" orient="vertical").range-slider_second-thumb.js-range-slider_second-thumb
+    div.label_first Current first value: 5
+    div.label_second Current second value: 1
+    div.label__max-def-value
+    div.label__min-def-value
