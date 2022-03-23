@@ -6,29 +6,39 @@ const $maxDefValue = document.querySelector(".label__max-def-value") as HTMLDivE
 const $minDefValue = document.querySelector(".label__min-def-value") as HTMLDivElement;
 
 // set values of inputs
-$rangeSlider?.addEventListener('input', () => {
-    $labelFirst.innerHTML = `Current first value: ${(<HTMLInputElement>$rangeSlider).value}`;
-});
+function setValue() {
+    $rangeSlider?.addEventListener('input', () => {
+        $labelFirst.innerHTML = `Current first value: ${(<HTMLInputElement>$rangeSlider).value}`;
+    });
+}
+setValue();
 
 $secondRangeSlider?.addEventListener('input', () => {
     $labelSecond.innerHTML = `Current second value: ${(<HTMLInputElement>$secondRangeSlider).value}`;
 });
 
 // set max and min values
-$maxDefValue.innerHTML = `Max default value: ${(<HTMLInputElement>$rangeSlider).max}`;
-$minDefValue.innerHTML = `Min default value: ${(<HTMLInputElement>$rangeSlider).min}`;
-
+$maxDefValue.innerHTML = `Max default value: ${(<HTMLInputElement>$rangeSlider)?.max}`;
+$minDefValue.innerHTML = `Min default value: ${(<HTMLInputElement>$rangeSlider)?.min}`;
 
 // set min and max values by click on words
-$maxDefValue?.addEventListener('click', () => {
-    (<HTMLInputElement>$rangeSlider).value = (<HTMLInputElement>$rangeSlider).max;
-    $labelFirst.innerHTML = `Current value: ${(<HTMLInputElement>$rangeSlider).max}`;
-});
+function maxDefValue() {
+    $maxDefValue?.addEventListener('click', () => {
+        (<HTMLInputElement>$rangeSlider).value = (<HTMLInputElement>$rangeSlider).max;
+        $labelFirst.innerHTML = `Current value: ${(<HTMLInputElement>$rangeSlider).max}`;
+    });
+}
+maxDefValue();
 
-$minDefValue?.addEventListener('click', () => {
-    (<HTMLInputElement>$rangeSlider).value = (<HTMLInputElement>$rangeSlider).min;
-    $labelFirst.innerHTML = `Current value: ${(<HTMLInputElement>$rangeSlider).min}`;
-});
+function minDefValue() {
+    $minDefValue?.addEventListener('click', () => {
+        (<HTMLInputElement>$rangeSlider).value = (<HTMLInputElement>$rangeSlider).min;
+        $labelFirst.innerHTML = `Current value: ${(<HTMLInputElement>$rangeSlider).min}`;
+    });
+}
+minDefValue();
+
+export {maxDefValue};
 
 // unfinished version with class View
 
