@@ -37,6 +37,7 @@ module.exports = {
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, 'src/range-slider/index.pug'),
           filename: "index.html",
+          inject: "body"
         }),
         new ESLintPlugin({
           extensions: ['.tsx', '.ts', '.js'],

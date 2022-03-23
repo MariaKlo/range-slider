@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* Language and Environment */
     "target": "es5", 
-    "types": ["jquery", "jest"],                                
+    "types": ["jquery", "jest", "node"],                                
     "useDefineForClassFields": true,                 
     /* Modules */
     "module": "es6",                                
