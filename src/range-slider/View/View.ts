@@ -43,6 +43,44 @@ export {maxDefValue};
 // unfinished version with class View
 
 // class View {
+    // $range: <HTMLDivElement>;
+    // $wrapper:  <HTMLDivElement>;
+    // constructor($wrapper: <HTMLDivElement>, $range: <HTMLDivElement>) {
+    //     this.$wrapper = $wrapper;
+    //     this.$range = $range;
+    //     this.init();
+    // }
+    // init = () => {
+    //     this.createSlider();
+    // }
+    // createSlider() {
+    //     this.$range = this.$wrapper.find('js-rage-slider');
+    //     const slider = $(`
+    //     <div class="wrap">
+    //       <input type="range" min="1" max="10" step="1" orient="vertical" class="range-slider js-range-slider" id="range-slider"/>
+    //       <div class="ticks">
+    //         <span class="tick">1</span>
+    //         <span class="tick">2</span>
+    //         <span class="tick">3</span>
+    //         <span class="tick">4</span>
+    //         <span class="tick">5</span>
+    //         <span class="tick">6</span>
+    //         <span class="tick">7</span>
+    //         <span class="tick">8</span>
+    //         <span class="tick">9</span>
+    //         <span class="tick">10</span>
+    //       </div>
+    //       <input type="range" min="1" max="10" step="1" value="1" orient="vertical" class="range-slider_second-thumb js-range-slider_second-thumb"/>
+    //       <div class="label">
+    //         <div class="label_first">Current first value: 5</div>
+    //         <div class="label_second">Current second value: 1</div>
+    //         <div class="label_max-def-value">10</div>
+    //         <div class="label_min-def-value">1</div>
+    //       </div>
+    //     </div>
+    //   `);
+    //   this.$range.append(slider);
+    // }
 //     $label: JQuery<HTMLDivElement>;
 //     $rangeSlider: JQuery<HTMLInputElement>;
 //     constructor($label: JQuery<HTMLDivElement>, $rangeSlider: JQuery<HTMLInputElement>) {
