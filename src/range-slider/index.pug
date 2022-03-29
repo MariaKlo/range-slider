@@ -11,7 +11,7 @@ html
   body
     - var n = 1;
     div.wrap
-      input(type="range" min="1" max="10" step="1" orient="vertical").range-slider.js-range-slider#range-slider
+      input(type="range" min="1" max="10" step="1" value="5" orient="vertical").range-slider.js-range-slider#range-slider
       div.ticks
         while n <= 10
           span.tick= n++ 
