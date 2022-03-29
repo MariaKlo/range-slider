@@ -1,29 +1,33 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es5", 
+    "target": "es2015", 
     "types": ["jquery", "jest", "node"],                                
     "useDefineForClassFields": true,                 
     /* Modules */
-    "module": "es6",                                
+    "module": "es2015",                                
     "rootDir": "./src/",                                 
     /* Emit */                                
     "outDir": "./dist/",                                   
     "removeComments": true, 
     "pretty": true,                          
     /* Interop Constraints */           
-    "esModuleInterop": true,                            
+    "esModuleInterop": true,
+    "moduleResolution": "node",                            
     "forceConsistentCasingInFileNames": true,            
     /* Type Checking */
     "strict": true,                                     
-    "noImplicitAny": true,                            
+    "noImplicitAny": true,
+    "noImplicitReturns": true,                            
     "strictNullChecks": true,                         
     "strictFunctionTypes": true,                      
     "strictBindCallApply": true,                     
     "noImplicitThis": true,                           
-    "useUnknownInCatchVariables": true,               
+    "useUnknownInCatchVariables": true,
+    "allowSyntheticDefaultImports": true,               
     "noUnusedLocals": true,                           
     "noUnusedParameters": true,                      
-    "skipLibCheck": true                             
+    "skipLibCheck": true,
+    "sourceMap": true                             
   }
 }
