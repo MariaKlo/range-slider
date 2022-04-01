@@ -1,4 +1,4 @@
-import { Options } from '../component/options';
+// import { Options } from '../component/options';
 
 const $rangeSlider = document.querySelector(".js-range-slider") as HTMLInputElement;
 const $secondRangeSlider = document.querySelector(".js-range-slider_second-thumb") as HTMLInputElement;
@@ -8,32 +8,44 @@ const $maxDefValue = document.querySelector(".label__max-def-value") as HTMLDivE
 const $minDefValue = document.querySelector(".label__min-def-value") as HTMLDivElement;
 
 
+/**
+ * Try Options.max, Options.min for constructor
+ * 
+ */
+
 class View {
-    options: Options;
-    constructor(options: Options) {
-        this.options = options;
+    max?: number;
+    min?: number;
+    // valueFirst?: number;
+    // valueSecond?: number;
+    // options: Options;
+    constructor(max: number, min: number) {
+        this.max = max;
+        this.min = min;
     }
     setMinAndMaxValues() {
-        $maxDefValue.innerHTML = `Max default value: ${this.options.max}`;
-        $minDefValue.innerHTML = `Min default value: ${this.options.min}`;
+        $maxDefValue.innerHTML = `Max default value: ${this.max}`;
+        $minDefValue.innerHTML = `Min default value: ${this.min}`;
     }
-    setFirstCurrentValue() {
-        $rangeSlider?.addEventListener('input', () => {
-            $labelFirst.innerHTML = `Current first value: ${this.options.valueFirst}`;
+    setFirstCurrentValue(): void {
+        $rangeSlider.addEventListener('input', () => {
+            $labelFirst.innerHTML = `Current first value: ${$rangeSlider.value}`;
         });
     }
-    setSecondCurrentValue() {
-        $secondRangeSlider?.addEventListener('input', () => {
-            $labelSecond.innerHTML = `Current second value: ${this.options.valueSecond}`;
+    setSecondCurrentValue(): void {
+        $secondRangeSlider.addEventListener('input', () => {
+            $labelSecond.innerHTML = `Current second value: ${$secondRangeSlider.value}`;
         });
     }
-    // clickOnMaxValue() {
-    //     $maxDefValue?.addEventListener('click', () => {
-    //         (<HTMLInputElement>$rangeSlider).value: number;
-    //         (<HTMLInputElement>$rangeSlider).value = this.options.max;
-    //         $labelFirst.innerHTML = `Current value: ${this.options.max}`;
-    //     });
-    // }
+    clickOnMaxValue(): void {
+        $maxDefValue?.addEventListener('click', () => {
+            //   (<HTMLInputElement>$rangeSlider).value: number;
+            const valueOfInput =  $rangeSlider.value;
+            let valueAsNumber: number | undefined = +valueOfInput;
+            valueAsNumber = this.max;
+            $labelFirst.innerHTML = `Current first value: ${valueAsNumber}`;
+        });
+    }
     // clickOnMinValue() {
     //     $minDefValue?.addEventListener('click', () => {
     //         (<HTMLInputElement>$rangeSlider).value = this.options.min;
@@ -41,5 +53,18 @@ class View {
     //     });
     // }
 }
+
+const view: View = new View(10, 1);
+const result: void = view.setMinAndMaxValues();
+console.log(result);
+
+const result2 = view.setFirstCurrentValue();
+console.log(result2);
+
+const result3 = view.setSecondCurrentValue();
+console.log(result3);
+
+const result4 = view.clickOnMaxValue();
+console.log(result4);
 
 export { View };
