@@ -1,58 +1,33 @@
-interface Options {
-    max?: number;
-    min?: number;
-    valueFirst?: number;
-    valueSecond?: number;
-}
+import $ from 'jquery';
+import { View } from '../View/View';
+import { Slider, SliderPluginFunction, SliderPluginGlobalOptions, SliderPluginOptions } from './options';
 
-interface SliderGlobalOptions {
-    /**
-     * Global options of the example plugin.
-     */
-    options: Options;
-}
-  
-//   /**
-//    * Function to apply the example plugin to the selected elements of a jQuery result.
-//    */
-interface SliderFunction {
-    /**
-     * Apply the example plugin to the elements selected in the jQuery result.
-     *
-     * @param options Options to use for this application of the example plugin.
-     * @returns jQuery result.
-     */
-    (options: Options): JQuery;
-}
-  
-//   /**
-//    * Declaration of the example plugin.
-//    */
-interface Slider extends SliderGlobalOptions, SliderFunction { }
-  
-//   /**
-//    * Extend the jQuery result declaration with the example plugin.
-//    */
-interface JQuery {
-    /**
-     * Extension of the example plugin.
-     */
-    examplePlugin: Slider;
-}
+// Define the plugin function on the jQuery extension point.
+// Note: Function and global default options must be combined as long as the options are mandatory.
+$.fn.Slider = Object.assign<SliderPluginFunction, SliderPluginGlobalOptions>(
+  function (this: JQuery, options: SliderPluginOptions): JQuery {
 
-function getPerson() {
-    const person = <Options>{
-        max: 100,
-        min: 0,
-        valueFirst: 50,
-        valueSecond: 10
-    };
-    return person;
-}
+    // Merge the global options with the options given as argument.
+    options = $.extend({}, $.fn.Slider.options, options);
 
-const slider: Options = getPerson();
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const name1: number = slider.max!;
-console.log(name1);
+    // Check if required options are missing.
+    if (!options.outputSelector) {
+      console.error('Example plugin options are missing required parameter "outputSelector": ', JSON.stringify(options));
+      return this;
+    }
 
-export { Options, Slider };
+    // Do what the plugin should do. Here we create an instance of the separate service which is then used when the
+    // user clicks the element that the plugin is attached to. It produces a greeting message and appends it to the output.
+    const view = new View(10, 1);
+    console.log(view);
+    // Return the jQuery object for chaining.
+    return this;
+
+  },
+  // Define the global default options.
+  {
+    options: {
+      outputSelector: null
+    }
+  }
+);

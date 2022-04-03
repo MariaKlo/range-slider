@@ -1,8 +1,10 @@
+import { View } from '../View/View';
+
 interface Options {
-    max?: number;
-    min?: number;
-    valueFirst?: number;
-    valueSecond?: number;
+    max: number;
+    min: number;
+    valueFirst: number;
+    valueSecond: number;
 }
 
 interface SliderGlobalOptions {
@@ -28,7 +30,9 @@ interface SliderFunction {
 //   /**
 //    * Declaration of the example plugin.
 //    */
-interface Slider extends SliderGlobalOptions, SliderFunction { }
+interface Slider extends SliderGlobalOptions, SliderFunction {
+    view: View;
+}
   
 //   /**
 //    * Extend the jQuery result declaration with the example plugin.
@@ -37,7 +41,7 @@ interface JQuery {
     /**
      * Extension of the example plugin.
      */
-    examplePlugin: Slider;
+    sliderPlugin: Slider;
 }
 
-export { Options, Slider };
+export { Options, Slider, JQuery, SliderGlobalOptions, SliderFunction };

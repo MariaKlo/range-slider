@@ -3,7 +3,7 @@ import './index.scss';
 // import Model from './Model/Model';
 // import { View } from './View/View';
 // // import Presenter from './Presenter/Presenter';
-// import { Options, Slider } from './component/options';
+// import { Slider } from './component/options';
 
 //  // Use the plugin once the DOM has been loaded.
 //  $(function () {
@@ -24,9 +24,9 @@ etc
 
 */
 // (function($){
-//   $.fn.rangeSlider = function(options) {  
+//   $.fn.Slider = function(options) {  
 
   
 
-//   };
+// };
 // })( jQuery );

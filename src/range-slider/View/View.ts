@@ -7,18 +7,9 @@ const $labelSecond = document.querySelector(".label_second") as HTMLDivElement;
 const $maxDefValue = document.querySelector(".label__max-def-value") as HTMLDivElement;
 const $minDefValue = document.querySelector(".label__min-def-value") as HTMLDivElement;
 
-
-/**
- * Try Options.max, Options.min for constructor
- * 
- */
-
 class View {
-    max?: number;
-    min?: number;
-    // valueFirst?: number;
-    // valueSecond?: number;
-    // options: Options;
+    max: number;
+    min: number;
     constructor(max: number, min: number) {
         this.max = max;
         this.min = min;
@@ -39,19 +30,16 @@ class View {
     }
     clickOnMaxValue(): void {
         $maxDefValue?.addEventListener('click', () => {
-            //   (<HTMLInputElement>$rangeSlider).value: number;
-            const valueOfInput =  $rangeSlider.value;
-            let valueAsNumber: number | undefined = +valueOfInput;
-            valueAsNumber = this.max;
-            $labelFirst.innerHTML = `Current first value: ${valueAsNumber}`;
+            $rangeSlider.valueAsNumber = this.max;
+            $labelFirst.innerHTML = `Current first value: ${this.max}`;
         });
     }
-    // clickOnMinValue() {
-    //     $minDefValue?.addEventListener('click', () => {
-    //         (<HTMLInputElement>$rangeSlider).value = this.options.min;
-    //         $labelFirst.innerHTML = `Current value: ${this.options.min}`;
-    //     });
-    // }
+    clickOnMinValue(): void {
+        $minDefValue?.addEventListener('click', () => {
+            $rangeSlider.valueAsNumber = this.min;
+            $labelSecond.innerHTML = `Current first value: ${this.min}`;
+        });
+    }
 }
 
 const view: View = new View(10, 1);
@@ -66,5 +54,8 @@ console.log(result3);
 
 const result4 = view.clickOnMaxValue();
 console.log(result4);
+
+const result5 = view.clickOnMinValue();
+console.log(result5);
 
 export { View };
