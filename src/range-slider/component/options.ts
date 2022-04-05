@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { View } from '../View/View';
-import { Slider, SliderFunction, SliderGlobalOptions, Options } from './options';
+import { SliderFunction, SliderGlobalOptions, Options } from './globalOptions';
 
 // Define the plugin function on the jQuery extension point.
 // Note: Function and global default options must be combined as long as the options are mandatory.
@@ -11,7 +11,7 @@ $.fn.Slider = Object.assign<SliderFunction, SliderGlobalOptions>(
     options = $.extend({}, $.fn.Slider.options, options);
 
     // Check if required options are missing.
-    if (!options.outputSelector) {
+    if (!options.max || !options.min) {
       console.error('Slider plugin does not have properties max and min: ', JSON.stringify(options));
       return this;
     }

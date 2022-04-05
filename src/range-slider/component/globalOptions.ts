@@ -24,23 +24,15 @@ export interface SliderFunction {
 //    * Declaration of the example plugin.
 //    */
 export interface Slider extends SliderGlobalOptions, SliderFunction {
-    settings: MyPluginSettings;
     (behavior: 'enable'): JQuery;
-    (settings?: MyPluginSettings): JQuery;
 }
-
-export interface MyPluginSettings {
-    title?: string;
-}
-    
 //   /**
 //    * Extend the jQuery result declaration with the example plugin.
 //    */
-declare namespace global {
-    export interface JQuery {
-        /**
-         * Extension of the example plugin.
-         */
-        slider: Slider;
-    }
+
+export interface JQuery {
+    /**
+     * Extension of the example plugin.
+     */
+    slider: Slider;
 }
