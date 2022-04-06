@@ -16,7 +16,6 @@ export interface SliderGlobalOptions {
 //    * Function to apply the example plugin to the selected elements of a jQuery result.
 //    */
 export interface SliderFunction {
- 
     (options: Options): JQuery;
 }
     
