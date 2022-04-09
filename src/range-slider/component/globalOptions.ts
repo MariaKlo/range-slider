@@ -3,6 +3,8 @@ export interface Options {
     min: number;
     valueFirst: number;
     valueSecond: number;
+    isVertical: boolean;
+    showBubble: boolean;
 }
 
 export interface SliderGlobalOptions {
