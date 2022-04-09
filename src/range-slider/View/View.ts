@@ -1,4 +1,10 @@
-// import { Options } from '../component/options';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import Options from '../component/options';
+const values: Options = {
+    max: 40,
+    min: 1,
+    value: 7
+}
 
 const $rangeSlider = document.querySelector(".js-range-slider") as HTMLInputElement;
 const $secondRangeSlider = document.querySelector(".js-range-slider_second-thumb") as HTMLInputElement;
@@ -7,12 +13,23 @@ const $labelSecond = document.querySelector(".label_second") as HTMLDivElement;
 const $maxDefValue = document.querySelector(".label__max-def-value") as HTMLDivElement;
 const $minDefValue = document.querySelector(".label__min-def-value") as HTMLDivElement;
 
+// const maxDefaultValue = 10;
+// const minDefaultValue = 1;
+
 class View {
     max: number;
     min: number;
     constructor(max: number, min: number) {
         this.max = max;
         this.min = min;
+        this.init();
+    }
+    init() {
+        this.setMinAndMaxValues();
+        this.setFirstCurrentValue();
+        this.setSecondCurrentValue();
+        this.clickOnMaxValue();
+        this.clickOnMinValue();
     }
     setMinAndMaxValues() {
         $maxDefValue.innerHTML = `Max default value: ${this.max}`;
@@ -42,20 +59,7 @@ class View {
     }
 }
 
-const view: View = new View(10, 1);
-const result: void = view.setMinAndMaxValues();
-console.log(result);
+const view: View = new View(values.max, values.min);
+console.log(view);
 
-const result2 = view.setFirstCurrentValue();
-console.log(result2);
-
-const result3 = view.setSecondCurrentValue();
-console.log(result3);
-
-const result4 = view.clickOnMaxValue();
-console.log(result4);
-
-const result5 = view.clickOnMinValue();
-console.log(result5);
-
-export { View };
+export default { View };
