@@ -3,7 +3,6 @@ import Options from '../component/options';
 const values: Options = {
     max: 40,
     min: 1,
-    value: 7
 }
 
 const $rangeSlider = document.querySelector(".js-range-slider") as HTMLInputElement;
@@ -31,7 +30,7 @@ class View {
         this.clickOnMaxValue();
         this.clickOnMinValue();
     }
-    setMinAndMaxValues() {
+    setMinAndMaxValues(): void {
         $maxDefValue.innerHTML = `Max default value: ${this.max}`;
         $minDefValue.innerHTML = `Min default value: ${this.min}`;
     }
@@ -46,13 +45,13 @@ class View {
         });
     }
     clickOnMaxValue(): void {
-        $maxDefValue?.addEventListener('click', () => {
+        $maxDefValue.addEventListener('click', () => {
             $rangeSlider.valueAsNumber = this.max;
             $labelFirst.innerHTML = `Current first value: ${this.max}`;
         });
     }
     clickOnMinValue(): void {
-        $minDefValue?.addEventListener('click', () => {
+        $minDefValue.addEventListener('click', () => {
             $rangeSlider.valueAsNumber = this.min;
             $labelSecond.innerHTML = `Current first value: ${this.min}`;
         });
@@ -62,4 +61,4 @@ class View {
 const view: View = new View(values.max, values.min);
 console.log(view);
 
-export default { View };
+export {View};
