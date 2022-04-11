@@ -1,13 +1,15 @@
 import $ from 'jquery';
 // import maxDefaultValue from './const';
 // import minDefaultValue from './const';
-// import View from '../View/View';
+import {View} from '../View/View';
 // import { SliderFunction, SliderGlobalOptions, Options } from './globalOptions';
+
+const maxDefaultValue = 10;
+const minDefaultValue = 1;
 
 export default interface Options {
   max: number;
   min: number;
-  value: number;
 }
 
 // interface SliderGlobalOptions {
@@ -42,11 +44,14 @@ declare global {
   }
 }
 
+
+
 // Define the plugin function on the jQuery extension point.
 // Note: Function and global default options must be combined as long as the options are mandatory.
-$.fn.Slider = function (this: JQuery, options: Options): JQuery {
-    
+$.fn.Slider = function Slider(this: JQuery, options: Options): JQuery {
     // Merge the global options with the options given as argument.
+    const view = new View(options.max, options.min);
+    console.log(view.max);
     options = $.extend({}, $.fn.Slider, options);
 
     // Check if required options are missing.
@@ -63,15 +68,9 @@ $.fn.Slider = function (this: JQuery, options: Options): JQuery {
 
   },
   // Define the global default options.
-  // {
-  //   options: {
-  //     max: maxDefaultValue,
-  //     min: minDefaultValue,
-  //   }
-  // }
-
-$('.range-slider').Slider({
-  max: 15,
-  min: 1,
-  value: 7
-});
+  {
+    options: {
+      max: maxDefaultValue,
+      min: minDefaultValue
+    }
+  }
