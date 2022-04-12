@@ -1,8 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import Options from '../component/options';
+import {maxDefaultValue} from '../component/const';
+import {minDefaultValue}from '../component/const';
 const values: Options = {
-    max: 40,
-    min: 1,
+    max: maxDefaultValue,
+    min: minDefaultValue,
 }
 
 const $rangeSlider = document.querySelector(".js-range-slider") as HTMLInputElement;
@@ -11,9 +13,6 @@ const $labelFirst = document.querySelector(".label_first") as HTMLDivElement;
 const $labelSecond = document.querySelector(".label_second") as HTMLDivElement;
 const $maxDefValue = document.querySelector(".label__max-def-value") as HTMLDivElement;
 const $minDefValue = document.querySelector(".label__min-def-value") as HTMLDivElement;
-
-// const maxDefaultValue = 10;
-// const minDefaultValue = 1;
 
 class View {
     max: number;
@@ -37,6 +36,15 @@ class View {
     setFirstCurrentValue(): void {
         $rangeSlider.addEventListener('input', () => {
             $labelFirst.innerHTML = `Current first value: ${$rangeSlider.value}`;
+            // if (parseInt($rangeSlider.value) > this.max) {
+            //     let valueAsNumber = parseInt($rangeSlider.value);
+            //     console.log(valueAsNumber);
+            //     valueAsNumber = this.max;
+            //     $labelFirst.innerHTML = `Current first value: ${this.max}`;
+            // }
+            let maxInputValueAsNumber = parseInt($rangeSlider.max);
+            maxInputValueAsNumber = this.max;
+            console.log(maxInputValueAsNumber);
         });
     }
     setSecondCurrentValue(): void {
@@ -58,7 +66,7 @@ class View {
     }
 }
 
-const view: View = new View(values.max, values.min);
+export const view: View = new View(values.max, values.min);
 console.log(view);
 
 export {View};
