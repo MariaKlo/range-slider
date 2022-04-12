@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const maxDefaultValue = 10;
-const minDefaultValue = 1;
+export const maxDefaultValue = 10;
+export const minDefaultValue = 1;
 
-export default {
-    maxDefaultValue,
-    minDefaultValue
-};
+// export default {
+//     maxDefaultValue,
+//     minDefaultValue
+// };
