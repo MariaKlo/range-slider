@@ -1,11 +1,6 @@
 import $ from 'jquery';
-// import maxDefaultValue from './const';
-// import minDefaultValue from './const';
-import {View} from '../View/View';
+// import {view} from '../View/View';
 // import { SliderFunction, SliderGlobalOptions, Options } from './globalOptions';
-
-const maxDefaultValue = 10;
-const minDefaultValue = 1;
 
 export default interface Options {
   max: number;
@@ -50,8 +45,8 @@ declare global {
 // Note: Function and global default options must be combined as long as the options are mandatory.
 $.fn.Slider = function Slider(this: JQuery, options: Options): JQuery {
     // Merge the global options with the options given as argument.
-    const view = new View(options.max, options.min);
-    console.log(view.max);
+    // view.max
+    // console.log(view.max);
     options = $.extend({}, $.fn.Slider, options);
 
     // Check if required options are missing.
@@ -66,11 +61,4 @@ $.fn.Slider = function Slider(this: JQuery, options: Options): JQuery {
     // Return the jQuery object for chaining.
     return this;
 
-  },
-  // Define the global default options.
-  {
-    options: {
-      max: maxDefaultValue,
-      min: minDefaultValue
-    }
   }
