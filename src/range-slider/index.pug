@@ -11,14 +11,13 @@ html
   body
     - var n = 1;
     div.wrap
-      input(type="range" step="1" value="8" max="50" orient="vertical").range-slider.js-range-slider#range-slider
+      input(type="range" step="1" max="100" min="1" orient="vertical").range-slider.js-range-slider#range-slider
       div.ticks
         while n <= 10
           span.tick= n++ 
-      input(type="range" step="1" value="1" min="1" orient="vertical").range-slider_second-thumb.js-range-slider_second-thumb
+      input(type="range" step="1" orient="vertical").range-slider_second-thumb.js-range-slider_second-thumb
     div.label
       div.label_first Current first value:
       div.label_second Current second value:
       div.label__max-def-value
       div.label__min-def-value
-    script(src="./View/View.ts")

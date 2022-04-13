@@ -1,4 +1,3 @@
-
 import Options from '../component/options';
 import {maxDefaultValue} from '../component/const';
 import {minDefaultValue}from '../component/const';
@@ -35,6 +34,8 @@ class View {
     }
     setFirstCurrentValue(): void {
         $rangeSlider.addEventListener('input', () => {
+            let maxValue = values.max.toString();
+            maxValue = $rangeSlider.max;
             $labelFirst.innerHTML = `Current first value: ${$rangeSlider.value}`;
             // if (parseInt($rangeSlider.value) > this.max) {
             //     let valueAsNumber = parseInt($rangeSlider.value);
@@ -42,9 +43,11 @@ class View {
             //     valueAsNumber = this.max;
             //     $labelFirst.innerHTML = `Current first value: ${this.max}`;
             // }
-            let maxInputValueAsNumber = parseInt($rangeSlider.max);
-            maxInputValueAsNumber = this.max;
-            console.log(maxInputValueAsNumber);
+            console.log(maxValue);
+
+            // let maxInputValueAsNumber = parseInt($rangeSlider.max);
+            // maxInputValueAsNumber = values.max;
+            // console.log(maxInputValueAsNumber);
         });
     }
     setSecondCurrentValue(): void {
