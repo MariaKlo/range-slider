@@ -5,6 +5,7 @@ import $ from 'jquery';
 export default interface Options {
   max: number;
   min: number;
+  step: number;
 }
 
 // interface SliderGlobalOptions {
