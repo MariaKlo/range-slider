@@ -14,6 +14,7 @@ const $labelFirst = document.querySelector(".label_first") as HTMLDivElement;
 const $labelSecond = document.querySelector(".label_second") as HTMLDivElement;
 const $maxDefValue = document.querySelector(".label__max-def-value") as HTMLDivElement;
 const $minDefValue = document.querySelector(".label__min-def-value") as HTMLDivElement;
+const $step = document.querySelector(".label__step") as HTMLDivElement;
 
 class View {
     max: number;
@@ -31,6 +32,8 @@ class View {
         this.setSecondCurrentValue();
         this.clickOnMaxValueForFirstInput();
         this.clickOnMinValueForSecondInput();
+        this.setStepForFirstInput();
+        this.setStepForSecondInput();
     }
     setMinAndMaxValuesForLabels(): void {
         $maxDefValue.innerHTML = `Max default value: ${this.max}`;
@@ -78,6 +81,14 @@ class View {
         $rangeSlider.addEventListener('input', () => {
             const steps = values.step.toString();
             $rangeSlider.step = steps;
+            $step.innerHTML = `Step of slider: ${$rangeSlider.step}`;
+        });
+    }
+    setStepForSecondInput(): void {
+        $secondRangeSlider.addEventListener('input', () => {
+            const steps = values.step.toString();
+            $secondRangeSlider.step = steps;
+            $step.innerHTML = `Step of slider: ${$secondRangeSlider.step}`;
         });
     }
 }
