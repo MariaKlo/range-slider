@@ -11,7 +11,7 @@ html
   body
     - var n = 1;
     div.wrap
-      input(type="range" orient="vertical").range-slider.js-range-slider#range-slider
+      input(type="range" step="1" orient="vertical").range-slider.js-range-slider#range-slider
       div.ticks
         while n <= 10
           span.tick= n++ 
@@ -21,3 +21,4 @@ html
       div.label_second Current second value:
       div.label__max-def-value
       div.label__min-def-value
+      div.label__step Step of slider: 
