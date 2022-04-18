@@ -30,3 +30,14 @@ etc
 
 // };
 // })( jQuery );
+
+// $(document).foundation({
+//     slider: {
+//       on_change: function(){
+//         // do something when the value changes
+//       }
+//     }
+//   });
+
+// var new_value = 3;
+// $('.range-slider').foundation('slider', 'set_value', new_value);
