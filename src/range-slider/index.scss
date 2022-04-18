@@ -57,7 +57,8 @@ button, button:hover, button:focus, button:active {
 
 @mixin thumb() {
   border: none; 
-  width: $h; height: $h;
+  width: $h; 
+  height: $h;
   border-radius: 0; 
   background: currentcolor;
   pointer-events: auto;
@@ -66,7 +67,6 @@ button, button:hover, button:focus, button:active {
 .wrap {
   display: grid;
   grid-template-rows: max-content $h;
-  overflow: hidden;
   position: relative;
   margin: 1em;
   width: $w;
@@ -96,28 +96,32 @@ button, button:hover, button:focus, button:active {
 
 // use it for vertical display
 .range-slider_vertical {
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
-  width: 8px;
-  height: 175px;
-  padding: 0 5px;
+  display: inline-block;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  background: linear-gradient(90deg, #ccc 10em, transparent 0);
+  background-color: #ccc;
+  transform-origin: 140px 140px;
 }
 
-.ticks {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 7px;
-}
-.tick {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: end;
-  width: 1px;
-  background: gray;
-  height: 10px;
-  padding-bottom: 7px;
-}
+// .ticks {
+//   display: flex;
+//   justify-content: space-between;
+//   padding: 15px 7px;
+// }
+// .tick {
+//   position: relative;
+//   display: flex;
+//   justify-content: center;
+//   align-items: end;
+//   width: 1px;
+//   background: gray;
+//   height: 10px;
+//   padding-bottom: 7px;
+// }
 
 .label {
   padding: 15px;
