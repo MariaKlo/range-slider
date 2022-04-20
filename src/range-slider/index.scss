@@ -86,7 +86,7 @@ button, button:hover, button:focus, button:active {
   @if $bg {
     background: linear-gradient(0deg, #ccc $h, transparent 0);
   } @else {
-    background: none;
+    background: #ccc;
   }
 }
 
@@ -97,6 +97,13 @@ button, button:hover, button:focus, button:active {
   margin: 1em;
   width: $w;
   @include wrap-background($bg: true);
+
+  &_vertical {
+    display: grid;
+    margin: 4em;
+    width: 20em;
+    transform: rotate(270deg) translateX(-129px);
+  }
 }
 
 .range-slider, .range-slider_second-thumb {
@@ -126,31 +133,11 @@ button, button:hover, button:focus, button:active {
 
 // use it for vertical display
 .range-slider_vertical, .range-slider_vertical-second {
-  display: inline-block;
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
   @include wrap-background($bg: false);
-  background-color: #ccc;
   transform-origin: 140px 140px;
 
   &::-webkit-slider-runnable-track { @include track }
   &::-moz-range-track { @include track }
-  
-  // &::-webkit-slider-thumb {
-  //   -webkit-appearance: none;
-  //   border: 1px solid #000000;
-  //   height: 36px;
-  //   width: 16px;
-  //   border-radius: 3px;
-  //   background: #ffffff;
-  //   cursor: pointer;
-  //   margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  //   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  //   z-index: 1;
-  // }
 
   &::-webkit-slider-runnable-track { @include track-vertical }
   &::-moz-range-thumb { @include thumb-vertical }
