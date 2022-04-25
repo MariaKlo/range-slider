@@ -6,7 +6,7 @@ $unit: 10px;
 // excess height to improve interactive area / accessibility
 $height: 30px;
 $thumb-height: 13px;
-$track-height: 3px;
+$track-height: 13px;
 
 // colours
 $upper-color: #cfcfcf;
@@ -231,7 +231,7 @@ button, button:hover, button:focus, button:active {
 
 @mixin wrap-background($bg: true) {
   @if $bg {
-    background: linear-gradient(0deg, #ccc $h, transparent 0);
+    background: linear-gradient(0deg, rgb(187, 67, 67) $h, transparent 0);
   } @else {
     background: #ccc;
   }
@@ -239,7 +239,7 @@ button, button:hover, button:focus, button:active {
 
 .wrap {
   display: grid;
-  grid-template-rows: max-content $h;
+  grid-template-rows: 1em 1.6em;
   position: relative;
   margin: 1em;
   width: $w;
