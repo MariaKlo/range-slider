@@ -1,4 +1,5 @@
 import './index.scss';
+import './index.js';
 // import $ from "jquery";
 // import Model from './Model/Model';
 // import { View } from './View/View';
