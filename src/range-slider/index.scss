@@ -1,294 +1,294 @@
-$w: 20em;
-$h: 1em;
-$unit: 10px;
+// $w: 20em;
+// $h: 1em;
+// $unit: 10px;
 
 // CODE FOR PROGRESS BAR
 // excess height to improve interactive area / accessibility
-$height: 30px;
-$thumb-height: 13px;
-$track-height: 13px;
+// $height: 30px;
+// $thumb-height: 13px;
+// $track-height: 13px;
 
-// colours
-$upper-color: #cfcfcf;
-$lower-color: #0199ff;
-$thumb-color: #0199ff;
-$thumb-hover-color: #55c2ff;
+// // colours
+// $upper-color: #cfcfcf;
+// $lower-color: #0199ff;
+// $thumb-color: #0199ff;
+// $thumb-hover-color: #55c2ff;
 
-$upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 50% / 100% $track-height no-repeat transparent;
-$lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
+// $upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 50% / 100% $track-height no-repeat transparent;
+// $lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
 
-// Webkit cannot style progress so we fake it with a long shadow
-// on the thumb element
-@function webkit-slider-thumb-shadow($i: 1) {
-  $val: #{$i}px 0 0 -#{($thumb-height - $track-height) / 2} #{$upper-color};
-  @if $i == 1 {
-    @for $k from 2 through 1000 {
-      $val: #{$val}, webkit-slider-thumb-shadow($k);
-    }
-  }
-  @return $val;
-}
+// // Webkit cannot style progress so we fake it with a long shadow
+// // on the thumb element
+// @function webkit-slider-thumb-shadow($i: 1) {
+//   $val: #{$i}px 0 0 -#{($thumb-height - $track-height) / 2} #{$upper-color};
+//   @if $i == 1 {
+//     @for $k from 2 through 1000 {
+//       $val: #{$val}, webkit-slider-thumb-shadow($k);
+//     }
+//   }
+//   @return $val;
+// }
 
-.range-slider, .range-slider_second-thumb {
-  display: block;
-  appearance: none;
-  width: 100%;
-  margin: 0;
-  height: $height;
-  overflow: hidden;
-  cursor: pointer;
+// .range-slider, .range-slider_second-thumb {
+//   display: block;
+//   appearance: none;
+//   width: 100%;
+//   margin: 0;
+//   height: $height;
+//   overflow: hidden;
+//   cursor: pointer;
   
-  &:focus {
-    outline: none;
-  }
-}
+//   &:focus {
+//     outline: none;
+//   }
+// }
 
-// Webkit
-.range-slider::-webkit-slider-runnable-track,
-.range-slider_second-thumb::-webkit-slider-runnable-track {
-  width: 100%;
-  height: $height;
-  background: $lower-background;
-}
+// // Webkit
+// .range-slider::-webkit-slider-runnable-track,
+// .range-slider_second-thumb::-webkit-slider-runnable-track {
+//   width: 100%;
+//   height: $height;
+//   background: $lower-background;
+// }
 
-.range-slider::-webkit-slider-thumb,
-.range-slider_second-thumb::-webkit-slider-thumb {
-  position: relative;
-  appearance: none;
-  height: $thumb-height;
-  width: $thumb-height;
-  background: $thumb-color;
-  border-radius: 100%;
-  border: 0;
-  top: 50%;
-  margin-top: (-$thumb-height/2);
-  box-shadow: webkit-slider-thumb-shadow();
-  transition: background-color 150ms;
-}
+// .range-slider::-webkit-slider-thumb,
+// .range-slider_second-thumb::-webkit-slider-thumb {
+//   position: relative;
+//   appearance: none;
+//   height: $thumb-height;
+//   width: $thumb-height;
+//   background: $thumb-color;
+//   border-radius: 100%;
+//   border: 0;
+//   top: 50%;
+//   margin-top: (-$thumb-height/2);
+//   box-shadow: webkit-slider-thumb-shadow();
+//   transition: background-color 150ms;
+// }
 
-// Firefox
-.range-slider::-moz-range-track,
-.range-slider::-moz-range-progress,
-.range-slider_second-thumb::-moz-range-track,
-.range-slider_second-thumb::-moz-range-progress {
-  width: 100%;
-  height: $height;
-  background: $upper-background;
-}
+// // Firefox
+// .range-slider::-moz-range-track,
+// .range-slider::-moz-range-progress,
+// .range-slider_second-thumb::-moz-range-track,
+// .range-slider_second-thumb::-moz-range-progress {
+//   width: 100%;
+//   height: $height;
+//   background: $upper-background;
+// }
 
-.range-slider::-moz-range-progress,
-.range-slider_second-thumb::-moz-range-progress {
-  background: $lower-background;
-}
+// .range-slider::-moz-range-progress,
+// .range-slider_second-thumb::-moz-range-progress {
+//   background: $lower-background;
+// }
 
-.range-slider::-moz-range-thumb,
-.range-slider_second-thumb::-moz-range-thumb {
-  appearance: none;
-  margin: 0;
-  height: $thumb-height;
-  width: $thumb-height;
-  background: $thumb-color;
-  border-radius: 100%;
-  border: 0;
-  transition: background-color 150ms;
-}
+// .range-slider::-moz-range-thumb,
+// .range-slider_second-thumb::-moz-range-thumb {
+//   appearance: none;
+//   margin: 0;
+//   height: $thumb-height;
+//   width: $thumb-height;
+//   background: $thumb-color;
+//   border-radius: 100%;
+//   border: 0;
+//   transition: background-color 150ms;
+// }
 
-// Internet Exploder
-.range-slider::-ms-track,
-.range-slider_second-thumb::-ms-track {
-  width: 100%;
-  height: $height;
-  border: 0;
-  // color needed to hide track marks
-  color: transparent;
-  background: transparent;
-}
+// // Internet Exploder
+// .range-slider::-ms-track,
+// .range-slider_second-thumb::-ms-track {
+//   width: 100%;
+//   height: $height;
+//   border: 0;
+//   // color needed to hide track marks
+//   color: transparent;
+//   background: transparent;
+// }
 
-.range-slider::-ms-fill-lower,
-.range-slider_second-thumb::-ms-fill-lower {
-  background: $lower-background;
-}
+// .range-slider::-ms-fill-lower,
+// .range-slider_second-thumb::-ms-fill-lower {
+//   background: $lower-background;
+// }
 
-.range-slider::-ms-fill-upper,
-.range-slider_second-thumb::-ms-fill-upper {
-  background: $upper-background;
-}
+// .range-slider::-ms-fill-upper,
+// .range-slider_second-thumb::-ms-fill-upper {
+//   background: $upper-background;
+// }
 
-.range-slider::-ms-thumb,
-.range-slider_second-thumb::-ms-thumb {
-  appearance: none;
-  height: $thumb-height;
-  width: $thumb-height;
-  background: $thumb-color;
-  border-radius: 100%;
-  border: 0;
-  transition: background-color 150ms;
-  // IE Edge thinks it can support -webkit prefixes
-  top: 0;
-  margin: 0;
-  box-shadow: none;
-}
+// .range-slider::-ms-thumb,
+// .range-slider_second-thumb::-ms-thumb {
+//   appearance: none;
+//   height: $thumb-height;
+//   width: $thumb-height;
+//   background: $thumb-color;
+//   border-radius: 100%;
+//   border: 0;
+//   transition: background-color 150ms;
+//   // IE Edge thinks it can support -webkit prefixes
+//   top: 0;
+//   margin: 0;
+//   box-shadow: none;
+// }
 
-.range-slider:hover,
-.range-slider:focus,
-.range-slider_second-thumb:hover,
-.range-slider_second-thumb:focus {
+// .range-slider:hover,
+// .range-slider:focus,
+// .range-slider_second-thumb:hover,
+// .range-slider_second-thumb:focus {
 
-  &::-webkit-slider-thumb {
-    background-color: $thumb-hover-color;
-  }
-  &::-moz-range-thumb {
-    background-color: $thumb-hover-color;
-  }
-  &::-ms-thumb {
-    background-color: $thumb-hover-color;
-  }
-}
-// END OF PROGRESS BAR
-
-
+//   &::-webkit-slider-thumb {
+//     background-color: $thumb-hover-color;
+//   }
+//   &::-moz-range-thumb {
+//     background-color: $thumb-hover-color;
+//   }
+//   &::-ms-thumb {
+//     background-color: $thumb-hover-color;
+//   }
+// }
+// // END OF PROGRESS BAR
 
 
-* { 
-  font: inherit;
-  box-sizing: border-box;
-}
 
-body {
-  line-height: $unit * 2;
-  background: white;
-  padding: 0;
-  margin: 0;
-  background-color: #fff;
-  font-family: 'Montserrat';
-  font-size: 0.87rem;
-  color: black;
-  overflow-x: hidden;
-}
 
-div, p, form, input, a, span, button {
-  box-sizing: border-box;
-}
+// * { 
+//   font: inherit;
+//   box-sizing: border-box;
+// }
 
-p {
-  padding: 0;
-  margin: 0;
-}
+// body {
+//   line-height: $unit * 2;
+//   background: white;
+//   padding: 0;
+//   margin: 0;
+//   background-color: #fff;
+//   font-family: 'Montserrat';
+//   font-size: 0.87rem;
+//   color: black;
+//   overflow-x: hidden;
+// }
 
-ul, li {
-  display: block;
-  padding: 0;
-  margin: 0;
-}
+// div, p, form, input, a, span, button {
+//   box-sizing: border-box;
+// }
 
-h1, h2, h3, h4, h5, h6 {
-  padding: 0;
-  margin: 0;
-  font-weight: 700;
-  text-transform: uppercase;
-}
+// p {
+//   padding: 0;
+//   margin: 0;
+// }
 
-input, input:hover, input:focus, input:active,
-button, button:hover, button:focus, button:active {
-  outline: none;
-}
+// ul, li {
+//   display: block;
+//   padding: 0;
+//   margin: 0;
+// }
 
-button, button:hover, button:focus, button:active {
-  cursor: pointer;
-}
+// h1, h2, h3, h4, h5, h6 {
+//   padding: 0;
+//   margin: 0;
+//   font-weight: 700;
+//   text-transform: uppercase;
+// }
 
-@mixin track() {
-  width: 100%; 
-  height: 100%;
-  background: none;
-}
+// input, input:hover, input:focus, input:active,
+// button, button:hover, button:focus, button:active {
+//   outline: none;
+// }
 
-@mixin track-vertical() {
-  width: 100%; 
-  height: 100%;
-  z-index: 2;
-  background: none;
-}
+// button, button:hover, button:focus, button:active {
+//   cursor: pointer;
+// }
 
-@mixin thumb() {
-  border: none; 
-  width: $h; 
-  height: $h;
-  border-radius: 0; 
-  background: currentcolor;
-  pointer-events: auto;
-}
+// @mixin track() {
+//   width: 100%; 
+//   height: 100%;
+//   background: none;
+// }
 
-@mixin thumb-vertical() {
-  border: none; 
-  width: $h; 
-  height: $h;
-  border-radius: 0; 
-  background: currentcolor;
-  pointer-events: auto;
-  z-index: 1;
-}
+// @mixin track-vertical() {
+//   width: 100%; 
+//   height: 100%;
+//   z-index: 2;
+//   background: none;
+// }
 
-@mixin wrap-background($bg: true) {
-  @if $bg {
-    background: linear-gradient(0deg, rgb(187, 67, 67) $h, transparent 0);
-  } @else {
-    background: #ccc;
-  }
-}
+// @mixin thumb() {
+//   border: none; 
+//   width: $h; 
+//   height: $h;
+//   border-radius: 0; 
+//   background: currentcolor;
+//   pointer-events: auto;
+// }
 
-.wrap {
-  display: grid;
-  grid-template-rows: 1em 1.6em;
-  position: relative;
-  margin: 1em;
-  width: $w;
-  @include wrap-background($bg: true);
+// @mixin thumb-vertical() {
+//   border: none; 
+//   width: $h; 
+//   height: $h;
+//   border-radius: 0; 
+//   background: currentcolor;
+//   pointer-events: auto;
+//   z-index: 1;
+// }
 
-  &_vertical {
-    display: grid;
-    margin: 4em;
-    width: 20em;
-    transform: rotate(270deg) translateX(-129px);
-  }
-}
+// @mixin wrap-background($bg: true) {
+//   @if $bg {
+//     background: linear-gradient(0deg, rgb(187, 67, 67) $h, transparent 0);
+//   } @else {
+//     background: #ccc;
+//   }
+// }
 
-.range-slider, .range-slider_second-thumb {
-  &::-webkit-slider-runnable-track, 
-  &::-webkit-slider-thumb, & {
-    -webkit-appearance: none
-  }
+// .wrap {
+//   display: grid;
+//   grid-template-rows: max-content 1em; //1em 1.6em for progress
+//   position: relative;
+//   margin: 1em;
+//   width: $w;
+//   @include wrap-background($bg: true);
+
+//   &_vertical {
+//     display: grid;
+//     margin: 4em;
+//     width: 20em;
+//     transform: rotate(270deg) translateX(-129px);
+//   }
+// }
+
+// .range-slider, .range-slider_second-thumb {
+//   &::-webkit-slider-runnable-track, 
+//   &::-webkit-slider-thumb, & {
+//     -webkit-appearance: none
+//   }
   
-  grid-column: 1;
-  grid-row: 2;
-  margin: 0;
-  background: none;
-  color: #000;
-  font: inherit;
-  pointer-events: none;
+//   grid-column: 1;
+//   grid-row: 2;
+//   margin: 0;
+//   background: none;
+//   color: #000;
+//   font: inherit;
+//   pointer-events: none;
   
-  &::-webkit-slider-runnable-track { @include track }
-  &::-moz-range-track { @include track }
+//   &::-webkit-slider-runnable-track { @include track }
+//   &::-moz-range-track { @include track }
   
-  &::-webkit-slider-thumb { @include thumb }
-  &::-moz-range-thumb { @include thumb }
-}
+//   &::-webkit-slider-thumb { @include thumb }
+//   &::-moz-range-thumb { @include thumb }
+// }
 
-.label {
-  padding: 15px;
-}
+// .label {
+//   padding: 15px;
+// }
 
-// use it for vertical display
-.range-slider_vertical, .range-slider_vertical-second {
-  @include wrap-background($bg: false);
-  transform-origin: 140px 140px;
+// // use it for vertical display
+// .range-slider_vertical, .range-slider_vertical-second {
+//   @include wrap-background($bg: false);
+//   transform-origin: 140px 140px;
 
-  &::-webkit-slider-runnable-track { @include track }
-  &::-moz-range-track { @include track }
+//   &::-webkit-slider-runnable-track { @include track }
+//   &::-moz-range-track { @include track }
 
-  &::-webkit-slider-runnable-track { @include track-vertical }
-  &::-moz-range-thumb { @include thumb-vertical }
-}
+//   &::-webkit-slider-runnable-track { @include track-vertical }
+//   &::-moz-range-thumb { @include thumb-vertical }
+// }
 
 // .ticks {
 //   display: flex;
@@ -305,3 +305,80 @@ button, button:hover, button:focus, button:active {
 //   height: 10px;
 //   padding-bottom: 7px;
 // }
+
+$w: 20em;
+$h: 1em;
+
+@mixin track() {
+  width: 100%; height: 100%;
+  background: none /* get rid of Firefox track background */
+}
+
+@mixin thumb() {
+  border: none; /* get rid of Firefox thumb border */
+  width: $h; height: $h;
+  border-radius: 0; /* get rid of Firefox corner rounding */
+  background: currentcolor;
+  pointer-events: auto
+}
+
+* { font: inherit }
+
+.wrap {
+  --dif: calc(var(--max) - var(--min));
+  display: grid;
+  grid-template: repeat(2, max-content) #{$h}/ 1fr 1fr;
+  overflow: hidden;
+  position: relative;
+  margin: 1em auto;
+  width: $w;
+  background: linear-gradient(0deg, #ccc $h, transparent 0);
+  font-family: ubuntu mono, consolas, monaco, monospace;
+  
+  &::before, &::after {
+    grid-column: 1/ span 2;
+    grid-row: 3;
+    height: 100%;
+    background: #95a;
+    content: ''
+  }
+  
+  &::before {
+    margin-left: calc((var(--a) - var(--min))/var(--dif)*100%);
+    width: calc((var(--b) - var(--a))/var(--dif)*100%);
+  }
+  
+  &::after {
+    margin-left: calc((var(--b) - var(--min))/var(--dif)*100%);
+    width: calc((var(--a) - var(--b))/var(--dif)*100%);
+  }
+}
+
+.range-slider, .range-slider_second-thumb {
+  &::-webkit-slider-runnable-track, 
+  &::-webkit-slider-thumb, & {
+    -webkit-appearance: none
+  }
+  
+  grid-column: 1/ span 2;
+  grid-row: 3;
+  z-index: 1;
+  top: 0; left: 0;
+  margin: 0;
+  background: none; /* get rid of white Chrome background */
+  color: #000;
+  pointer-events: none;
+  
+  &::-webkit-slider-runnable-track { @include track }
+  &::-moz-range-track { @include track }
+  
+  &::-webkit-slider-thumb { @include thumb }
+  &::-moz-range-thumb { @include thumb }
+  
+  &:focus {
+    z-index: 2;
+    outline: dotted 1px currentcolor;
+    
+    &, & + output { color: darkorange }
+  }
+}

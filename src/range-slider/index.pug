@@ -10,12 +10,21 @@ html
     title Range-slider plugin
   body
     //- - var n = 1;
-    div.wrap
-      input(type="range").range-slider.js-range-slider#range-slider
-      //- div.ticks
-      //-   while n <= 10
-      //-     span.tick= n++ 
-      input(type="range").range-slider_second-thumb.js-range-slider_second-thumb
+    //- - let min = -50, max = 50;
+    //- - let a = -30, b = 20;
+    //- div.wrap( style=`--a: ${a}; --b: ${b}; --min: ${min}; --max: ${max}`)
+    //-   input(type="range").range-slider.js-range-slider#range-slider.range-slider__bar
+    //-   //- div.ticks
+    //-   //-   while n <= 10
+    //-   //-     span.tick= n++ 
+    //-   input(type="range").range-slider_second-thumb.js-range-slider_second-thumb.range-slider__bar
+    - let min = 1, max = 10
+    - let a = -20, b = -20;
+
+    div.wrap(role='group' aria-labelledby='multi-lbl' 
+          style=`--a: ${a}; --b: ${b}; --min: ${min}; --max: ${max}`)
+      input#a(type='range' min=min value=a max=max).range-slider.js-range-slider
+      input#b(type='range' min=min value=b max=max).range-slider_second-thumb.js-range-slider_second-thumb
     div.label
       div.label_first Current first value:
       div.label_second Current second value:
