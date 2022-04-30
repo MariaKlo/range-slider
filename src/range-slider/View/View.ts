@@ -1,99 +1,130 @@
-import Options from '../component/options';
-import {maxDefaultValue} from '../component/const';
-import {minDefaultValue}from '../component/const';
-import {defaultStep}from '../component/const';
-const values: Options = {
-    max: maxDefaultValue,
-    min: minDefaultValue,
-    step: defaultStep
-}
-
-const $rangeSlider = document.querySelector(".js-range-slider") as HTMLInputElement;
-const $secondRangeSlider = document.querySelector(".js-range-slider_second-thumb") as HTMLInputElement;
-const $labelFirst = document.querySelector(".label_first") as HTMLDivElement;
-const $labelSecond = document.querySelector(".label_second") as HTMLDivElement;
-const $maxDefValue = document.querySelector(".label__max-def-value") as HTMLDivElement;
-const $minDefValue = document.querySelector(".label__min-def-value") as HTMLDivElement;
-const $step = document.querySelector(".label__step") as HTMLDivElement;
-
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 class View {
-    max: number;
-    min: number;
-    constructor(max: number, min: number) {
-        this.max = max;
-        this.min = min;
-        this.init();
+    // vars for form
+    form!: HTMLDivElement;
+    input!: HTMLInputElement;
+    secondInput!: HTMLInputElement;
+    // vars for thumbs
+    firstThumb!: HTMLDivElement;
+    secondThumb!: HTMLDivElement;
+    showThumb!: HTMLDivElement;
+    showSecondThumb!: HTMLDivElement;
+
+
+    init(parent: HTMLDivElement, isDouble: boolean, min: number, max: number,
+        toggleElement: boolean, firstValue: number, secondValue: number): void {
+        this.createForm(parent);
+        this.createInput(isDouble);
+        this.setMax(isDouble, max);
+        this.setMin(isDouble, min);
+        // thumbs
+        this.createThumb(parent, isDouble);
+        if (toggleElement) {
+            this.createThumbElement(isDouble, this.firstThumb, this.secondThumb);
+            this.setThumbValue(isDouble, firstValue, secondValue);
+        }
     }
-    init() {
-        this.setMinAndMaxValuesForLabels();
-        this.setMaxAndMinValuesForFirstInput();
-        this.setMaxAndMinValuesForSecondInput();
-        this.setFirstCurrentValue();
-        this.setSecondCurrentValue();
-        this.clickOnMaxValueForFirstInput();
-        this.clickOnMinValueForSecondInput();
-        this.setStepForFirstInput();
-        this.setStepForSecondInput();
+    // methods creating form
+    createForm(parent: HTMLDivElement): void {
+        this.form = <HTMLDivElement>(document.createElement('div'));
+        this.form.classList.add('range-slider__form');
+        parent.append(this.form);
     }
-    setMinAndMaxValuesForLabels(): void {
-        $maxDefValue.innerHTML = `Max default value: ${this.max}`;
-        $minDefValue.innerHTML = `Min default value: ${this.min}`;
+
+    createInput(isDouble: boolean): void {
+        if (isDouble) {
+            this.input = document.createElement('input');
+            this.input.type = 'range';
+            this.input.classList.add('range-slider__input');
+            this.input.classList.add('range-slider__input_first');
+            this.form.append(this.input);
+
+            this.secondInput = document.createElement('input');
+            this.secondInput.type = 'range';
+            this.secondInput.classList.add('range-slider__input');
+            this.secondInput.classList.add('range-slider__input_second');
+            this.form.append(this.secondInput);
+
+        } else {
+            this.input = document.createElement('input');
+            this.input.type = 'range';
+            this.input.classList.add('range-slider__input');
+            this.form.append(this.input);
+        }
     }
-    setMaxAndMinValuesForFirstInput(): void {
-        $rangeSlider.addEventListener('input', () => {
-            const maxValue = values.max.toString();
-            $rangeSlider.max = maxValue;
-            const minValue = values.min.toString();
-            $rangeSlider.min = minValue;
-        });
+
+    setValues(isDouble: boolean, value: number, secondValue?: number): void {
+        this.input.value = String(value);
+
+        if (isDouble && secondValue) {
+            this.secondInput.value = String(secondValue);
+        }
     }
-    setMaxAndMinValuesForSecondInput(): void {
-        $secondRangeSlider.addEventListener('input', () => {
-            const maxValue = values.max.toString();
-            $secondRangeSlider.max = maxValue;
-            const minValue = values.min.toString();
-            $secondRangeSlider.min = minValue;
-        });
+
+    setMax(isDouble: boolean, max: number) {
+        this.input.max = String(max);
+        if (isDouble) {
+            this.secondInput.max = String(max);
+        }
     }
-    setFirstCurrentValue(): void {
-        $rangeSlider.addEventListener('input', () => {
-            $labelFirst.innerHTML = `Current first value: ${$rangeSlider.value}`;
-        });
+
+    setMin(isDouble: boolean, min: number) {
+        this.input.min = String(min);
+        if (isDouble) {
+            this.secondInput.max = String(min);
+        }
     }
-    setSecondCurrentValue(): void {
-        $secondRangeSlider.addEventListener('input', () => {
-            $labelSecond.innerHTML = `Current second value: ${$secondRangeSlider.value}`;
-        });
+
+    // methods creating thumbs
+
+    createThumb(parent: HTMLDivElement, isDouble: boolean): void {
+        this.firstThumb = document.createElement('div');
+        this.firstThumb.className = 'range-slider__thumb';
+        parent.append(this.firstThumb);
+
+        if (isDouble) {
+            this.firstThumb.classList.add('range-slider__thumb_first');
+            this.secondThumb = document.createElement('div');
+            this.secondThumb.classList.add('range-slider__thumb');
+            this.secondThumb.classList.add('range-slider__thumb_right');
+            parent.append(this.secondThumb);
+        }
     }
-    clickOnMaxValueForFirstInput(): void {
-        $maxDefValue.addEventListener('click', () => {
-            $rangeSlider.valueAsNumber = this.max;
-            $labelFirst.innerHTML = `Current first value: ${this.max}`;
-        });
+
+    createThumbElement(isDouble: boolean, parent: HTMLDivElement, secondParent?: HTMLDivElement): void {
+        this.showThumb = document.createElement('p');
+        this.showThumb.className = 'range-slider__value-thumb';
+        parent.append(this.showThumb);
+        if (isDouble) {
+          this.showSecondThumb = document.createElement('p');
+          this.showSecondThumb.classList.add('range-slider__value-thumb');
+          secondParent!.append(this.showSecondThumb);
+        } 
     }
-    clickOnMinValueForSecondInput(): void {
-        $minDefValue.addEventListener('click', () => {
-            $secondRangeSlider.valueAsNumber = this.min;
-            $labelSecond.innerHTML = `Current second value: ${this.min}`;
-        });
+
+    setThumbValue(isDouble: boolean, value: number, secondValue?: number): void {
+        if (this.showThumb) {
+            this.showThumb.textContent = String(value);
+            if (isDouble) {
+              this.showSecondThumb!.textContent = String(secondValue);
+            }
+        }
     }
-    setStepForFirstInput(): void {
-        $rangeSlider.addEventListener('input', () => {
-            const steps = values.step.toString();
-            $rangeSlider.step = steps;
-            $step.innerHTML = `Step of slider: ${$rangeSlider.step}`;
-        });
+
+    setThumb(isDouble: boolean, percent: number, percentSecond?: number): void {
+        this.firstThumb.style.left = `${percent}%`;
+        if (isDouble) {
+            this.secondThumb.style.right = `${100 - (percentSecond || 0)}%`;
+        }
     }
-    setStepForSecondInput(): void {
-        $secondRangeSlider.addEventListener('input', () => {
-            const steps = values.step.toString();
-            $secondRangeSlider.step = steps;
-            $step.innerHTML = `Step of slider: ${$secondRangeSlider.step}`;
-        });
+
+    rotateThumb(): void {
+        const classNameVertical = 'range-slider__value-thumb_vertical';
+        this.showThumb.classList.add(classNameVertical);
+        if (this.showSecondThumb) {
+            this.showSecondThumb.classList.add(classNameVertical);
+        }
     }
 }
 
-export const view: View = new View(values.max, values.min);
-console.log(view);
-
-export {View};
+export default View;

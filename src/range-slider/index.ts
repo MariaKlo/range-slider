@@ -1,44 +1,46 @@
-import './index.scss';
-import './index.js';
-// import $ from "jquery";
-// import Model from './Model/Model';
-// import { View } from './View/View';
-// // import Presenter from './Presenter/Presenter';
-// import { Slider } from './component/options';
+/* Future setup
+import Model from './Model/Model';
+import View from './View/View';
+import Presenter from './Presenter/Presenter';
+import Options from './component/globalOptions';
 
-//  // Use the plugin once the DOM has been loaded.
-//  $(function () {
-//    // Apply the plugin with additional options to override certain default options.
-//    $('#btn-alex').Slider({ outputColor: 'red' });
-//  });
-/*
-Okay you need to write it in the way that the user can write smth like this:
-
-$('.slider').rangeSlider({
-value:[5,50],
-direction: vertical,
-label: true,
-ticks: true,
-etc
-etc
-});
+(function slider($: JQueryStatic) {
+    $.fn.rangeSlider = function init(settings: {
+        min?: number
+        max?: number
+        step?: number
+        defaultValue?: number
+        firstValue?: number
+        secondValue?: number
+        isMultiThumb?: boolean
+        rightProgressBar?: boolean
+        overThumbElement?: boolean
+        showBubble?: boolean
+        isVertical?: boolean
+        showTicks?: boolean
+    }) {
+        return new Presenter(
+            new Model({
+                min: settings.min,
+                max: settings.max,
+                step: settings.step,
+                defaultValue: settings.isRange ? settings.firstValue : settings.defaultValue,
+                secondValue: settings.secondValue,
+                isMultiThumb: settings.isMultiThumb,
+                rightProgressBar: settings.rightProgressBar,
+                overThumbElement: settings.overThumbElement,
+                isVertical: settings.isVertical,
+                showTicks: settings.showTicks,
+            }),
+            new View(
+                this,
+                new Slider(),
+                new ProgressBar(),
+                new Thumb(),
+                new Scale(),
+            ),
+        );
+    };
+}(jQuery));
 
 */
-// (function($){
-//   $.fn.Slider = function(options) {  
-
-  
-
-// };
-// })( jQuery );
-
-// $(document).foundation({
-//     slider: {
-//       on_change: function(){
-//         // do something when the value changes
-//       }
-//     }
-//   });
-
-// var new_value = 3;
-// $('.range-slider').foundation('slider', 'set_value', new_value);
