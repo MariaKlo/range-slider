@@ -91,7 +91,7 @@ class View {
         }
     }
 
-    createThumbElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLDivElement): void {
+    createThumbElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLElement): void {
         this.showThumb = document.createElement('p');
         this.showThumb.className = 'range-slider__value-thumb';
         parent.append(this.showThumb);
@@ -103,11 +103,9 @@ class View {
     }
 
     setThumbValue(isDouble: boolean, value: number, secondValue?: number): void {
-        if (this.showThumb) {
-            this.showThumb.textContent = String(value);
-            if (isDouble) {
-              this.showSecondThumb!.textContent = String(secondValue);
-            }
+        this.showThumb.textContent = String(value);
+        if (isDouble) {
+            this.showSecondThumb!.textContent = String(secondValue);
         }
     }
 
