@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 class View {
     // vars for form
-    form!: HTMLDivElement;
+    form!: HTMLElement;
     input!: HTMLInputElement;
     secondInput!: HTMLInputElement;
     // vars for thumbs
@@ -11,7 +11,7 @@ class View {
     showSecondThumb!: HTMLDivElement;
 
 
-    init(parent: HTMLDivElement, isDouble: boolean, min: number, max: number,
+    init(parent: HTMLElement, isDouble: boolean, min: number, max: number,
         toggleElement: boolean, firstValue: number, secondValue: number): void {
         this.createForm(parent);
         this.createInput(isDouble);
@@ -25,8 +25,8 @@ class View {
         }
     }
     // methods creating form
-    createForm(parent: HTMLDivElement): void {
-        this.form = <HTMLDivElement>(document.createElement('div'));
+    createForm(parent: HTMLElement): void {
+        this.form = <HTMLElement>(document.createElement('div'));
         this.form.classList.add('range-slider__form');
         parent.append(this.form);
     }
@@ -71,13 +71,13 @@ class View {
     setMin(isDouble: boolean, min: number) {
         this.input.min = String(min);
         if (isDouble) {
-            this.secondInput.max = String(min);
+            this.secondInput.min = String(min);
         }
     }
 
     // methods creating thumbs
 
-    createThumb(parent: HTMLDivElement, isDouble: boolean): void {
+    createThumb(parent: HTMLElement, isDouble: boolean): void {
         this.firstThumb = document.createElement('div');
         this.firstThumb.className = 'range-slider__thumb';
         parent.append(this.firstThumb);
@@ -91,7 +91,7 @@ class View {
         }
     }
 
-    createThumbElement(isDouble: boolean, parent: HTMLDivElement, secondParent?: HTMLDivElement): void {
+    createThumbElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLDivElement): void {
         this.showThumb = document.createElement('p');
         this.showThumb.className = 'range-slider__value-thumb';
         parent.append(this.showThumb);

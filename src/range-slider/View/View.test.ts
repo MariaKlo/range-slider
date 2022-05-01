@@ -1,9 +1,50 @@
-test('check current value of first thumb', () => {
-    const $rangeSlider = document.querySelector(".js-range-slider") as HTMLInputElement;
-    expect($rangeSlider.value).toEqual(5);
-})
+import View from './View';
 
-test('check current value of second thumb', () => {
-    const $secondRangeSlider = document.querySelector(".js-range-slider_second-thumb") as HTMLInputElement;
-    expect($secondRangeSlider.value).toEqual(1);
-})
+describe('initial test', () => {
+    let view: View;
+    let createRangeSlider = () => {
+        document.body.innerHTML = '';
+        view.init(document.body, true, -200, 100, true, 0, 70);
+    };
+    console.log(createRangeSlider); // tests won't run without it. Error: 'createRangeSlider' is declared but its value is never read.
+    beforeEach(() => {
+        view = new View();
+        view.init(document.body, false, 0, 100, false, 20, 30);
+        createRangeSlider = () => {
+            document.body.innerHTML = '';
+            view.init(document.body, true, -200, 100, true, 0, 70);
+        };
+    });
+    afterEach(() => {
+        document.body.innerHTML = '';
+    });
+
+    test('default value is set correctly', () => {
+        view.setValues(false, 20);
+        expect(view.input.value).toBe('20');
+    });
+
+    test('set max value correctly for single slider', () => {
+        view.setMax(false, 100);
+        expect(view.input.max).toBe('100');
+    });
+
+    test('set min value correctly for single slider', () => {
+        view.setMin(false, 0);
+        expect(view.input.min).toBe('0');
+    });
+
+    test('set max value correctly for double slider', () => {
+        createRangeSlider();
+        view.setMax(true, 100);
+        expect(view.input.max).toBe('100');
+        expect(view.secondInput.max).toBe('100');
+    });
+
+    test('set min value correctly for double slider', () => {
+        createRangeSlider();
+        view.setMin(true, 0);
+        expect(view.input.min).toBe('0');
+        expect(view.secondInput.min).toBe('0');
+    });
+});
