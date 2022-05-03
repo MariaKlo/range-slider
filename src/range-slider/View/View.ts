@@ -7,22 +7,15 @@ class View {
     // vars for thumbs
     firstThumb!: HTMLDivElement;
     secondThumb!: HTMLDivElement;
-    showThumb!: HTMLDivElement;
-    showSecondThumb!: HTMLDivElement;
 
 
-    init(parent: HTMLElement, isDouble: boolean, min: number, max: number,
-        toggleElement: boolean, firstValue: number, secondValue: number): void {
+    init(parent: HTMLElement, isDouble: boolean, min: number, max: number): void {
         this.createForm(parent);
         this.createInput(isDouble);
         this.setMax(isDouble, max);
         this.setMin(isDouble, min);
         // thumbs
         this.createThumb(parent, isDouble);
-        if (toggleElement) {
-            this.createThumbElement(isDouble, this.firstThumb, this.secondThumb);
-            this.setThumbValue(isDouble, firstValue, secondValue);
-        }
     }
     // methods creating form
     createForm(parent: HTMLElement): void {
@@ -88,39 +81,6 @@ class View {
             this.secondThumb.classList.add('range-slider__thumb');
             this.secondThumb.classList.add('range-slider__thumb_right');
             parent.append(this.secondThumb);
-        }
-    }
-
-    createThumbElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLElement): void {
-        this.showThumb = document.createElement('p');
-        this.showThumb.className = 'range-slider__value-thumb';
-        parent.append(this.showThumb);
-        if (isDouble) {
-          this.showSecondThumb = document.createElement('p');
-          this.showSecondThumb.classList.add('range-slider__value-thumb');
-          secondParent!.append(this.showSecondThumb);
-        } 
-    }
-
-    setThumbValue(isDouble: boolean, value: number, secondValue?: number): void {
-        this.showThumb.textContent = String(value);
-        if (isDouble) {
-            this.showSecondThumb!.textContent = String(secondValue);
-        }
-    }
-
-    setThumb(isDouble: boolean, percent: number, percentSecond?: number): void {
-        this.firstThumb.style.left = `${percent}%`;
-        if (isDouble) {
-            this.secondThumb.style.right = `${100 - (percentSecond || 0)}%`;
-        }
-    }
-
-    rotateThumb(): void {
-        const classNameVertical = 'range-slider__value-thumb_vertical';
-        this.showThumb.classList.add(classNameVertical);
-        if (this.showSecondThumb) {
-            this.showSecondThumb.classList.add(classNameVertical);
         }
     }
 }
