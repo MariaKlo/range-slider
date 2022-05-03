@@ -1,29 +1,30 @@
 import barView from "./barView";
 
 describe('test progress bar', () => {
-    const progressBar = new barView();
+    let progressBar: barView;
     
     beforeEach(() => {
-        const progressBar = new barView();
+        progressBar = new barView();
         progressBar.createProgressBar(document.body);
+        progressBar.calcPercent(50, 0, 100);
     });
 
     afterEach(() => {
         document.body.innerHTML = '';
     });
 
-    test('bar for one thumb, start left', () => {
+    test('one thumb, left progress bar', () => {
         progressBar.setDefault(false, 20);
         expect(progressBar.bar.style.left).toEqual('0px');
     });
 
-    test('bar for one thumb, start right', () => {
-        progressBar.setDefault(false, 30);
-        expect(progressBar.bar.style.right).toEqual('70%');
+    test('progress bar for two thumbs', () => {
+        progressBar.setDefault(true, 20, 60);
+        expect(progressBar.bar.style.left).toEqual('20%');
     });
 
-    test('bar for two thumbs, show progress bar', () => {
-        progressBar.setDefault(true, 30, 70);
-        expect(progressBar.bar.style.right).toEqual('40%');
+    test('calculate percentage correctly', () => {
+        progressBar.calcPercent(50, 0, 100);
+        expect(progressBar.percentage).toEqual(50);
     });
 });
