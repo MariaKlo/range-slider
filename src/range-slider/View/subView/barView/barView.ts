@@ -1,5 +1,6 @@
 class barView {
     bar!: HTMLElement;
+    percentage!: number;
 
     createProgressBar(parent: HTMLElement): void {
         this.bar = document.createElement('div');
@@ -7,24 +8,25 @@ class barView {
         parent.append(this.bar);
     }
 
-    // calcPercent(value: number, min: number, max: number): number {
-    //     return ((value - min) / (max - min)) * 100;
-    // }
+    calcPercent(value: number, min: number, max: number): number {
+        this.percentage = ((value - min) / (max - min)) * 100;
+        return this.percentage;
+    }
     
-    setDefault(isDouble: boolean, percent: number, percentRight?: number): void {
+    setDefault(isDouble: boolean, percent: number, percentSecond?: number): void {
         if (isDouble) {
             this.bar.style.left = `${percent}%`;
-            this.bar.style.right = `${100 - (percentRight || 0)}%`;
+            this.bar.style.right = `${100 - (percentSecond || 0)}%`;
         } else {
-            this.bar.style.right = `${100 - percent}%`;
             this.bar.style.left = String(0);
+            this.bar.style.right = `${100 - percent}%`;
         }
     }
 
-    setRight(percent: number): void {
-        this.bar.style.left = `${percent}%`;
-        this.bar.style.right = `${String(-1)}px`;
-    }
+    // setRight(percent: number): void {
+    //     this.bar.style.left = `${percent}%`;
+    //     this.bar.style.right = `${String(-1)}px`;
+    // }
 }
 
 export default barView;
