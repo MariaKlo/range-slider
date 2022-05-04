@@ -6,11 +6,11 @@ export default interface Options {
     valueFirst?: number;
     valueSecond?: number;
     isMultiThumb?: boolean;
-    rightProgressBar?: boolean;
-    overThumbElement?: boolean;
+    showRightProgressBar?: boolean;
     showBubble?: boolean;
     isVertical?: boolean;
     showTicks?: boolean;
+    ticksValues: number[];
 }
 
 // export interface SliderGlobalOptions {

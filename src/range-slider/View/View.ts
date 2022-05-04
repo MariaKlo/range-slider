@@ -1,13 +1,48 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import ticksView from "./subView/ticksView/ticksView";
+import stepView from "./subView/stepView/stepView";
+import bubbleView from "./subView/bubbleView/bubbleView";
+import barView from "./subView/barView/barView";
+import Options from "../component/globalOptions";
+
 class View {
     // vars for form
+    parent!: HTMLElement;
     form!: HTMLElement;
+    wrapper!: HTMLElement;
     input!: HTMLInputElement;
     secondInput!: HTMLInputElement;
     // vars for thumbs
     firstThumb!: HTMLDivElement;
     secondThumb!: HTMLDivElement;
+    // imported classes
+    ticks!: ticksView;
+    step!: stepView;
+    bubble!: bubbleView;
+    bar!: barView;
+    options!: Options;
 
+    constructor(parent: HTMLElement, ticks: ticksView, step: stepView, bubble: bubbleView, bar: barView) {
+        this.parent = parent;
+        this.ticks = ticks;
+        this.step = step;
+        this.bubble = bubble;
+        this.bar = bar;
+
+        this.options = {
+            max: 100,
+            min: 0,
+            defaultValue: 50,
+            valueFirst: 10,
+            valueSecond: 70,
+            isMultiThumb: false,
+            showRightProgressBar: false,
+            showBubble: true,
+            isVertical: false,
+            showTicks: false,
+            ticksValues: [],
+        };
+    }
 
     init(parent: HTMLElement, isDouble: boolean, min: number, max: number): void {
         this.createForm(parent);
@@ -16,7 +51,20 @@ class View {
         this.setMin(isDouble, min);
         // thumbs
         this.createThumb(parent, isDouble);
+
+        this.options.isMultiThumb,
+        this.options.max,
+        this.options.min
+        this.options.step
     }
+
+    createWrapper = () => {
+        this.wrapper = document.createElement('div');
+        this.wrapper.classList.add('range-slider');
+        // this.setAttributesValue();
+        this.parent.append(this.wrapper);
+    }
+
     // methods creating form
     createForm(parent: HTMLElement): void {
         this.form = <HTMLElement>(document.createElement('div'));
@@ -79,7 +127,7 @@ class View {
             this.firstThumb.classList.add('range-slider__thumb_first');
             this.secondThumb = document.createElement('div');
             this.secondThumb.classList.add('range-slider__thumb');
-            this.secondThumb.classList.add('range-slider__thumb_right');
+            this.secondThumb.classList.add('range-slider__thumb_second');
             parent.append(this.secondThumb);
         }
     }
