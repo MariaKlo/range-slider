@@ -1,15 +1,14 @@
 export default interface Options {
-    max?: number;
-    min?: number;
-    step?: number;
-    defaultValue?: number;
-    valueFirst?: number;
-    valueSecond?: number;
-    isMultiThumb?: boolean;
-    showRightProgressBar?: boolean;
-    showBubble?: boolean;
-    isVertical?: boolean;
-    showTicks?: boolean;
+    max: number;
+    min: number;
+    step: number;
+    defaultValue: number;
+    valueSecond: number;
+    isMultiThumb: boolean;
+    showRightProgressBar: boolean;
+    showBubble: boolean;
+    isVertical: boolean;
+    showTicks: boolean;
     ticksValues: number[];
 }
 

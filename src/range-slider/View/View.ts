@@ -8,10 +8,15 @@ import Options from "../component/globalOptions";
 class View {
     // vars for form
     parent!: HTMLElement;
-    form!: HTMLElement;
+    form!: HTMLInputElement;
+    formDiv!: HTMLElement;
     wrapper!: HTMLElement;
+    track!: HTMLDivElement;
     input!: HTMLInputElement;
     secondInput!: HTMLInputElement;
+    isMultiThumb!: boolean;
+    max!: number;
+    min!: number;
     // vars for thumbs
     firstThumb!: HTMLDivElement;
     secondThumb!: HTMLDivElement;
@@ -32,8 +37,8 @@ class View {
         this.options = {
             max: 100,
             min: 0,
+            step: 1,
             defaultValue: 50,
-            valueFirst: 10,
             valueSecond: 70,
             isMultiThumb: false,
             showRightProgressBar: false,
@@ -44,14 +49,14 @@ class View {
         };
     }
 
-    init(parent: HTMLElement, isDouble: boolean, min: number, max: number): void {
-        this.createForm(parent);
-        this.createInput(isDouble);
-        this.setMax(isDouble, max);
-        this.setMin(isDouble, min);
+    init(): void {
+        this.createForm(this.parent);
+        this.createInput(this.isMultiThumb);
+        this.setMax(this.isMultiThumb, this.max);
+        this.setMin(this.isMultiThumb, this.min);
         // thumbs
-        this.createThumb(parent, isDouble);
-
+        this.createThumb(this.parent, this.isMultiThumb);
+        this.bar.createProgressBar(this.track);
         this.options.isMultiThumb,
         this.options.max,
         this.options.min
@@ -61,13 +66,22 @@ class View {
     createWrapper = () => {
         this.wrapper = document.createElement('div');
         this.wrapper.classList.add('range-slider');
-        // this.setAttributesValue();
+        this.setAttributesValue();
         this.parent.append(this.wrapper);
     }
 
+    setAttributesValue = () => {
+        if (this.options.isMultiThumb) {
+          this.wrapper.setAttribute('first-value', String(this.options.defaultValue));
+          this.wrapper.setAttribute('second-value', String(this.options.valueSecond));
+        } else {
+          this.wrapper.setAttribute('default-value', String(this.options.defaultValue));
+        }
+    };
+
     // methods creating form
     createForm(parent: HTMLElement): void {
-        this.form = <HTMLElement>(document.createElement('div'));
+        this.formDiv = <HTMLElement>(document.createElement('div'));
         this.form.classList.add('range-slider__form');
         parent.append(this.form);
     }
@@ -131,6 +145,30 @@ class View {
             parent.append(this.secondThumb);
         }
     }
+
+    // set progress bar
+    setInput = () => {
+        this.setValues(this.options.isMultiThumb, this.options.defaultValue,
+          this.options.valueSecond);
+        const placeDefault: number = this.bar.calcPercent(
+          Number(this.input.value),
+          Number(this.input.min),
+          Number(this.input.max),
+        );
+    
+        const placeRight: number = this.secondInput
+          ? this.bar.calcPercent(
+            Number(this.secondInput.value),
+            Number(this.secondInput.min),
+            Number(this.secondInput.max),
+          )
+          : NaN;
+    
+        this.bar.setDefault(this.options.isMultiThumb, placeDefault, placeRight);
+        if (this.options.showRightProgressBar && !this.options.isMultiThumb) {
+          this.bar.setRight(placeDefault);
+        }
+    };
 }
 
 export default View;
