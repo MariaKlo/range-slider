@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Model from './Model/Model';
 import View from './View/View';
 import barView from './View/subView/barView/barView';
@@ -6,9 +7,10 @@ import stepView from './View/subView/stepView/stepView';
 import ticksView from './View/subView/ticksView/ticksView';
 import Presenter from './Presenter/Presenter';
 import Options from './component/globalOptions';
+import { Slider, SliderFunction, SliderGlobalOptions, JQuery } from './component/globalOptions';
 
-(function slider($: JQueryStatic) {
-    $.fn.rangeSlider = function init(settings: Options) {
+(function Slider($: JQueryStatic) {
+    $.fn.Slider = function init(settings: Options) {
         return new Presenter(
             new Model({
                 max: settings.max,

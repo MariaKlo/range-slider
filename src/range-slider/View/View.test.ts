@@ -1,20 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import View from './View';
+import ticksView from './subView/ticksView/ticksView';
+import stepView from './subView/stepView/stepView';
+import bubbleView from './subView/bubbleView/bubbleView';
+import barView from './subView/barView/barView';
 
 describe('test view', () => {
     let view: View;
+    let ticks: ticksView;
+    let step: stepView;
+    let bubble: bubbleView;
+    let bar: barView;
 
     let createRangeSlider = () => {
         document.body.innerHTML = '';
-        view.init(document.body, true, -200, 100);
+        view.init();
     };
 
     beforeEach(() => {
-        view = new View();
-        view.init(document.body, false, 0, 100);
+        ticks = new ticksView();
+        step = new stepView();
+        bubble = new bubbleView();
+        bar = new barView();
+        view = new View(document.body, ticks, step, bubble, bar);
+        view.init();
         createRangeSlider = () => {
             document.body.innerHTML = '';
-            view.init(document.body, true, -200, 100);
+            view.init();
         };
     });
     afterEach(() => {
