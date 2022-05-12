@@ -4,8 +4,8 @@ describe('test progress bar', () => {
     let progressBar: barView;
     
     beforeEach(() => {
-        progressBar = new barView();
-        progressBar.createProgressBar(document.body);
+        progressBar = new barView(document.body);
+        progressBar.createProgressBar();
         progressBar.calcPercent(50, 0, 100);
     });
 

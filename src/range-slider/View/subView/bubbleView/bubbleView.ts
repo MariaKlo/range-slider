@@ -1,20 +1,35 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 class bubbleView {
-    firstBubble!: HTMLDivElement;
-    secondBubble!: HTMLDivElement;
-    showBubble!: HTMLDivElement;
-    showSecondBubble!: HTMLDivElement;
+    firstBubble!: HTMLElement;
+    secondBubble!: HTMLElement;
+    showBubble!: HTMLElement;
+    showSecondBubble!: HTMLElement;
 
-    init(isDouble: boolean, toggleElement: boolean, firstValue: number, secondValue: number): void {
+    init(parent: HTMLElement, isDouble: boolean, toggleElement: boolean, firstValue: number, secondValue: number): void {
+        this.createBubbleWrapper(parent, isDouble);
         if (toggleElement) {
             this.createBubbleElement(isDouble, this.firstBubble, this.secondBubble);
             this.setBubbleValue(isDouble, firstValue, secondValue);
         }
     }
 
+    createBubbleWrapper(parent: HTMLElement, isDouble: boolean): void {
+        this.firstBubble = document.createElement('div');
+        this.firstBubble.className = 'range-slider__bubble';
+        parent.append(this.firstBubble);
+        if (isDouble) {
+          this.firstBubble.classList.add('range-slider__bubble_first');
+          this.secondBubble = document.createElement('div');
+          this.secondBubble.classList.add('range-slider__bubble');
+          this.secondBubble.classList.add('range-slider__bubble_second');
+          parent.append(this.secondBubble);
+        }
+    }
+
     createBubbleElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLElement): void {
         this.showBubble = document.createElement('p');
-        this.showBubble.className = 'range-slider__bubble';
+        this.showBubble.classList.add('range-slider__bubble');
+        console.log(parent);
         parent.append(this.showBubble);
         if (isDouble) {
           this.showSecondBubble = document.createElement('p');
