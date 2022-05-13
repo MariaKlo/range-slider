@@ -29,7 +29,6 @@ class bubbleView {
     createBubbleElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLElement): void {
         this.showBubble = document.createElement('p');
         this.showBubble.classList.add('range-slider__bubble');
-        console.log(parent);
         parent.append(this.showBubble);
         if (isDouble) {
           this.showSecondBubble = document.createElement('p');
