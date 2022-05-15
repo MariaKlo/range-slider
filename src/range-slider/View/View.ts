@@ -11,7 +11,7 @@ export interface IObserverView {
 
 class View {
     // vars for form
-    parent!: HTMLElement;
+    parent: HTMLElement;
     formDiv!: HTMLElement;
     wrapper!: HTMLDivElement;
     track!: HTMLDivElement;
@@ -29,10 +29,10 @@ class View {
     firstValue!: number;
     secondValue!: number;
     // imported classes
-    ticks!: ticksView;
-    step!: stepView;
-    bubble!: bubbleView;
-    bar!: barView;
+    ticks: ticksView;
+    step: stepView;
+    bubble: bubbleView;
+    bar: barView;
     options!: Options;
     observers!: IObserverView[];
 
