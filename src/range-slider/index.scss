@@ -143,5 +143,13 @@
   &__input {
     margin: 5px 3px 0;
     display: block;
+
+    &_first {
+      display: block;
+    }
+
+    &_second {
+      display: block;
+    }
   }
 }
