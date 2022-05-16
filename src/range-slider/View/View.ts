@@ -16,7 +16,7 @@ class View {
     wrapper!: HTMLDivElement;
     track!: HTMLDivElement;
     input!: HTMLInputElement;
-    secondInput!: HTMLInputElement;
+    secondInput?: HTMLInputElement;
     isMultiThumb!: boolean;
     max!: number;
     min!: number;
@@ -64,12 +64,12 @@ class View {
         this.observers.push(observer);
     };
 
-    init = () => {
+    init = (parent: HTMLElement, isMultiThumb: boolean, max: number, min: number) => {
         this.createWrapper();
-        this.createForm(this.parent);
-        this.createInput(this.isMultiThumb);
-        this.setMin(this.isMultiThumb, this.min);
-        this.setMax(this.isMultiThumb, this.max);
+        this.createForm(parent);
+        this.createInput(isMultiThumb);
+        this.setMin(isMultiThumb, min);
+        this.setMax(isMultiThumb, max);
         
         this.createThumb(this.parent, this.isMultiThumb);
         if (this.toggleElement) {
@@ -130,14 +130,14 @@ class View {
           };
         }
         return () => {
-          this.update(Number(this.secondInput.value), isDefault);
+          this.update(Number(this.secondInput!.value), isDefault);
         };
       };
     
       eventInput = () => {
         this.input.addEventListener('input', this.onInput(true));
         if (this.options.isMultiThumb) {
-          this.secondInput.addEventListener('input', this.onInput(false));
+          this.secondInput!.addEventListener('input', this.onInput(false));
         }
       };
     
@@ -198,9 +198,9 @@ class View {
         this.input.addEventListener('mouseout',
           this.onMouseOverOut(this.firstThumb, this.thumbOut));
         if (this.options.isMultiThumb) {
-          this.secondInput.addEventListener('mouseover',
+          this.secondInput!.addEventListener('mouseover',
             this.onMouseOverOut(this.secondThumb, this.thumbOutSecond));
-          this.secondInput.addEventListener('mouseout',
+          this.secondInput!.addEventListener('mouseout',
             this.onMouseOverOut(this.secondThumb, this.thumbOutSecond));
         }
       };
@@ -221,8 +221,8 @@ class View {
         this.input.addEventListener('mousedown', this.onMouseUpDown(true));
         this.input.addEventListener('mouseup', this.onMouseUpDown(true));
         if (this.options.isMultiThumb) {
-          this.secondInput.addEventListener('mousedown', this.onMouseUpDown(false));
-          this.secondInput.addEventListener('mouseup', this.onMouseUpDown(false));
+          this.secondInput!.addEventListener('mousedown', this.onMouseUpDown(false));
+          this.secondInput!.addEventListener('mouseup', this.onMouseUpDown(false));
         }
       };
 
@@ -275,21 +275,21 @@ class View {
         this.input.value = String(value);
 
         if (isDouble && secondValue) {
-            this.secondInput.value = String(secondValue);
+            this.secondInput!.value = String(secondValue);
         }
     }
 
     setMax(isDouble: boolean, max: number) {
         this.input.max = String(max);
         if (isDouble) {
-            this.secondInput.max = String(max);
+            this.secondInput!.max = String(max);
         }
     }
 
     setMin(isDouble: boolean, min: number) {
         this.input.min = String(min);
         if (isDouble) {
-            this.secondInput.min = String(min);
+            this.secondInput!.min = String(min);
         }
     }
 

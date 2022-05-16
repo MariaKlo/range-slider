@@ -17,7 +17,7 @@ describe('test view', () => {
         bubble = new bubbleView();
         bar = new barView(document.body);
         view = new View(document.body, ticks, step, bubble, bar);
-        view.init();
+        view.init(document.body, false, 100, 1);
     });
     afterEach(() => {
         document.body.innerHTML = '';
@@ -58,7 +58,7 @@ describe('test view', () => {
           showBubble: true,
         };
         jest.spyOn(view.bubble, 'rotateBubble');
-        view.init();
+        view.init(document.body, false, 100, 1);
         expect(view.bubble.rotateBubble).toHaveBeenCalled();
       });
       test('mousedown on ProgressBar should call clickOnBar function', () => {
@@ -79,28 +79,11 @@ describe('test view', () => {
         view.onClick(5)();
         expect(view.options.defaultValue).toBe(5);
       });
-      test('left and right values are changed by click', () => {
-        view.options = {
-          ...view.options,
-          isMultiThumb: true,
-          valueSecond: 80,
-          defaultValue: 0,
-        };
-        view.onClick(75)();
-        expect(view.options.valueSecond).toBe(75);
-        expect(view.options.defaultValue).toBe(0);
-      });
       test('input event calls update method with default settings', () => {
         jest.spyOn(view, 'update');
         view.onInput(true)();
         const value = Number(view.input.value);
         expect(view.update).toHaveBeenCalledWith(value, true);
-      });
-      test('input event calls update method with settings for right thumb', () => {
-        jest.spyOn(view, 'update');
-        view.onInput(false)();
-        const value = Number(view.secondInput.value);
-        expect(view.update).toHaveBeenCalledWith(value, false);
       });
       test('progress bar is set on right', () => {
         view.options = {
@@ -111,17 +94,5 @@ describe('test view', () => {
         jest.spyOn(view.bar, 'setRight');
         view.setInput();
         expect(view.bar.setRight).toHaveBeenCalled();
-      });
-      test('should toggle class for default thumb when mouse up or down', () => {
-        const { firstBubble } = view.bubble;
-        jest.spyOn(firstBubble.classList, 'toggle');
-        view.onMouseUpDown(true)();
-        expect(firstBubble.classList.toggle).toHaveBeenCalledWith('range-slider__thumb_active');
-      });
-      test('should toggle class for right thumb when mouse up or down', () => {
-        const { secondBubble } = view.bubble;
-        jest.spyOn(secondBubble.classList, 'toggle');
-        view.onMouseUpDown(false)();
-        expect(secondBubble.classList.toggle).toHaveBeenCalledWith('range-slider__thumb_active');
       });
 });
