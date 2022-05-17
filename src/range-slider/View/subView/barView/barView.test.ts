@@ -18,9 +18,24 @@ describe('test progress bar', () => {
         expect(progressBar.bar.style.left).toEqual('0px');
     });
 
+    test('one thumb, right progress bar', () => {
+        progressBar.setDefault(false, 20);
+        expect(progressBar.bar.style.right).toEqual('80%');
+    });
+
     test('progress bar for two thumbs', () => {
         progressBar.setDefault(true, 20, 60);
         expect(progressBar.bar.style.left).toEqual('20%');
+    });
+
+    test('double thumbs, left progress bar', () => {
+        progressBar.setDefault(true, 20, 60);
+        expect(progressBar.bar.style.left).toEqual('20%');
+      });
+
+    test('double thumbs, right progress bar', () => {
+        progressBar.setDefault(true, 20, undefined);
+        expect(progressBar.bar.style.right).toEqual('100%');
     });
 
     test('calculate percentage correctly', () => {
