@@ -51,7 +51,7 @@ describe('test view', () => {
         expect(view.wrapper.getAttribute('first-value')).toBe('10');
         expect(view.wrapper.getAttribute('second-value')).toBe('40');
       });
-      test('thumb element is rotated when slider is vertical', () => {
+      test('one bubble is rotated when slider is vertical', () => {
         view.options = {
           ...view.options,
           isVertical: true,
