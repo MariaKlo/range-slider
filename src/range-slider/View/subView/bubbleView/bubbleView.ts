@@ -52,9 +52,11 @@ class bubbleView {
     }
 
     rotateBubble(): void {
+        this.showBubble = document.createElement('div');
         const classNameVertical = 'range-slider__bubble_vertical';
         this.showBubble.classList.add(classNameVertical);
         if (this.showSecondBubble) {
+            this.showSecondBubble = document.createElement('div');
             this.showSecondBubble.classList.add(classNameVertical);
         }
     }
