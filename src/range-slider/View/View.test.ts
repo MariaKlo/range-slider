@@ -61,6 +61,16 @@ describe('test view', () => {
         view.init(document.body, false, 100, 1);
         expect(view.bubble.rotateBubble).toHaveBeenCalled();
       });
+      test('two bubbles are rotated when slider is vertical', () => {
+        view.options = {
+          ...view.options,
+          isVertical: true,
+          showBubble: true,
+        };
+        jest.spyOn(view.bubble, 'rotateBubble');
+        view.init(document.body, true, 100, 1);
+        expect(view.bubble.rotateBubble).toHaveBeenCalled();
+      });
       test('mousedown on ProgressBar should call clickOnBar function', () => {
         jest.spyOn(view, 'clickOnBar');
         view.bar.bar.dispatchEvent(new MouseEvent('mousedown'));

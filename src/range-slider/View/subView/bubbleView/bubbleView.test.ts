@@ -41,27 +41,21 @@ describe('test view', () => {
         expect(bubble.createBubbleWrapper).toHaveBeenCalledTimes(1);
     });
 
-    // crushed tests below
-    test('two bubbles are rotated when slider is vertical', () => {
-        // const mockedElementDOM = { classList: { contains: jest.fn(), remove: jest.fn(), add: jest.fn() } };
-        jest.spyOn(bubble, 'rotateBubble');
-        // bubble.rotateBubble();
-        // const className = 'range-slider__bubble_vertical';
-        // mockedElementDOM.classList.contains.mockReturnValueOnce(false);
-        bubble.rotateBubble();
-        expect(bubble.rotateBubble).toBeCalled();
+    test('set two bubbles considering percent and double thumbs', () => {
+        jest.spyOn(bubble, 'setBubble');
+        bubble.setBubble(document.body, true, bubbleOptions.percent, bubbleOptions.percentSecond);
+        expect(bubble.secondBubble.style.right).toEqual(`40%`);
     });
 
-    // test('set default bubble considering percent', () => {
-    //     jest.spyOn(bubble, 'setBubble');
-    //     bubble.setBubble(bubbleOptions.setTwoThumbs, bubbleOptions.percent, undefined);
-    //     expect(bubble.firstBubble.style.left).toEqual(`30%`);
-    // });
-
-    // test('set two bubbles considering percent and double thumbs', () => {
-    //     jest.spyOn(bubble, 'setBubble');
-    //     bubble.setBubble(true, bubbleOptions.percent, bubbleOptions.percentSecond);
-    //     expect(bubble.secondBubble.style.right).toEqual(`40%`);
+    // crushed tests below
+    // test('two bubbles are rotated when slider is vertical', () => {
+    //     // const mockedElementDOM = { classList: { contains: jest.fn(), remove: jest.fn(), add: jest.fn() } };
+    //     jest.spyOn(bubble, 'rotateBubble');
+    //     // bubble.rotateBubble();
+    //     // const className = 'range-slider__bubble_vertical';
+    //     // mockedElementDOM.classList.contains.mockReturnValueOnce(false);
+    //     bubble.rotateBubble();
+    //     expect(bubble.rotateBubble).toBeCalled();
     // });
 
     // test('rotate second bubble to vertical position', () => {
