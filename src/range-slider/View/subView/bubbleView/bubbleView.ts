@@ -15,13 +15,13 @@ class bubbleView {
 
     createBubbleWrapper(parent: HTMLElement, isDouble: boolean): void {
         this.firstBubble = document.createElement('div');
-        this.firstBubble.className = 'range-slider__bubble';
+        this.firstBubble.className = 'range-slider__thumb';
         parent.append(this.firstBubble);
         if (isDouble) {
-          this.firstBubble.classList.add('range-slider__bubble_first');
+          this.firstBubble.classList.add('range-slider__thumb_first');
           this.secondBubble = document.createElement('div');
-          this.secondBubble.classList.add('range-slider__bubble');
-          this.secondBubble.classList.add('range-slider__bubble_second');
+          this.secondBubble.classList.add('range-slider__thumb');
+          this.secondBubble.classList.add('range-slider__thumb_second');
           parent.append(this.secondBubble);
         }
     }
@@ -44,9 +44,11 @@ class bubbleView {
         }
     }
 
-    setBubble(isDouble: boolean, percent: number, percentSecond?: number): void {
+    setBubble(parent: HTMLElement, isDouble: boolean, percent: number, percentSecond?: number): void {
+        this.createBubbleWrapper(parent, !isDouble);
         this.firstBubble.style.left = `${percent}%`;
         if (isDouble) {
+            this.createBubbleWrapper(parent, isDouble);
             this.secondBubble.style.right = `${100 - (percentSecond || 0)}%`;
         }
     }
