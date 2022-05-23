@@ -65,7 +65,7 @@ describe('test model', () => {
         expect(model.limitToggle).toHaveBeenCalled();
         expect(model.limitStep).toHaveBeenCalled();
     });
-    // new tests below
+
     test('default value set to the new normal value when it fits the step', () => {
         jest.spyOn(model, 'setDefaultValue');
         model.step = 1;
@@ -85,5 +85,34 @@ describe('test model', () => {
         model.step = 2;
         model.limitStep(23, false);
         expect(model.setSecondValue).toHaveBeenCalledWith(22);
+    });
+
+    test('toggle is limited and step fits, update observers', () => {
+        jest.spyOn(model, 'updateObservers');
+        model.limitToggle(30, false);
+        expect(model.updateObservers).toHaveBeenCalledWith();
+    });
+
+    test('update multi values and limit toggle', () => {
+        jest.spyOn(model, 'limitToggle');
+        model.isMultiThumb = true;
+        model.update(10, true);
+        expect(model.limitToggle).toHaveBeenCalledWith(10, true);
+    });
+
+    test('when there are more than 11 possible ticks, reduce them to 10-11 ticks', () => {
+        const expectedArray = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+        expect(model.getTicks(0, 100, 1, true)).toEqual(expectedArray);
+    });
+
+    test('updateObservers work correctly with updateView', () => {
+        const observers = {
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            updateView(): void {}
+        }
+        model.subscribe(observers);
+        jest.spyOn(model.observers[0], 'updateView');
+        model.updateObservers();
+        expect(model.observers[0].updateView).toHaveBeenCalled();
     });
 });
