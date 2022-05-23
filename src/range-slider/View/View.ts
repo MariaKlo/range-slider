@@ -5,8 +5,8 @@ import bubbleView from "./subView/bubbleView/bubbleView";
 import barView from "./subView/barView/barView";
 import Options from "../component/globalOptions";
 
-export interface IObserverView {
-    updateModel(arg0: number, arg1: boolean): void
+interface IObserverView {
+  updateModel(arg0: number, arg1: boolean): void
 }
 
 class View {
@@ -322,14 +322,6 @@ class View {
       this.firstThumb.style.left = `${percent}%`;
       if (isDouble) {
         this.secondThumb.style.right = `${100 - (percentSecond || 0)}%`;
-      }
-    }
-  
-    rotateElements() {
-      const className = 'range-slider__value-thumb_vertical';
-      this.thumbOut.classList.add(className);
-      if (this.thumbOutSecond) {
-        this.thumbOutSecond.classList.add(className);
       }
     }
 
