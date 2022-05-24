@@ -4,6 +4,7 @@ import ticksView from './subView/ticksView/ticksView';
 import stepView from './subView/stepView/stepView';
 import bubbleView from './subView/bubbleView/bubbleView';
 import barView from './subView/barView/barView';
+import ThumbView from './subView/thumbView/thumbView';
 
 describe('test view', () => {
     let view: View;
@@ -11,12 +12,14 @@ describe('test view', () => {
     let step: stepView;
     let bubble: bubbleView;
     let bar: barView;
+    let thumb: ThumbView;
 
     beforeEach(() => {
+      thumb = new ThumbView();
       ticks = new ticksView();
       bubble = new bubbleView();
       bar = new barView(document.body);
-      view = new View(document.body, ticks, step, bubble, bar);
+      view = new View(document.body, ticks, step, bubble, bar, thumb);
       view.init(document.body, false, 100, 1);
     });
     afterEach(() => {
@@ -115,15 +118,12 @@ describe('test view', () => {
       expect(view.bar.setRight).toHaveBeenCalled();
     });
 
-    // test('update second value and ', () => {
-    //   view.update(30, false);
-    //   const observers = {
-    //     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    //     updateModel(_arg0: number, _arg1: boolean): void {}
-    // }
-    //   view.subscribe(observers);
-    //   jest.spyOn(view.observers[0], 'updateModel');
-    //   expect(view.observers[0].updateModel(30, false)).toHaveBeenCalledWith(30, false);
-    //   // expect(view.update).toEqual(30);
-    // });
+    test('toggle class when user is over bubble (make bubble bigger)', () => {
+      jest.spyOn(view, 'onMouseOverOut');
+      const divElement = document.createElement('div');
+      divElement.classList.add('range-slider__bubble');
+      view.onMouseOverOut(divElement, divElement);
+      divElement.classList.toggle('range-slider__bubble_big');
+      expect(divElement.classList.contains('range-slider__bubble_big')).toBe(true);
+    });
 });

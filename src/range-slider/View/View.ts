@@ -3,6 +3,7 @@ import ticksView from "./subView/ticksView/ticksView";
 import stepView from "./subView/stepView/stepView";
 import bubbleView from "./subView/bubbleView/bubbleView";
 import barView from "./subView/barView/barView";
+import thumbView from './subView/thumbView/thumbView';
 import Options from "../component/globalOptions";
 
 interface IObserverView {
@@ -33,15 +34,18 @@ class View {
     step: stepView;
     bubble: bubbleView;
     bar: barView;
+    thumb: thumbView;
     options!: Options;
     observers!: IObserverView[];
 
-    constructor(parent: HTMLElement, ticks: ticksView, step: stepView, bubble: bubbleView, bar: barView) {
+    constructor(parent: HTMLElement, ticks: ticksView, step: stepView, bubble: bubbleView, bar: barView,
+      thumb: thumbView) {
         this.parent = parent;
         this.ticks = ticks;
         this.step = step;
         this.bubble = bubble;
         this.bar = bar;
+        this.thumb = thumb;
 
         this.options = {
             max: 100,
@@ -70,12 +74,6 @@ class View {
         this.createInput(isMultiThumb);
         this.setMin(isMultiThumb, min);
         this.setMax(isMultiThumb, max);
-        
-        this.createThumb(this.parent, this.isMultiThumb);
-        if (this.toggleElement) {
-          this.createThumb(this.parent, this.isMultiThumb);
-          this.writeThumbValue(this.isMultiThumb, this.firstValue, this.secondValue);
-        }
 
         this.createTrack(this.wrapper);
         this.bar.createProgressBar();
@@ -187,7 +185,7 @@ class View {
     
       onMouseOverOut = (bubble: HTMLDivElement, bubbleOut: HTMLDivElement | undefined) => () => {
         if (this.options.showBubble && bubbleOut) {
-          bubbleOut.classList.toggle('range-slider__value-bubble_big');
+          bubbleOut.classList.toggle('range-slider__bubble_big');
         }
         bubble.classList.toggle('range-slider__bubble_hover');
       };
@@ -272,18 +270,18 @@ class View {
     }
 
     setValues(isDouble: boolean, value: number, secondValue?: number): void {
-        this.input.value = String(value);
+      this.input.value = String(value);
 
-        if (isDouble && secondValue) {
-            this.secondInput!.value = String(secondValue);
-        }
+      if (isDouble && secondValue) {
+          this.secondInput!.value = String(secondValue);
+      }
     }
 
     setMax(isDouble: boolean, max: number) {
-        this.input.max = String(max);
-        if (isDouble) {
-            this.secondInput!.max = String(max);
-        }
+      this.input.max = String(max);
+      if (isDouble) {
+          this.secondInput!.max = String(max);
+      }
     }
 
     setMin(isDouble: boolean, min: number) {
@@ -291,38 +289,6 @@ class View {
         if (isDouble) {
             this.secondInput!.min = String(min);
         }
-    }
-
-    // methods creating thumbs
-
-    createThumb(parent: HTMLElement, isDouble: boolean): void {
-        this.firstThumb = document.createElement('div');
-        this.firstThumb.className = 'range-slider__thumb';
-        parent.append(this.firstThumb);
-
-        if (isDouble) {
-            this.firstThumb.classList.add('range-slider__thumb_first');
-            this.secondThumb = document.createElement('div');
-            this.secondThumb.classList.add('range-slider__thumb');
-            this.secondThumb.classList.add('range-slider__thumb_second');
-            parent.append(this.secondThumb);
-        }
-    }
-
-    writeThumbValue(isMultiThumb: boolean, value: number, secondValue?: number): void {
-      if (this.firstThumb) {
-        this.firstThumb.textContent = `First value: ${String(value)}`;
-        if (isMultiThumb) {
-          this.secondThumb!.textContent = `Second value: ${String(secondValue)}`
-        }
-      }
-    }
-
-    placeThumb(isDouble: boolean, percent: number, percentSecond?: number): void {
-      this.firstThumb.style.left = `${percent}%`;
-      if (isDouble) {
-        this.secondThumb.style.right = `${100 - (percentSecond || 0)}%`;
-      }
     }
 
     // set progress bar

@@ -3,6 +3,7 @@ import stepView from '../View/subView/stepView/stepView';
 import bubbleView from '../View/subView/bubbleView/bubbleView';
 import barView from '../View/subView/barView/barView';
 import ticksView from '../View/subView/ticksView/ticksView';
+import thumbView from '../View/subView/thumbView/thumbView';
 import Model from '../Model/Model';
 import Presenter from './Presenter';
 
@@ -15,6 +16,7 @@ describe('test Presenter', () => {
     let bubble: bubbleView;
     let bar: barView;
     let ticks: ticksView;
+    let thumb: thumbView;
 
     beforeEach(() => {
       model = new Model();
@@ -22,7 +24,8 @@ describe('test Presenter', () => {
       bubble = new bubbleView();
       bar = new barView(document.body);
       ticks = new ticksView();
-      view = new View(document.body, ticks, step, bubble,  bar);
+      thumb = new thumbView();
+      view = new View(document.body, ticks, step, bubble, bar, thumb);
 
       presenter = new Presenter(view, model);
     });
