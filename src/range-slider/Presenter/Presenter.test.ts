@@ -1,24 +1,33 @@
 import View from '../View/View';
-import stepView from '../View/subView/stepView';
-import bubbleView from '../View/subView/bubbleView';
-import barView from '../View/subView/barView';
-import ticksView from '../View/subView/ticksView';
+import stepView from '../View/subView/stepView/stepView';
+import bubbleView from '../View/subView/bubbleView/bubbleView';
+import barView from '../View/subView/barView/barView';
+import ticksView from '../View/subView/ticksView/ticksView';
+import thumbView from '../View/subView/thumbView/thumbView';
 import Model from '../Model/Model';
 import Presenter from './Presenter';
 
 describe('test Presenter', () => {
     let presenter: Presenter;
     let model: Model;
+    let view: View;
+
     let step: stepView;
     let bubble: bubbleView;
     let bar: barView;
     let ticks: ticksView;
+    let thumb: thumbView;
 
     beforeEach(() => {
-      presenter = new Presenter(
-      new Model(),
-      new View(document.body, new ticksView(), new stepView(), new bubbleView(), new barView()),
-      );
+      model = new Model();
+      step = new stepView();
+      bubble = new bubbleView();
+      bar = new barView(document.body);
+      ticks = new ticksView();
+      thumb = new thumbView();
+      view = new View(document.body, ticks, step, bubble, bar, thumb);
+
+      presenter = new Presenter(view, model);
     });
     test('Model is initialized', () => {
       jest.spyOn(presenter.model, 'init');
@@ -42,18 +51,19 @@ describe('test Presenter', () => {
     });
     test('transfer data from model to view', () => {
       const data = {
-        min: 0,
         max: 100,
+        min: 0,
+        step: 1,
         defaultValue: 11,
-        rightValue: 23,
-        isRange: true,
-        rightProgressBar: false,
-        overThumbElement: true,
+        valueSecond: 23,
+        isMultiThumb: true,
+        showRightProgressBar: false,
+        showBubble: true,
         isVertical: true,
-        isScale: true,
-        scaleValues: [0, 50, 100],
+        showTicks: true,
+        ticksValues: [0, 50, 100],
       };
-      presenter.model.dataForView = data;
+      presenter.model.optionsForView = data;
       presenter.init();
       expect(presenter.view.options).toEqual(data);
     });
