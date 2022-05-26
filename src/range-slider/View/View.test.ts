@@ -126,21 +126,78 @@ describe('test view', () => {
     expect(view.update).toHaveBeenCalledWith(value, false);
   });
 
+  test('should toggle class for default thumb when mouse up or down', () => {
+    jest.spyOn(thumb.firstThumb.classList, 'toggle');
+    jest.spyOn(view, 'onMouseUpDown');
+    view.onMouseUpDown(true)();
+    thumb.firstThumb = document.createElement('div');
+    thumb.firstThumb.className = 'range-slider__thumb';
+    thumb.firstThumb.classList.toggle('range-slider__thumb_active');
+    expect(thumb.firstThumb.classList.contains('range-slider__thumb_active')).toBe(true);
+  });
+
+  test('set value for second input correctly', () => {
+    jest.spyOn(view, 'setValues');
+    jest.spyOn(view, 'createInput');
+    view.setValues(true, 30, 50);
+    view.createInput(true);
+    expect(view.secondInput.value).toBe(String(50));
+  });
+
+  test('update second event input', () => {
+    jest.spyOn(view, 'eventInput');
+    jest.spyOn(view, 'onInput');
+    view.options.isMultiThumb = true;
+    document.dispatchEvent(new MouseEvent('input'));
+    view.eventInput();
+    expect(view.eventInput).toHaveBeenCalled();
+  });
+
+  test('update second input event hover', () => {
+    jest.spyOn(view, 'eventHover');
+    jest.spyOn(view, 'onMouseOverOut');
+    view.options.isMultiThumb = true;
+    document.dispatchEvent(new MouseEvent('mouseover'));
+    view.eventHover();
+    expect(view.eventHover).toHaveBeenCalled();
+  });
+
+  test('update second input event active', () => {
+    jest.spyOn(view, 'eventActive');
+    jest.spyOn(view, 'onMouseUpDown');
+    view.options.isMultiThumb = true;
+    document.dispatchEvent(new MouseEvent('mousedown'));
+    document.dispatchEvent(new MouseEvent('mouseup'));
+    view.eventActive();
+    expect(view.eventActive).toHaveBeenCalled();
+  });
+
+  test('activate onmouseupdown for second thumb', () => {
+    jest.spyOn(view, 'onMouseUpDown');
+    view.onMouseUpDown(false)();
+    thumb.secondThumb = document.createElement('div');
+    thumb.secondThumb.classList.add('range-slider__thumb');
+    thumb.secondThumb.classList.toggle('range-slider__thumb_active');
+    expect(thumb.secondThumb.classList.contains('range-slider__thumb_active')).toBe(true);
+  });
+
   // crashed tests below
 
-  // test('should toggle class for default thumb when mouse up or down', () => {
-  //   thumb.createThumb(document.body, false);
-  //   const { firstThumb } = view.thumb;
-  //   jest.spyOn(firstThumb.classList, 'toggle');
-  //   view.onMouseUpDown(true)();
-  //   expect(firstThumb.classList.toggle).toHaveBeenCalledWith('range-slider__thumb_active');
+  // test('create ticks for multi thumbs and set click on every tick', () => {
+  //   jest.spyOn(view, 'init');
+  //   jest.spyOn(view.ticks, 'createTicks');
+  //   jest.spyOn(view, 'onClick');
+  //   view.onClick(50);
+  //   view.options.isMultiThumb = true;
+  //   const arrOfTicks = [1, 10, 20, 30, 40, 50, 60, 70];
+  //   const tick = view.ticks.createTicks(arrOfTicks, 50);
+  //   // const { ticksElement } = tick;
+  //   const ticksValues = tick.values;
+  //   for (let i = 0; i < ticksValues.length; i += 1) {
+  //     ticksValues[i].element.addEventListener('click', view.onClick(ticksValues[i].value));
+  //   }
+  //   document.dispatchEvent(new MouseEvent('click'));
+  //   expect(ticks.createTicks).toHaveBeenCalledTimes(1);
+  //   expect(view.onClick).toHaveBeenCalledTimes(9);
   // });
-
-  // test('should toggle class for right thumb when mouse up or down', () => {
-  //   const { secondThumb } = view.thumb;
-  //   jest.spyOn(secondThumb.classList, 'toggle');
-  //   view.onMouseUpDown(false)();
-  //   expect(secondThumb.classList.toggle).toHaveBeenCalledWith('range-slider__thumb_active');
-  // });
-
 });

@@ -17,7 +17,7 @@ class View {
   wrapper!: HTMLDivElement;
   track!: HTMLDivElement;
   input!: HTMLInputElement;
-  secondInput?: HTMLInputElement;
+  secondInput!: HTMLInputElement;
   isMultiThumb!: boolean;
   max!: number;
   min!: number;
@@ -136,6 +136,7 @@ class View {
     eventInput = () => {
       this.input.addEventListener('input', this.onInput(true));
       if (this.options.isMultiThumb) {
+        this.createInput(true);
         this.secondInput!.addEventListener('input', this.onInput(false));
       }
     };
@@ -197,6 +198,7 @@ class View {
       this.input.addEventListener('mouseout',
         this.onMouseOverOut(this.firstThumb, this.thumbOut));
       if (this.options.isMultiThumb) {
+        this.createInput(true);
         this.secondInput!.addEventListener('mouseover',
           this.onMouseOverOut(this.secondThumb, this.thumbOutSecond));
         this.secondInput!.addEventListener('mouseout',
@@ -212,6 +214,7 @@ class View {
         };
       }
       return () => {
+        this.thumb.createThumb(this.parent, true);
         this.thumb.secondThumb.classList.toggle('range-slider__thumb_active');
       };
     };
@@ -220,6 +223,7 @@ class View {
       this.input.addEventListener('mousedown', this.onMouseUpDown(true));
       this.input.addEventListener('mouseup', this.onMouseUpDown(true));
       if (this.options.isMultiThumb) {
+        this.createInput(true);
         this.secondInput!.addEventListener('mousedown', this.onMouseUpDown(false));
         this.secondInput!.addEventListener('mouseup', this.onMouseUpDown(false));
       }
@@ -272,9 +276,9 @@ class View {
 
     setValues(isDouble: boolean, value: number, secondValue?: number): void {
       this.input.value = String(value);
-
-      if (isDouble && secondValue) {
-        this.secondInput!.value = String(secondValue);
+      if (isDouble && secondValue !== undefined) {
+        this.createInput(true);
+        this.secondInput.value = String(secondValue);
       }
     }
 
