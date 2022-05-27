@@ -47,6 +47,12 @@ describe('test view', () => {
         expect(bubble.secondBubble.style.right).toEqual(`40%`);
     });
 
+    test('set two bubbles considering percent and double thumbs (100% percent for 2nd bubble)', () => {
+        jest.spyOn(bubble, 'setBubble');
+        bubble.setBubble(document.body, true, bubbleOptions.percent, undefined);
+        expect(bubble.secondBubble.style.right).toEqual(`100%`);
+    });
+
     test('rotate second bubble to vertical position', () => {
         const classNameVertical = 'range-slider__bubble_vertical';
         bubble.showSecondBubble = document.createElement('div');

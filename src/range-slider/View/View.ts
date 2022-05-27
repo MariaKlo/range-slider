@@ -102,7 +102,7 @@ class View {
       if (this.options.isVertical && this.options.showBubble) {
         this.bubble.rotateBubble();
       }
-      if (this.options.isMultiThumb) {
+      if (this.options.showTicks) {
         const ticks = this.ticks.createTicks(this.options.ticksValues, this.wrapper.offsetWidth);
         const { ticksElement } = ticks;
         const ticksValues = ticks.values;
