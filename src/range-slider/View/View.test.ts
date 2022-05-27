@@ -21,7 +21,7 @@ describe('test view', () => {
     bubble = new bubbleView();
     bar = new barView(document.body);
     view = new View(document.body, ticks, step, bubble, bar, thumb);
-    view.init(document.body, false, 100, 1);
+    view.init(document.body, true, 100, 1);
   });
   afterEach(() => {
     document.body.innerHTML = '';
@@ -181,23 +181,85 @@ describe('test view', () => {
     expect(thumb.secondThumb.classList.contains('range-slider__thumb_active')).toBe(true);
   });
 
+  test('both values are updated on click', () => {
+    view.options = {
+      ...view.options,
+      defaultValue: 0,
+      valueSecond: 20,
+      isMultiThumb: true
+    };
+    bubble.createBubbleElement(true, document.body, document.body);
+    view.onClick(15)();
+    expect(view.options.valueSecond).toBe(15);
+    expect(view.options.defaultValue).toBe(0);
+  });
+
+  test('updateObservers work correctly with updateView', () => {
+    const observers = {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      updateModel(_arg0: number, _arg1: boolean): void {}
+    }
+    view.subscribe(observers);
+    jest.spyOn(view.observers[0], 'updateModel');
+    view.update(30, true);
+    view.observers[0].updateModel(30, true);
+    expect(view.observers[0].updateModel).toHaveBeenCalled();
+  });
+
+  test('get coords for vertical slider', () => {
+    view.options = {
+      ...view.options,
+      min: 10,
+      max: 100,
+      isVertical: true,
+    };
+    const coords = {
+      bottom: 516,
+      top: 114,
+      height: 402,
+      width: 0,
+      x: 0,
+      y: 0,
+      left: 0,
+      right: 0,
+      toJSON: () => ''
+    };
+    const element = new MouseEvent('click', { clientY: 265 });
+    expect(view.getValueByCoords(element, coords)).toBe(44);
+  });
+
+  test('activate onmouseoverout for default bubble', () => {
+    jest.spyOn(view, 'onMouseOverOut');
+    view.onMouseOverOut(document.body, undefined)();
+    view.bubble.showBubble = document.createElement('p');
+    view.bubble.showBubble.classList.add('range-slider__bubble');
+    bubble.showBubble.classList.toggle('range-slider__bubble_hover');
+    expect(bubble.showBubble.classList.contains('range-slider__bubble_hover')).toBe(true);
+  });
+
+  test('activate onmouseoverout for multi bubbles', () => {
+    jest.spyOn(view, 'onMouseOverOut');
+    view.options.showBubble = true;
+    view.onMouseOverOut(document.body, document.body)();
+    view.bubble.showSecondBubble = document.createElement('p');
+    view.bubble.showSecondBubble.classList.add('range-slider__bubble');
+    bubble.showSecondBubble.classList.toggle('range-slider__bubble_big');
+    expect(bubble.showSecondBubble.classList.contains('range-slider__bubble_big')).toBe(true);
+  });
+
   // crashed tests below
 
   // test('create ticks for multi thumbs and set click on every tick', () => {
-  //   jest.spyOn(view, 'init');
+  //   view.init(document.body, true, 100, 1);
+  //   view.options.showTicks = true;
+  //   const arr = [1, 10, 20, 30, 40, 50];
+  //   jest.spyOn(view, 'createWrapper');
   //   jest.spyOn(view.ticks, 'createTicks');
   //   jest.spyOn(view, 'onClick');
-  //   view.onClick(50);
-  //   view.options.isMultiThumb = true;
-  //   const arrOfTicks = [1, 10, 20, 30, 40, 50, 60, 70];
-  //   const tick = view.ticks.createTicks(arrOfTicks, 50);
-  //   // const { ticksElement } = tick;
-  //   const ticksValues = tick.values;
-  //   for (let i = 0; i < ticksValues.length; i += 1) {
-  //     ticksValues[i].element.addEventListener('click', view.onClick(ticksValues[i].value));
-  //   }
+  //   view.createWrapper();
+  //   view.ticks.createTicks(arr, 50);
   //   document.dispatchEvent(new MouseEvent('click'));
-  //   expect(ticks.createTicks).toHaveBeenCalledTimes(1);
-  //   expect(view.onClick).toHaveBeenCalledTimes(9);
+  //   view.onClick(30);
+  //   expect(view.onClick).toHaveBeenCalled();
   // });
 });
