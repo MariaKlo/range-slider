@@ -11,7 +11,8 @@ module.exports = {
         Main: './src/range-slider/index.ts',
         Model: './src/range-slider/Model/Model.ts',
         View: './src/range-slider/View/View.ts',
-        Presenter: './src/range-slider/Presenter/Presenter.ts'
+        Presenter: './src/range-slider/Presenter/Presenter.ts',
+        Demo: './src/demo-page/index.js'
     },
     devtool: 'inline-source-map',
     output: {
@@ -35,7 +36,7 @@ module.exports = {
             'window.jQuery': 'jquery'
         }),
         new HtmlWebpackPlugin({
-          template: path.resolve(__dirname, 'src/range-slider/index.pug'),
+          template: path.resolve(__dirname, 'src/demo-page/index.pug'),
           filename: "index.html",
           inject: "body"
         }),
@@ -72,7 +73,11 @@ module.exports = {
          {
           test: /\.tsx?$/,
           use: 'ts-loader',
-          exclude: /node_modules/,
+          exclude: /node_modules|\.d\.ts$/,
+        },
+        {
+          test: /\.d\.ts$/,
+          loader: 'ignore-loader'
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/i,

@@ -31,6 +31,7 @@ import { Slider, SliderFunction, SliderGlobalOptions, JQuery } from './component
 //                 new bubbleView(),
 //                 new stepView(),
 //                 new ticksView(),
+//                 new thumbView(),
 //             ),
 //         );
 //     };
@@ -42,52 +43,46 @@ const fetchOptionsFromDataAttr = (attr: Options): Options => Object.assign(
     )),
   );
   
-  $.fn.Slider = function Slider(this: JQuery, options?: Options): JQuery {
-    const defaults: Options = {
-      max: 1,
-      min: 100,
-      step: 1,
-      defaultValue: 30,
-      valueSecond: 50,
-      isMultiThumb: false,
-      showRightProgressBar: false,
-      showBubble: true,
-      isVertical: false,
-      showTicks: false,
-    };
-  
-    const dataAttrOptions: Options = fetchOptionsFromDataAttr(this.data());
-  
-    return this.each((_, element) => {
-      $(element).data('api', new Presenter(
-          new Model({
-            max: settings.max,
-            min: settings.min,
-            step: settings.step,
-            defaultValue: settings.isMultiThumb ? settings.secondValue : settings.defaultValue,
-            secondValue: settings.secondValue,
-            isMultiThumb: settings.isMultiThumb,
-            rightProgressBar: settings.rightProgressBar,
-            showBubble: settings.showBubble,
-            isVertical: settings.isVertical,
-            showTicks: settings.showTicks,
-        }),
-        new View(
-          this,
-          new ticksView(),
-          new stepView(),
-          new bubbleView(),
-          new barView(),
-          new thumbView(),
-        ),
-      ));
-    });
-  };
-
-$('#plugin').Slider({
-    max: 500,
-    min: 50,
+$.fn.Slider = function Slider(this: JQuery, options?: Options): JQuery {
+  const defaults: Options = {
+    max: 1,
+    min: 100,
     step: 1,
-});
+    defaultValue: 30,
+    valueSecond: 50,
+    isMultiThumb: false,
+    showRightProgressBar: false,
+    showBubble: true,
+    isVertical: false,
+    showTicks: false,
+  };
+  
+  const dataAttrOptions: Options = fetchOptionsFromDataAttr(this.data());
+  
+  return this.each((_, element) => {
+    $(element).data('api', new Presenter(
+      new Model({
+        max: settings.max,
+        min: settings.min,
+        step: settings.step,
+        defaultValue: settings.isMultiThumb ? settings.secondValue : settings.defaultValue,
+        secondValue: settings.secondValue,
+        isMultiThumb: settings.isMultiThumb,
+        rightProgressBar: settings.rightProgressBar,
+        showBubble: settings.showBubble,
+        isVertical: settings.isVertical,
+        showTicks: settings.showTicks,
+      }),
+      new View(
+        this,
+        new ticksView(),
+        new stepView(),
+        new bubbleView(),
+        new barView(),
+        new thumbView(),
+      ),
+    ));
+  });
+};
 
 export default $.fn.Slider;

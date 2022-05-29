@@ -1,0 +1,12 @@
+include api/api.pug
+include panel/panel.pug
+mixin example()
+  div.example-wrapper
+    +api('api_first')
+    +panel()
+  div.example-wrapper
+    +api('api_second')
+    +panel()
+  div.example-wrapper
+    +api('api_third')
+    +panel()

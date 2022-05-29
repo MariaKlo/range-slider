@@ -246,20 +246,4 @@ describe('test view', () => {
     bubble.showSecondBubble.classList.toggle('range-slider__bubble_big');
     expect(bubble.showSecondBubble.classList.contains('range-slider__bubble_big')).toBe(true);
   });
-
-  // crashed tests below
-
-  // test('create ticks for multi thumbs and set click on every tick', () => {
-  //   view.init(document.body, true, 100, 1);
-  //   view.options.showTicks = true;
-  //   const arr = [1, 10, 20, 30, 40, 50];
-  //   jest.spyOn(view, 'createWrapper');
-  //   jest.spyOn(view.ticks, 'createTicks');
-  //   jest.spyOn(view, 'onClick');
-  //   view.createWrapper();
-  //   view.ticks.createTicks(arr, 50);
-  //   document.dispatchEvent(new MouseEvent('click'));
-  //   view.onClick(30);
-  //   expect(view.onClick).toHaveBeenCalled();
-  // });
 });
