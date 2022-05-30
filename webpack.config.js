@@ -12,7 +12,7 @@ module.exports = {
         Model: './src/range-slider/Model/Model.ts',
         View: './src/range-slider/View/View.ts',
         Presenter: './src/range-slider/Presenter/Presenter.ts',
-        Demo: './src/demo-page/index.js'
+        Demo: './src/demo-page/index.ts'
     },
     devtool: 'inline-source-map',
     output: {

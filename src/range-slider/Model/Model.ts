@@ -19,17 +19,17 @@ class Model {
     ticksValues!: number[];
     observers!: IObserverModel[];
 
-    constructor() {
-        this.max = Number(this.max || 100);
-        this.min = Number(this.min || 0);
-        this.step = Number(this.step || 1);
-        this.defaultValue = Number(this.defaultValue || 50);
-        this.valueSecond = Number(this.valueSecond || 70);
-        this.isMultiThumb = this.isMultiThumb || false;
-        this.showRightProgressBar = this.showRightProgressBar || false;
-        this.showBubble = this.showBubble || false;
-        this.isVertical = this.isVertical || false;
-        this.showTicks = this.showTicks || false;
+    constructor(options: Options) {
+        this.max = Number(options.max || 100);
+        this.min = Number(options.min || 0);
+        this.step = Number(options.step || 1);
+        this.defaultValue = Number(options.defaultValue || 50);
+        this.valueSecond = Number(options.valueSecond || 70);
+        this.isMultiThumb = options.isMultiThumb || false;
+        this.showRightProgressBar = options.showRightProgressBar || false;
+        this.showBubble = options.showBubble || false;
+        this.isVertical = options.isVertical || false;
+        this.showTicks = options.showTicks || false;
         this.ticksValues = [];
         this.observers = [];
 
