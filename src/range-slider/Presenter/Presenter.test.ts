@@ -6,6 +6,7 @@ import ticksView from '../View/subView/ticksView/ticksView';
 import thumbView from '../View/subView/thumbView/thumbView';
 import Model from '../Model/Model';
 import Presenter from './Presenter';
+import Options from "../component/globalOptions";
 
 describe('test Presenter', () => {
     let presenter: Presenter;
@@ -18,8 +19,10 @@ describe('test Presenter', () => {
     let ticks: ticksView;
     let thumb: thumbView;
 
+    let options: Options;
+
     beforeEach(() => {
-      model = new Model();
+      model = new Model(options);
       step = new stepView();
       bubble = new bubbleView();
       bar = new barView(document.body);
