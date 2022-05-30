@@ -1,10 +1,12 @@
 import Model from './Model';
+import Options from "../component/globalOptions";
 
 describe('test model', () => {
     let model: Model;
+    let options: Options;
 
     beforeEach(() => {
-        model = new Model();
+        model = new Model(options);
     });
 
     test('max value set to 100 if not defined', () => {
