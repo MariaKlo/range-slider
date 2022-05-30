@@ -7,7 +7,12 @@ html
     meta(name="description", content="range-slider")
     meta(name="keywords", content="plugin, plugins, range, range-slider, jquery-plugin")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+    script(type="text/javascript" src="Demo.js")
     title Range-slider plugin
   body
-    div#plugin
-  script(type="text/javascript" src="jquery.index.d.ts")
+    div.main
+      div.wrapper
+        h1.header Demo-page
+        include components/example/example.pug
+        +example() 
+  
