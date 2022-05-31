@@ -20,11 +20,11 @@ class Model {
     observers!: IObserverModel[];
 
     constructor(options: Options) {
-        this.max = Number(options.max || 100);
+        this.max = Number(options.max === 0 ? 0 : (options.max || 100));
         this.min = Number(options.min || 0);
         this.step = Number(options.step || 1);
-        this.defaultValue = Number(options.defaultValue || 50);
-        this.valueSecond = Number(options.valueSecond || 70);
+        this.defaultValue = Number(options.defaultValue === 0 ? 0 : (options.defaultValue || 50));
+        this.valueSecond = Number(options.valueSecond === 0 ? 0 : (options.valueSecond || 70));
         this.isMultiThumb = options.isMultiThumb || false;
         this.showRightProgressBar = options.showRightProgressBar || false;
         this.showBubble = options.showBubble || false;
