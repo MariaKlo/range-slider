@@ -1,21 +1,14 @@
 class barView {
     bar!: HTMLElement;
-    parent: HTMLElement;
-    percentage!: number;
 
-    constructor(parent: HTMLElement) {
-        this.parent = parent;
-    }
-
-    createProgressBar(): void {
+    createProgressBar(parent: HTMLElement): void {
         this.bar = document.createElement('div');
         this.bar.classList.add('range-slider__progress-bar');
-        this.parent.append(this.bar);
+        parent.append(this.bar);
     }
 
     calcPercent(value: number, min: number, max: number): number {
-        this.percentage = ((value - min) / (max - min)) * 100;
-        return this.percentage;
+        return ((value - min) / (max - min)) * 100;
     }
     
     setDefault(isDouble: boolean, percent: number, percentSecond?: number): void {

@@ -19,7 +19,7 @@ describe('test view', () => {
     thumb = new ThumbView();
     ticks = new ticksView();
     bubble = new bubbleView();
-    bar = new barView(document.body);
+    bar = new barView();
     view = new View(document.body, ticks, step, bubble, bar, thumb);
     view.init(document.body, true, 100, 1);
   });

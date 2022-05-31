@@ -15,13 +15,13 @@ class bubbleView {
 
     createBubbleWrapper(parent: HTMLElement, isDouble: boolean): void {
         this.firstBubble = document.createElement('div');
-        this.firstBubble.className = 'range-slider__thumb';
+        this.firstBubble.className = 'range-slider__bubble';
         parent.append(this.firstBubble);
         if (isDouble) {
-          this.firstBubble.classList.add('range-slider__thumb_first');
+          this.firstBubble.classList.add('range-slider__bubble_first');
           this.secondBubble = document.createElement('div');
-          this.secondBubble.classList.add('range-slider__thumb');
-          this.secondBubble.classList.add('range-slider__thumb_second');
+          this.secondBubble.classList.add('range-slider__bubble');
+          this.secondBubble.classList.add('range-slider__bubble_second');
           parent.append(this.secondBubble);
         }
     }

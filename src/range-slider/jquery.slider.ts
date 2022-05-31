@@ -66,7 +66,7 @@ export default function Slider(settings: Options): JQuery | void | Presenter {
               new ticksView(),
               new stepView(),
               new bubbleView(),
-              new barView(document.body),
+              new barView(),
               new thumbView(),
             ),
             new Model({

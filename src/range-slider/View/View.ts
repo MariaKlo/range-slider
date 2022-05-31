@@ -21,7 +21,6 @@ class View {
   isMultiThumb!: boolean;
   max!: number;
   min!: number;
-  toggleElement!: boolean;
   // vars for thumbs
   firstThumb!: HTMLDivElement;
   secondThumb!: HTMLDivElement;
@@ -68,7 +67,7 @@ class View {
       this.observers.push(observer);
     };
 
-    init = (parent: HTMLElement, isMultiThumb: boolean, max: number, min: number) => {
+    init = (parent: HTMLElement, isMultiThumb: boolean, max: number, min: number) => {      
       this.createWrapper();
       this.createForm(parent);
       this.createInput(isMultiThumb);
@@ -76,7 +75,7 @@ class View {
       this.setMax(isMultiThumb, max);
 
       this.createTrack(this.wrapper);
-      this.bar.createProgressBar();
+      this.bar.createProgressBar(this.track);
       this.bubble.init(
         this.parent,
         this.options.isMultiThumb,

@@ -86,50 +86,79 @@ interface Options {
   //    */
   
   // eslint-disable-next-line @typescript-eslint/no-namespace
-  // declare global {
-  //   interface JQuery {
-  //     Slider(options: Options): JQuery | void;
-  //   }
-  // }
-  (function ($): void | JQuery<HTMLElement> {
-    $.fn.Slider = function(settings: Options): JQuery<HTMLElement> | Presenter {
-          const presenter: Presenter | JQuery<HTMLElement> = new Presenter(
-              new View(
-                document.body,
-                new ticksView(),
-                new stepView(),
-                new bubbleView(),
-                new barView(document.body),
-                new thumbView(),
-              ),
-              new Model({
-                  max: settings.max,
-                  min: settings.min,
-                  step: settings.step,
-                  defaultValue: settings.isMultiThumb ? settings.defaultValue : settings.valueSecond,
-                  valueSecond: settings.valueSecond,
-                  isMultiThumb: settings.isMultiThumb,
-                  showRightProgressBar: settings.showRightProgressBar,
-                  showBubble: settings.showBubble,
-                  isVertical: settings.isVertical,
-                  showTicks: settings.showTicks,
-                  ticksValues: settings.ticksValues
-                }),
-          );
-        return presenter;
-      }
-    }(jQuery));
+declare global {
+  interface JQuery {
+    sliderPlugin(options: Options): JQuery | Presenter;
+  }
+}
 
-$('#api_first').Slider({
-    max: 500,
-    min: 50,
-    step: 1,
-    defaultValue: 90,
-    valueSecond: 170,
-    isMultiThumb: true,
-    showRightProgressBar: false,
-    showBubble: true,
-    isVertical: false,
-    showTicks: false,
-    ticksValues: []
+(function ($: JQueryStatic) {
+  $.fn.sliderPlugin = function(settings: Options) {
+      const presenter: Presenter = new Presenter(
+        new View(
+          document.body,
+          new ticksView(),
+          new stepView(),
+          new bubbleView(),
+          new barView(),
+          new thumbView(),
+        ),
+        new Model({
+          max: settings.max,
+          min: settings.min,
+          step: settings.step,
+          defaultValue: settings.isMultiThumb ? settings.defaultValue : settings.valueSecond,
+          valueSecond: settings.valueSecond,
+          isMultiThumb: settings.isMultiThumb,
+          showRightProgressBar: settings.showRightProgressBar,
+          showBubble: settings.showBubble,
+          isVertical: settings.isVertical,
+          showTicks: settings.showTicks,
+          ticksValues: settings.ticksValues
+        }),
+      );
+    return presenter;
+  }
+}(jQuery));
+
+  // (function initSlider($: JQueryStatic) {
+  //   $.fn.Slider = function init(settings: Options) {
+  //     return new Presenter(
+  //       new View(
+  //         document.body,
+  //         new ticksView(),
+  //         new stepView(),
+  //         new bubbleView(),
+  //         new barView(document.body),
+  //         new thumbView(),
+  //       ),
+  //       new Model({
+  //         max: settings.max,
+  //         min: settings.min,
+  //         step: settings.step,
+  //         defaultValue: settings.isMultiThumb ? settings.defaultValue : settings.valueSecond,
+  //         valueSecond: settings.valueSecond,
+  //         isMultiThumb: settings.isMultiThumb,
+  //         showRightProgressBar: settings.showRightProgressBar,
+  //         showBubble: settings.showBubble,
+  //         isVertical: settings.isVertical,
+  //         showTicks: settings.showTicks,
+  //         ticksValues: settings.ticksValues
+  //       }),
+  //     );
+  //   };
+  // }(jQuery));
+
+$('#api_first').sliderPlugin({
+  max: 500,
+  min: 50,
+  step: 1,
+  defaultValue: 90,
+  valueSecond: 170,
+  isMultiThumb: true,
+  showRightProgressBar: false,
+  showBubble: true,
+  isVertical: false,
+  showTicks: false,
+  ticksValues: []
 });
