@@ -20,9 +20,9 @@ describe('test view', () => {
 
     // tests for thumb
     test('value for first thumb is set correctly', () => {
-        const { setTwoThumbs, firstValue } = bubbleOptions;
+        const { setTwoThumbs, firstValue, secondValue } = bubbleOptions;
         bubble.createBubbleElement(setTwoThumbs, document.body);
-        bubble.setBubbleValue(setTwoThumbs, firstValue);
+        bubble.setBubbleValue(setTwoThumbs, firstValue, secondValue);
         expect(bubble.showBubble.textContent).toBe(String(firstValue));
     });
 

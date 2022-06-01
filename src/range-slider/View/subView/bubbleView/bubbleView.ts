@@ -4,6 +4,8 @@ class bubbleView {
     secondBubble!: HTMLElement;
     showBubble!: HTMLElement;
     showSecondBubble!: HTMLElement;
+    parent!: HTMLElement;
+    secondParent!: HTMLElement;
 
     init(parent: HTMLElement, isDouble: boolean, toggleElement: boolean, firstValue: number, secondValue: number): void {
         this.createBubbleWrapper(parent, isDouble);
@@ -27,6 +29,7 @@ class bubbleView {
     }
 
     createBubbleElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLElement): void {
+        this.createBubbleWrapper(parent, isDouble);
         this.showBubble = document.createElement('p');
         this.showBubble.classList.add('range-slider__bubble');
         parent.append(this.showBubble);
@@ -40,7 +43,8 @@ class bubbleView {
     setBubbleValue(isDouble: boolean, value: number, secondValue?: number): void {
         this.showBubble.textContent = String(value);
         if (isDouble) {
-            this.showSecondBubble!.textContent = String(secondValue);
+            this.createBubbleElement(isDouble, this.parent, this.secondParent);
+            this.showSecondBubble.textContent = String(secondValue);
         }
     }
 
