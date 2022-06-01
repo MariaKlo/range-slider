@@ -230,7 +230,7 @@ describe('test view', () => {
 
   test('activate onmouseoverout for default bubble', () => {
     jest.spyOn(view, 'onMouseOverOut');
-    view.onMouseOverOut(document.body, undefined)();
+    view.onMouseOverOut(document.body)();
     view.bubble.showBubble = document.createElement('p');
     view.bubble.showBubble.classList.add('range-slider__bubble');
     bubble.showBubble.classList.toggle('range-slider__bubble_hover');
@@ -240,7 +240,7 @@ describe('test view', () => {
   test('activate onmouseoverout for multi bubbles', () => {
     jest.spyOn(view, 'onMouseOverOut');
     view.options.showBubble = true;
-    view.onMouseOverOut(document.body, document.body)();
+    view.onMouseOverOut(document.body)();
     view.bubble.showSecondBubble = document.createElement('p');
     view.bubble.showSecondBubble.classList.add('range-slider__bubble');
     bubble.showSecondBubble.classList.toggle('range-slider__bubble_big');

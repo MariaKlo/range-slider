@@ -184,24 +184,23 @@ class View {
       }
     };
     
-    onMouseOverOut = (bubble: HTMLElement, bubbleOut: HTMLElement | undefined) => () => {
+    onMouseOverOut = (bubbleOut: HTMLElement | undefined) => () => {
       if (this.options.showBubble && bubbleOut) {
         bubbleOut.classList.toggle('range-slider__bubble_big');
       }
-      bubble.classList.toggle('range-slider__bubble_hover');
     };
     
     eventHover = () => {
       this.input.addEventListener('mouseover',
-        this.onMouseOverOut(this.firstThumb, this.thumbOut));
+        this.onMouseOverOut(this.firstThumb));
       this.input.addEventListener('mouseout',
-        this.onMouseOverOut(this.firstThumb, this.thumbOut));
+        this.onMouseOverOut(this.firstThumb));
       if (this.options.isMultiThumb) {
         this.createInput(true);
         this.secondInput!.addEventListener('mouseover',
-          this.onMouseOverOut(this.secondThumb, this.thumbOutSecond));
+          this.onMouseOverOut(this.secondThumb));
         this.secondInput!.addEventListener('mouseout',
-          this.onMouseOverOut(this.secondThumb, this.thumbOutSecond));
+          this.onMouseOverOut(this.secondThumb));
       }
     };
     
