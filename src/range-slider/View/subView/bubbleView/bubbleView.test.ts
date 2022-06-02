@@ -36,9 +36,9 @@ describe('test view', () => {
     });
 
     test('create bubble wrapper with double thumbs', () => {
-        jest.spyOn(bubble, 'createBubbleWrapper');
-        bubble.createBubbleWrapper(document.body, true);
-        expect(bubble.createBubbleWrapper).toHaveBeenCalledTimes(1);
+        jest.spyOn(bubble, 'createThumbWrapper');
+        bubble.createThumbWrapper(document.body, true);
+        expect(bubble.createThumbWrapper).toHaveBeenCalledTimes(1);
     });
 
     test('set two bubbles considering percent and double thumbs', () => {
