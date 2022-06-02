@@ -6,7 +6,7 @@ describe('test view', () => {
     beforeEach(() => {
       thumb = new ThumbView();
       thumb.init(document.body, true, true, 10, 30);
-      thumb.createThumb = () => { thumb.createThumb(document.body, false); };
+      // thumb.createThumb = () => { thumb.createThumb(document.body, false); };
     });
     afterEach(() => {
       document.body.innerHTML = '';
