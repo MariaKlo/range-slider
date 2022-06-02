@@ -5,27 +5,27 @@ class ThumbView {
     thumbOut!: HTMLDivElement;
     thumbOutSecond!: HTMLDivElement;
 
-    init(parent: HTMLElement, isDouble: boolean, toggleElement: boolean, defaultValue: number,
+    init(_parent: HTMLElement, isDouble: boolean, toggleElement: boolean, defaultValue: number,
         secondValue?: number) {
-        this.createThumb(parent, isDouble);
+        // this.createThumb(parent, isDouble);
         if (toggleElement) {
             this.writeThumbValue(isDouble, defaultValue, secondValue);
         } 
     }
 
-    createThumb(parent: HTMLElement, isDouble: boolean): void {
-        this.firstThumb = document.createElement('div');
-        this.firstThumb.className = 'range-slider__thumb';
-        parent.append(this.firstThumb);
+    // createThumb(parent: HTMLElement, isDouble: boolean): void {
+    //     this.firstThumb = document.createElement('div');
+    //     this.firstThumb.className = 'range-slider__thumb';
+    //     parent.append(this.firstThumb);
 
-        if (isDouble) {
-            this.firstThumb.classList.add('range-slider__thumb_first');
-            this.secondThumb = document.createElement('div');
-            this.secondThumb.classList.add('range-slider__thumb');
-            this.secondThumb.classList.add('range-slider__thumb_second');
-            parent.append(this.secondThumb);
-        }
-    }
+    //     if (isDouble) {
+    //         this.firstThumb.classList.add('range-slider__thumb_first');
+    //         this.secondThumb = document.createElement('div');
+    //         this.secondThumb.classList.add('range-slider__thumb');
+    //         this.secondThumb.classList.add('range-slider__thumb_second');
+    //         parent.append(this.secondThumb);
+    //     }
+    // }
 
     writeThumbValue(isMultiThumb: boolean, value: number, secondValue?: number): void {
       if (this.firstThumb) {
