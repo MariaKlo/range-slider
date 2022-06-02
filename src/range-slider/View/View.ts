@@ -76,6 +76,7 @@ class View {
 
       this.createTrack(this.wrapper);
       this.bar.createProgressBar(this.track);
+      this.bubble.createThumbWrapper(this.track, this.isMultiThumb);
       this.bubble.init(
         this.parent,
         this.options.isMultiThumb,
@@ -101,6 +102,15 @@ class View {
       if (this.options.isVertical && this.options.showBubble) {
         this.bubble.rotateBubble();
       }
+      const ticks = this.ticks.createTicks(this.options.ticksValues, this.wrapper.offsetWidth);
+      const { ticksElement } = ticks;
+      this.wrapper.append(ticksElement);
+
+      const ticksValues = ticks.values;
+      for (let i = 0; i < ticksValues.length; i += 1) {
+        ticksValues[i].element.addEventListener('click', this.onClick(ticksValues[i].value));
+      }
+      
       if (this.options.showTicks) {
         const ticks = this.ticks.createTicks(this.options.ticksValues, this.wrapper.offsetWidth);
         const { ticksElement } = ticks;
@@ -205,14 +215,12 @@ class View {
     };
     
     onMouseUpDown = (isDefault: boolean) => {
-      this.thumb.createThumb(this.parent, this.isMultiThumb);
       if (isDefault) {
         return () => {
           this.thumb.firstThumb.classList.toggle('range-slider__thumb_active');
         };
       }
       return () => {
-        this.thumb.createThumb(this.parent, true);
         this.thumb.secondThumb.classList.toggle('range-slider__thumb_active');
       };
     };
@@ -244,10 +252,11 @@ class View {
     };
 
     // methods creating form
-    createForm(parent: HTMLElement): void {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    createForm(_parent: HTMLElement): void {
       this.formDiv = <HTMLElement>(document.createElement('div'));
       this.formDiv.classList.add('range-slider__form');
-      parent.append(this.formDiv);
+      this.wrapper.append(this.formDiv);
     }
 
     createInput(isDouble: boolean): void {
