@@ -1,6 +1,6 @@
 .range-slider {
   position: relative;
-  width: 100%;
+  width: 50%;
 
   &_vertical {
     transform: rotate(90deg);
@@ -70,7 +70,7 @@
     bottom: 0;
     margin-left: -0.5%;
     margin-right: 0;
-    background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+    background: linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%);
     border-radius: 3px;
   }
 
@@ -79,12 +79,12 @@
     z-index: 3;
     width: 12px;
     height: 12px;
-    background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+    background: linear-gradient(180deg,  #cf6f7f 0%, #ea6666 100%);
     border-radius: 50%;
     border: 2px solid #fff;
     margin-top: -5px;
     margin-left: -10px;
-    box-shadow: 0 0 0 0 rgba(61, 176, 180, 0.25);
+    box-shadow: 0 0 0 0 rgba(102, 34, 34, 0.25);
     transition: box-shadow .3s ease-in-out;
 
     &_first {
@@ -97,11 +97,11 @@
     }
 
     &_hover {
-      box-shadow: 0 0 0 5px rgba(61, 176, 180, 0.25);
+      box-shadow: 0 0 0 5px rgba(102, 34, 34, 0.25);
     }
 
     &_active {
-      box-shadow: 0 0 0 5px rgba(61, 176, 180, 0.5);
+      box-shadow: 0 0 0 5px rgba(102, 34, 34, 0.5);
     }
   }
 
@@ -113,7 +113,7 @@
     color: black;
     border: 1px solid #000;
     padding: 2px;
-    background-color: #66D2EA;
+    background-color: #eac966;
     border-radius: 3px;
     text-align: center;
 
@@ -123,8 +123,8 @@
     &_vertical {
       transform: rotate(-90deg);
     }
-    &:hover {
-      box-shadow: 0 0 0 5px rgba(61, 176, 180, 0.25);
+    &_hover {
+      box-shadow: 0 0 0 5px rgba(102, 34, 34, 0.25);
     }
   }
 

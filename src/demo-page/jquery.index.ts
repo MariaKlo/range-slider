@@ -1,14 +1,16 @@
 import './index.scss';
+import '../range-slider/index.scss'
 import '../range-slider/jquery.slider.ts';
 import $ from 'jquery';
 import Model from '../range-slider/Model/Model';
 import View from '../range-slider/View/View';
 import barView from '../range-slider/View/subView/barView/barView';
-import bubbleView from '../range-slider/View/subView/bubbleView/bubbleView';
+// import bubbleView from '../range-slider/View/subView/bubbleView/bubbleView';
 import stepView from '../range-slider/View/subView/stepView/stepView';
 import ticksView from '../range-slider/View/subView/ticksView/ticksView';
 import thumbView from '../range-slider/View/subView/thumbView/thumbView';
 import Presenter from '../range-slider/Presenter/Presenter';
+import formView from '../range-slider/View/subView/formView/formView';
 
 
 // $.fn.Slider = function Slider(this: JQuery): JQuery {
@@ -99,9 +101,10 @@ declare global {
           document.body,
           new ticksView(),
           new stepView(),
-          new bubbleView(),
+          // new bubbleView(),
           new barView(),
           new thumbView(),
+          new formView()
         ),
         new Model({
           max: settings.max,
@@ -156,9 +159,9 @@ $('#api_first').sliderPlugin({
   defaultValue: 90,
   valueSecond: 170,
   isMultiThumb: true,
-  showRightProgressBar: false,
+  showRightProgressBar: true,
   showBubble: true,
-  isVertical: false,
-  showTicks: false,
-  ticksValues: []
+  isVertical: true,
+  showTicks: true,
+  ticksValues: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
 });
