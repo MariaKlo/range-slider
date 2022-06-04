@@ -12,7 +12,7 @@ class Presenter {
   }
 
   init() {
-      this.view.init(this.view.parent, this.view.isMultiThumb, this.view.max, this.view.min);
+      this.view.init();
       this.model.init();
       this.model.subscribe(this);
       this.view.subscribe(this);
