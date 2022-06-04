@@ -21,7 +21,7 @@ describe('test view', () => {
     // tests for thumb
     test('value for first thumb is set correctly', () => {
         const { setTwoThumbs, firstValue, secondValue } = bubbleOptions;
-        bubble.createBubbleElement(setTwoThumbs, document.body);
+        bubble.createBubbleElement(setTwoThumbs, document.body, document.body);
         bubble.setBubbleValue(setTwoThumbs, firstValue, secondValue);
         expect(bubble.showBubble.textContent).toBe(String(firstValue));
     });
@@ -35,11 +35,11 @@ describe('test view', () => {
         expect(bubble.showSecondBubble.textContent).toBe(String(secondValue));
     });
 
-    test('create bubble wrapper with double thumbs', () => {
-        jest.spyOn(bubble, 'createThumbWrapper');
-        bubble.createThumbWrapper(document.body, true);
-        expect(bubble.createThumbWrapper).toHaveBeenCalledTimes(1);
-    });
+    // test('create bubble wrapper with double thumbs', () => {
+    //     jest.spyOn(bubble, 'createThumbWrapper');
+    //     bubble.createThumbWrapper(document.body, true);
+    //     expect(bubble.createThumbWrapper).toHaveBeenCalledTimes(1);
+    // });
 
     test('set two bubbles considering percent and double thumbs', () => {
         jest.spyOn(bubble, 'setBubble');
