@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import ticksView from "./subView/ticksView/ticksView";
 import stepView from "./subView/stepView/stepView";
-import bubbleView from "./subView/bubbleView/bubbleView";
+// import bubbleView from "./subView/bubbleView/bubbleView";
 import barView from "./subView/barView/barView";
 import thumbView from './subView/thumbView/thumbView';
+import formView from "./subView/formView/formView";
 import Options from "../component/globalOptions";
 
 interface IObserverView {
@@ -11,40 +13,32 @@ interface IObserverView {
 }
 
 class View {
-  // vars for form
+  // vars for view
   parent: HTMLElement;
-  formDiv!: HTMLElement;
   wrapper!: HTMLDivElement;
   track!: HTMLDivElement;
   input!: HTMLInputElement;
+  firstInput!: HTMLElement;
   secondInput!: HTMLInputElement;
-  isMultiThumb!: boolean;
-  max!: number;
-  min!: number;
-  // vars for thumbs
-  firstThumb!: HTMLDivElement;
-  secondThumb!: HTMLDivElement;
-  thumbOut!: HTMLDivElement;
-  thumbOutSecond!: HTMLDivElement;
-  firstValue!: number;
-  secondValue!: number;
   // imported classes
   ticks: ticksView;
   step: stepView;
-  bubble: bubbleView;
+  // bubble: bubbleView;
   bar: barView;
   thumb: thumbView;
+  form!: formView;
   options!: Options;
   observers!: IObserverView[];
 
-  constructor(parent: HTMLElement, ticks: ticksView, step: stepView, bubble: bubbleView, bar: barView,
-    thumb: thumbView) {
+  constructor(parent: HTMLElement, ticks: ticksView, step: stepView, bar: barView,
+    thumb: thumbView, form: formView) {
     this.parent = parent;
     this.ticks = ticks;
     this.step = step;
-    this.bubble = bubble;
+    // this.bubble = bubble;
     this.bar = bar;
     this.thumb = thumb;
+    this.form = form;
 
     this.options = {
       max: 100,
@@ -52,12 +46,12 @@ class View {
       step: 1,
       defaultValue: 50,
       valueSecond: 70,
-      isMultiThumb: false,
-      showRightProgressBar: false,
+      isMultiThumb: true,
+      showRightProgressBar: true,
       showBubble: true,
       isVertical: false,
-      showTicks: false,
-      ticksValues: [],
+      showTicks: true,
+      ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     };
 
     this.observers = [];
@@ -67,18 +61,20 @@ class View {
       this.observers.push(observer);
     };
 
-    init = (parent: HTMLElement, isMultiThumb: boolean, max: number, min: number) => {      
+    init = () => {      
       this.createWrapper();
-      this.createForm(parent);
-      this.createInput(isMultiThumb);
-      this.setMin(isMultiThumb, min);
-      this.setMax(isMultiThumb, max);
+
+      this.form.init(
+        this.wrapper,
+        this.options.isMultiThumb,
+        this.options.min,
+        this.options.max,
+      );
 
       this.createTrack(this.wrapper);
       this.bar.createProgressBar(this.track);
-      this.bubble.createThumbWrapper(this.track, this.isMultiThumb);
-      this.bubble.init(
-        this.parent,
+      this.thumb.init(
+        this.track,
         this.options.isMultiThumb,
         this.options.showBubble,
         this.options.defaultValue,
@@ -100,15 +96,7 @@ class View {
         this.wrapper.classList.add('range-slider_vertical');
       }
       if (this.options.isVertical && this.options.showBubble) {
-        this.bubble.rotateBubble();
-      }
-      const ticks = this.ticks.createTicks(this.options.ticksValues, this.wrapper.offsetWidth);
-      const { ticksElement } = ticks;
-      this.wrapper.append(ticksElement);
-
-      const ticksValues = ticks.values;
-      for (let i = 0; i < ticksValues.length; i += 1) {
-        ticksValues[i].element.addEventListener('click', this.onClick(ticksValues[i].value));
+        this.thumb.rotateBubble();
       }
       
       if (this.options.showTicks) {
@@ -124,29 +112,67 @@ class View {
       }
     };
 
-    createTrack(parent: HTMLDivElement): void {
+    createWrapper = () => {
+      this.wrapper = document.createElement('div');
+      this.wrapper.classList.add('range-slider');
+      this.setAttributesValue();
+      this.parent.append(this.wrapper);
+    }
+
+    createTrack(parent: HTMLElement): void {
       this.track = document.createElement('div');
       this.track.classList.add('range-slider__track');
       parent.append(this.track);
     }
 
+    setAttributesValue = () => {
+      if (this.options.isMultiThumb) {
+        this.wrapper.setAttribute('first-value', String(this.options.defaultValue));
+        this.wrapper.setAttribute('second-value', String(this.options.valueSecond));
+      } else {
+        this.wrapper.setAttribute('default-value', String(this.options.defaultValue));
+      }
+    };
+
+    setInput = () => {
+      this.form.setValues(this.options.isMultiThumb, this.options.defaultValue,
+        this.options.valueSecond);
+      const placeDefault: number = this.bar.calcPercent(
+        Number(this.form.input.value),
+        Number(this.form.input.min),
+        Number(this.form.input.max),
+      );
+  
+      const placeRight: number = this.form.secondInput
+        ? this.bar.calcPercent(
+          Number(this.form.secondInput.value),
+          Number(this.form.secondInput.min),
+          Number(this.form.secondInput.max),
+        )
+        : NaN;
+
+      this.bar.setDefault(this.options.isMultiThumb, placeDefault, placeRight);
+      if (this.options.showRightProgressBar && !this.options.isMultiThumb) {
+        this.bar.setRight(placeDefault);
+      }
+      this.thumb.placeThumb(this.options.isMultiThumb, placeDefault, placeRight);
+  };
+
     onInput = (isDefault: boolean) => {
       if (isDefault) {
         return () => {
-          this.update(Number(this.input.value), true);
+          this.update(Number(this.form.input.value), true);
         };
       }
-      this.createInput(true);
       return () => {
-        this.update(Number(this.secondInput!.value), isDefault);
+        this.update(Number(this.form.secondInput!.value), isDefault);
       };
     };
     
     eventInput = () => {
-      this.input.addEventListener('input', this.onInput(true));
+      this.form.input.addEventListener('input', this.onInput(true));
       if (this.options.isMultiThumb) {
-        this.createInput(true);
-        this.secondInput!.addEventListener('input', this.onInput(false));
+        this.form.secondInput!.addEventListener('input', this.onInput(false));
       }
     };
     
@@ -180,7 +206,7 @@ class View {
         observer.updateModel(newValue, isDefault);
       });
       this.setAttributesValue();
-      this.bubble.setBubbleValue(this.options.isMultiThumb,
+      this.thumb.writeBubbleValue(this.options.isMultiThumb,
         this.options.defaultValue, this.options.valueSecond);
     };
     
@@ -194,23 +220,23 @@ class View {
       }
     };
     
-    onMouseOverOut = (bubbleOut: HTMLElement | undefined) => () => {
+    onMouseOverOut = (thumb: HTMLElement, bubbleOut: HTMLElement | undefined) => () => {
       if (this.options.showBubble && bubbleOut) {
         bubbleOut.classList.toggle('range-slider__bubble_big');
       }
+      thumb.classList.toggle('range-slider__thumb_hover');
     };
     
     eventHover = () => {
-      this.input.addEventListener('mouseover',
-        this.onMouseOverOut(this.firstThumb));
-      this.input.addEventListener('mouseout',
-        this.onMouseOverOut(this.firstThumb));
+      this.form.input.addEventListener('mouseover',
+        this.onMouseOverOut(this.thumb.firstThumb, this.thumb.showBubble));
+      this.form.input.addEventListener('mouseout',
+        this.onMouseOverOut(this.thumb.firstThumb, this.thumb.showBubble));
       if (this.options.isMultiThumb) {
-        this.createInput(true);
-        this.secondInput!.addEventListener('mouseover',
-          this.onMouseOverOut(this.secondThumb));
-        this.secondInput!.addEventListener('mouseout',
-          this.onMouseOverOut(this.secondThumb));
+        this.form.secondInput!.addEventListener('mouseover',
+          this.onMouseOverOut(this.thumb.secondThumb, this.thumb.showSecondBubble));
+        this.form.secondInput!.addEventListener('mouseout',
+          this.onMouseOverOut(this.thumb.secondThumb, this.thumb.showSecondBubble));
       }
     };
     
@@ -226,106 +252,13 @@ class View {
     };
     
     eventActive = () => {
-      this.input.addEventListener('mousedown', this.onMouseUpDown(true));
-      this.input.addEventListener('mouseup', this.onMouseUpDown(true));
+      this.form.input.addEventListener('mousedown', this.onMouseUpDown(true));
+      this.form.input.addEventListener('mouseup', this.onMouseUpDown(true));
       if (this.options.isMultiThumb) {
-        this.createInput(true);
-        this.secondInput!.addEventListener('mousedown', this.onMouseUpDown(false));
-        this.secondInput!.addEventListener('mouseup', this.onMouseUpDown(false));
+        this.form.secondInput!.addEventListener('mousedown', this.onMouseUpDown(false));
+        this.form.secondInput!.addEventListener('mouseup', this.onMouseUpDown(false));
       }
     };
-
-    createWrapper = () => {
-      this.wrapper = document.createElement('div');
-      this.wrapper.classList.add('range-slider');
-      this.setAttributesValue();
-      this.parent.append(this.wrapper);
-    }
-
-    setAttributesValue = () => {
-      if (this.options.isMultiThumb) {
-        this.wrapper.setAttribute('first-value', String(this.options.defaultValue));
-        this.wrapper.setAttribute('second-value', String(this.options.valueSecond));
-      } else {
-        this.wrapper.setAttribute('default-value', String(this.options.defaultValue));
-      }
-    };
-
-    // methods creating form
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    createForm(_parent: HTMLElement): void {
-      this.formDiv = <HTMLElement>(document.createElement('div'));
-      this.formDiv.classList.add('range-slider__form');
-      this.wrapper.append(this.formDiv);
-    }
-
-    createInput(isDouble: boolean): void {
-      if (isDouble) {
-        this.input = document.createElement('input');
-        this.input.type = 'range';
-        this.input.classList.add('range-slider__input');
-        this.input.classList.add('range-slider__input_first');
-        this.formDiv.append(this.input);
-
-        this.secondInput = document.createElement('input');
-        this.secondInput.type = 'range';
-        this.secondInput.classList.add('range-slider__input');
-        this.secondInput.classList.add('range-slider__input_second');
-        this.formDiv.append(this.secondInput);
-
-      } else {
-        this.input = document.createElement('input');
-        this.input.type = 'range';
-        this.input.classList.add('range-slider__input');
-        this.formDiv.append(this.input);
-      }
-    }
-
-    setValues(isDouble: boolean, value: number, secondValue?: number): void {
-      this.input.value = String(value);
-      if (isDouble && secondValue !== undefined) {
-        this.createInput(true);
-        this.secondInput.value = String(secondValue);
-      }
-    }
-
-    setMax(isDouble: boolean, max: number) {
-      this.input.max = String(max);
-      if (isDouble) {
-        this.secondInput!.max = String(max);
-      }
-    }
-
-    setMin(isDouble: boolean, min: number) {
-      this.input.min = String(min);
-      if (isDouble) {
-        this.secondInput!.min = String(min);
-      }
-    }
-
-    // set progress bar
-    setInput = () => {
-      this.setValues(this.options.isMultiThumb, this.options.defaultValue,
-        this.options.valueSecond);
-      const placeDefault: number = this.bar.calcPercent(
-        Number(this.input.value),
-        Number(this.input.min),
-        Number(this.input.max),
-      );
-  
-      const placeRight: number = this.secondInput
-        ? this.bar.calcPercent(
-          Number(this.secondInput.value),
-          Number(this.secondInput.min),
-          Number(this.secondInput.max),
-        )
-        : NaN;
-  
-      this.bar.setDefault(this.options.isMultiThumb, placeDefault, placeRight);
-      if (this.options.showRightProgressBar && !this.options.isMultiThumb) {
-        this.bar.setRight(placeDefault);
-      }
-  };
 }
 
 export default View;
