@@ -13,9 +13,9 @@ describe('test view', () => {
     });
 
     test('write thumb value', () => {
-        thumb.writeThumbValue(false, 10, undefined);
+        thumb.writeBubbleValue(false, 10, undefined);
         expect(thumb.firstThumb.textContent).toEqual(`First value: ${String(10)}`);
-        thumb.writeThumbValue(true, 10, 30);
+        thumb.writeBubbleValue(true, 10, 30);
         expect(thumb.secondThumb.textContent).toEqual(`Second value: ${String(30)}`);
     });
 
