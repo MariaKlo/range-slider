@@ -1,6 +1,6 @@
 import './index.scss';
 import '../range-slider/index.scss'
-import '../range-slider/jquery.slider.ts';
+// import '../range-slider/jquery.slider.ts';
 import $ from 'jquery';
 import Model from '../range-slider/Model/Model';
 import View from '../range-slider/View/View';
@@ -11,7 +11,7 @@ import ticksView from '../range-slider/View/subView/ticksView/ticksView';
 import thumbView from '../range-slider/View/subView/thumbView/thumbView';
 import Presenter from '../range-slider/Presenter/Presenter';
 import formView from '../range-slider/View/subView/formView/formView';
-
+import Options from '../range-slider/component/globalOptions';
 
 // $.fn.Slider = function Slider(this: JQuery): JQuery {
 //     // const defaults: Options = {
@@ -46,19 +46,19 @@ import formView from '../range-slider/View/subView/formView/formView';
   
 //   export default $.fn.Slider;
 
-interface Options {
-    max: number;
-    min: number;
-    step: number;
-    defaultValue: number;
-    valueSecond: number;
-    isMultiThumb: boolean;
-    showRightProgressBar: boolean;
-    showBubble: boolean;
-    isVertical: boolean;
-    showTicks: boolean;
-    ticksValues: number[];
-  }
+// interface Options {
+//     max: number;
+//     min: number;
+//     step: number;
+//     defaultValue: number;
+//     valueSecond: number;
+//     isMultiThumb: boolean;
+//     // showRightProgressBar: boolean;
+//     showBubble: boolean;
+//     isVertical: boolean;
+//     showTicks: boolean;
+//     ticksValues: number[];
+//   }
   
   // interface SliderGlobalOptions {
   //   /**
@@ -113,7 +113,7 @@ declare global {
           defaultValue: settings.isMultiThumb ? settings.defaultValue : settings.valueSecond,
           valueSecond: settings.valueSecond,
           isMultiThumb: settings.isMultiThumb,
-          showRightProgressBar: settings.showRightProgressBar,
+          // showRightProgressBar: settings.showRightProgressBar,
           showBubble: settings.showBubble,
           isVertical: settings.isVertical,
           showTicks: settings.showTicks,
@@ -153,15 +153,15 @@ declare global {
   // }(jQuery));
 
 $('#api_first').sliderPlugin({
-  max: 500,
-  min: 50,
-  step: 1,
-  defaultValue: 90,
-  valueSecond: 170,
-  isMultiThumb: true,
-  showRightProgressBar: true,
-  showBubble: true,
-  isVertical: true,
-  showTicks: true,
-  ticksValues: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+  max: 100, // nothing changes, default option remains
+  min: 0, // nothing changes, default option remains
+  step: 1, // works in api
+  defaultValue: 50, // conflicts with default option
+  valueSecond: 70, // conflicts with default option
+  isMultiThumb: true, // conflicts, second thumb is not removed
+  // showRightProgressBar: true,
+  showBubble: true, // nothing changes, default option remains
+  isVertical: true, // nothing changes, default option remains
+  showTicks: true, // nothing changes, default option remains
+  ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], // nothing changes, default option remains
 });
