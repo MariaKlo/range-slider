@@ -11,7 +11,7 @@ class barView {
     return ((value - min) / (max - min)) * 100;
   }
     
-  setDefault(isDouble: boolean, percent: number, percentSecond?: number): void {
+  setDefault(isDouble: boolean, percent: number, percentSecond: number): void {
     if (isDouble) {
       this.bar.style.left = `${percent}%`;
       this.bar.style.right = `${100 - (percentSecond || 0)}%`;
@@ -21,10 +21,10 @@ class barView {
     }
   }
 
-  setRight(percent: number): void {
-    this.bar.style.left = `${percent}%`;
-    this.bar.style.right = `${String(-1)}px`;
-  }
+//   setRight(percent: number): void {
+//     this.bar.style.left = `${percent}%`;
+//     this.bar.style.right = `${String(-1)}px`;
+//   }
 }
 
 export default barView;

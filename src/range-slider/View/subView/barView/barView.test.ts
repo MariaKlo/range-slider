@@ -14,12 +14,12 @@ describe('test progress bar', () => {
     });
 
     test('one thumb, left progress bar', () => {
-        progressBar.setDefault(false, 20);
+        progressBar.setDefault(false, 20, 0);
         expect(progressBar.bar.style.left).toEqual('0px');
     });
 
     test('one thumb, right progress bar', () => {
-        progressBar.setDefault(false, 20);
+        progressBar.setDefault(false, 20, 0);
         expect(progressBar.bar.style.right).toEqual('80%');
     });
 
@@ -34,7 +34,7 @@ describe('test progress bar', () => {
       });
 
     test('double thumbs, right progress bar', () => {
-        progressBar.setDefault(true, 20, undefined);
+        progressBar.setDefault(true, 20, 0);
         expect(progressBar.bar.style.right).toEqual('100%');
     });
 
