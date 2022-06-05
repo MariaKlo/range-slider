@@ -111,16 +111,16 @@ describe('test view', () => {
     expect(view.update).toHaveBeenCalledWith(value, true);
   });
 
-  test('progress bar is set on right', () => {
-    view.options = {
-      ...view.options,
-      isMultiThumb: false,
-      showRightProgressBar: true,
-    };
-    jest.spyOn(view.bar, 'setRight');
-    view.setInput();
-    expect(view.bar.setRight).toHaveBeenCalled();
-  });
+  // test('progress bar is set on right', () => {
+  //   view.options = {
+  //     ...view.options,
+  //     isMultiThumb: false,
+  //     showRightProgressBar: true,
+  //   };
+  //   jest.spyOn(view.bar, 'setRight');
+  //   view.setInput();
+  //   expect(view.bar.setRight).toHaveBeenCalled();
+  // });
 
   test('input event calls update method with non-default settings', () => {
     jest.spyOn(view, 'update');

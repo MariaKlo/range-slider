@@ -47,9 +47,9 @@ class View {
       defaultValue: 50,
       valueSecond: 70,
       isMultiThumb: true,
-      showRightProgressBar: true,
+      // showRightProgressBar: false,
       showBubble: true,
-      isVertical: false,
+      isVertical: true,
       showTicks: true,
       ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     };
@@ -152,9 +152,9 @@ class View {
         : NaN;
 
       this.bar.setDefault(this.options.isMultiThumb, placeDefault, placeRight);
-      if (this.options.showRightProgressBar && !this.options.isMultiThumb) {
-        this.bar.setRight(placeDefault);
-      }
+      // if (this.options.showRightProgressBar && !this.options.isMultiThumb) {
+      //   this.bar.setRight(placeDefault);
+      // }
       this.thumb.placeThumb(this.options.isMultiThumb, placeDefault, placeRight);
   };
 
