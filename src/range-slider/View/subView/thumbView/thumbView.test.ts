@@ -20,11 +20,11 @@ describe('test view', () => {
     });
 
     test('place thumb on input', () => {
-        thumb.placeThumb(false, 10, undefined);
+        thumb.placeThumb(false, 10, 0);
         expect(thumb.firstThumb.style.left).toBe(`${10}%`);
         thumb.placeThumb(true, 10, 30);
         expect(thumb.secondThumb.style.right).toBe(`${70}%`);
-        thumb.placeThumb(true, 10, undefined);
+        thumb.placeThumb(true, 10, 0);
         expect(thumb.secondThumb.style.right).toBe(`${100}%`);
     });
 });

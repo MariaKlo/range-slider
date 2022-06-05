@@ -6,10 +6,24 @@ export default interface Options {
     defaultValue: number;
     valueSecond: number;
     isMultiThumb: boolean;
-    showRightProgressBar: boolean;
+    // showRightProgressBar: boolean;
     showBubble: boolean;
     isVertical: boolean;
     showTicks: boolean;
+    ticksValues: number[];
+}
+
+export class DefaultOptions {
+    max: 100;
+    min: 0;
+    step: 1;
+    defaultValue: 50;
+    valueSecond: 70;
+    isMultiThumb: false;
+    // showRightProgressBar: boolean;
+    showBubble: false;
+    isVertical: false;
+    showTicks: false;
     ticksValues: number[];
 }
 

@@ -26,7 +26,7 @@ class Model {
         this.defaultValue = Number(options.defaultValue === 0 ? 0 : (options.defaultValue || 50));
         this.valueSecond = Number(options.valueSecond === 0 ? 0 : (options.valueSecond || 70));
         this.isMultiThumb = options.isMultiThumb || false;
-        this.showRightProgressBar = options.showRightProgressBar || false;
+        // this.showRightProgressBar = options.showRightProgressBar || false;
         this.showBubble = options.showBubble || false;
         this.isVertical = options.isVertical || false;
         this.showTicks = options.showTicks || false;
@@ -40,7 +40,7 @@ class Model {
             defaultValue: this.defaultValue,
             valueSecond: this.valueSecond,
             isMultiThumb: this.isMultiThumb,
-            showRightProgressBar: this.showRightProgressBar,
+            // showRightProgressBar: this.showRightProgressBar,
             showBubble: this.showBubble,
             isVertical: this.isVertical,
             showTicks: this.showTicks,
