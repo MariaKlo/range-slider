@@ -20,11 +20,6 @@ class barView {
       this.bar.style.right = `${100 - percent}%`;
     }
   }
-
-//   setRight(percent: number): void {
-//     this.bar.style.left = `${percent}%`;
-//     this.bar.style.right = `${String(-1)}px`;
-//   }
 }
 
 export default barView;
