@@ -64,6 +64,9 @@ describe('test Presenter', () => {
         isVertical: true,
         showTicks: true,
         ticksValues: [0, 50, 100],
+        barColor: '#000000',
+        thumbColor: 'green',
+        bubbleColor: 'yellow'
       };
       presenter.model.optionsForView = data;
       presenter.init();
