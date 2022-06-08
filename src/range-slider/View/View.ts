@@ -2,11 +2,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import ticksView from "./subView/ticksView/ticksView";
 import stepView from "./subView/stepView/stepView";
-// import bubbleView from "./subView/bubbleView/bubbleView";
 import barView from "./subView/barView/barView";
 import thumbView from './subView/thumbView/thumbView';
 import formView from "./subView/formView/formView";
-import Options from "../component/globalOptions";
+import Options from '../component/globalOptions'
 
 interface IObserverView {
   updateModel(arg0: number, arg1: boolean): void
@@ -14,7 +13,7 @@ interface IObserverView {
 
 class View {
   // vars for view
-  parent: HTMLElement;
+  parent: HTMLElement | JQuery<HTMLElement>;
   wrapper!: HTMLDivElement;
   track!: HTMLDivElement;
   input!: HTMLInputElement;
@@ -23,36 +22,22 @@ class View {
   // imported classes
   ticks: ticksView;
   step: stepView;
-  // bubble: bubbleView;
   bar: barView;
   thumb: thumbView;
   form!: formView;
   options!: Options;
   observers!: IObserverView[];
 
-  constructor(parent: HTMLElement, ticks: ticksView, step: stepView, bar: barView,
-    thumb: thumbView, form: formView) {
+  constructor(parent: HTMLElement | JQuery<HTMLElement>, ticks: ticksView, step: stepView, bar: barView,
+    thumb: thumbView, form: formView, options: Options) {
     this.parent = parent;
     this.ticks = ticks;
     this.step = step;
-    // this.bubble = bubble;
     this.bar = bar;
     this.thumb = thumb;
     this.form = form;
 
-    this.options = {
-      max: 100,
-      min: 0,
-      step: 1,
-      defaultValue: 50,
-      valueSecond: 70,
-      isMultiThumb: true,
-      // showRightProgressBar: false,
-      showBubble: true,
-      isVertical: true,
-      showTicks: true,
-      ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-    };
+    this.options = options;
 
     this.observers = [];
   }
@@ -152,9 +137,6 @@ class View {
         : NaN;
 
       this.bar.setDefault(this.options.isMultiThumb, placeDefault, placeRight);
-      // if (this.options.showRightProgressBar && !this.options.isMultiThumb) {
-      //   this.bar.setRight(placeDefault);
-      // }
       this.thumb.placeThumb(this.options.isMultiThumb, placeDefault, placeRight);
   };
 
