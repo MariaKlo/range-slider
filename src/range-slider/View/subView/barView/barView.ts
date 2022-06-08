@@ -20,6 +20,10 @@ class barView {
       this.bar.style.right = `${100 - percent}%`;
     }
   }
+
+  changeBarColor(color: string): void {
+    this.bar.style.background = color;
+  }
 }
 
 export default barView;

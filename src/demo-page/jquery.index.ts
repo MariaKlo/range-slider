@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import './index.scss';
-import '../range-slider/index.scss'
+import '../range-slider/index.scss';
 // import './panel.js';
-// import $ from 'jquery';
 import Model from '../range-slider/Model/Model';
 import View from '../range-slider/View/View';
 import barView from '../range-slider/View/subView/barView/barView';
@@ -32,6 +31,9 @@ declare global {
     isVertical: boolean;
     showTicks: boolean;
     ticksValues: number[];
+    barColor: string;
+    thumbColor: string;
+    bubbleColor: string;
   }) {
       const presenter: Presenter = new Presenter(
         new View(
@@ -53,48 +55,12 @@ declare global {
           showBubble: settings.showBubble,
           isVertical: settings.isVertical,
           showTicks: settings.showTicks,
-          ticksValues: settings.ticksValues
+          ticksValues: settings.ticksValues,
+          barColor: settings.barColor,
+          thumbColor: settings.thumbColor,
+          bubbleColor: settings.bubbleColor
         }),
       );
     return presenter;
   }
 }(jQuery));
-
-// $('#api_first').sliderPlugin({
-//   max: 100,
-//   min: 0,
-//   step: 5,
-//   defaultValue: 60,
-//   valueSecond: 70,
-//   isMultiThumb: false,
-//   showBubble: true,
-//   isVertical: false,
-//   showTicks: true,
-//   ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-// });
-
-// $('#api_second').sliderPlugin({
-//   max: 50,
-//   min: 0,
-//   step: 1,
-//   defaultValue: 10,
-//   valueSecond: 30,
-//   isMultiThumb: true,
-//   showBubble: false,
-//   isVertical: false,
-//   showTicks: false,
-//   ticksValues: [0, 10, 20, 30, 40, 50],
-// });
-
-// $('#api_third').sliderPlugin({
-//   max: 100,
-//   min: 0,
-//   step: 10,
-//   defaultValue: 40,
-//   valueSecond: 90,
-//   isMultiThumb: true,
-//   showBubble: false,
-//   isVertical: true,
-//   showTicks: false,
-//   ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-// });

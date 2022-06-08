@@ -62,6 +62,22 @@ class ThumbView {
       this.showSecondBubble.classList.add(classNameVertical);
     }
   }
+
+  changeThumbColor(color: string, isDouble: boolean): void {
+    this.firstThumb.style.background = color;
+    if (isDouble) {
+      this.secondThumb.style.background = color;
+    }
+  }
+
+  changeBubbleColor(color: string, isDouble: boolean): void {
+    if (this.showBubble) {
+      this.showBubble.style.backgroundColor = color;
+    }
+    if (isDouble && this.showSecondBubble) {
+      this.showSecondBubble.style.backgroundColor = color;
+    }
+  }
 }
 
 export default ThumbView;

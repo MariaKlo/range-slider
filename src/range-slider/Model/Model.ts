@@ -17,6 +17,9 @@ class Model {
     isVertical!: boolean;
     showTicks!: boolean;
     ticksValues!: number[];
+    barColor!: string;
+    thumbColor!: string;
+    bubbleColor!: string;
     observers!: IObserverModel[];
 
     constructor(options: Options) {
@@ -30,6 +33,9 @@ class Model {
         this.isVertical = options.isVertical || false;
         this.showTicks = options.showTicks || false;
         this.ticksValues = [];
+        this.barColor = options.barColor || 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)';
+        this.thumbColor = options.thumbColor || 'linear-gradient(180deg,  #cf6f7f 0%, #ea6666 100%)';
+        this.bubbleColor = options.bubbleColor || '#eac966';
         this.observers = [];
 
         this.optionsForView = {
@@ -43,6 +49,9 @@ class Model {
             isVertical: this.isVertical,
             showTicks: this.showTicks,
             ticksValues: this.getTicks(),
+            barColor: this.barColor,
+            thumbColor: this.thumbColor,
+            bubbleColor: this.bubbleColor,
         };
     }
 

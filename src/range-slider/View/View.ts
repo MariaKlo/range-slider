@@ -58,6 +58,7 @@ class View {
 
       this.createTrack(this.wrapper);
       this.bar.createProgressBar(this.track);
+      this.bar.changeBarColor(this.options.barColor);
       this.thumb.init(
         this.track,
         this.options.isMultiThumb,
@@ -65,6 +66,9 @@ class View {
         this.options.defaultValue,
         this.options.valueSecond,
       );
+
+      this.thumb.changeThumbColor(this.options.thumbColor, this.options.isMultiThumb);
+      this.thumb.changeBubbleColor(this.options.bubbleColor, this.options.isMultiThumb);
   
       this.setInput();
       this.eventInput();
