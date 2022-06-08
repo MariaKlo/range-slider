@@ -3,27 +3,27 @@
 import View from './View';
 import ticksView from './subView/ticksView/ticksView';
 import stepView from './subView/stepView/stepView';
-// import bubbleView from './subView/bubbleView/bubbleView';
 import barView from './subView/barView/barView';
 import ThumbView from './subView/thumbView/thumbView';
 import formView from './subView/formView/formView';
+import Options from '../component/globalOptions';
 
 describe('test view', () => {
   let view: View;
   let ticks: ticksView;
   let step: stepView;
-  // let bubble: bubbleView;
   let bar: barView;
   let thumb: ThumbView;
   let form: formView;
 
+  let options: Options;
+
   beforeEach(() => {
     thumb = new ThumbView();
     ticks = new ticksView();
-    // bubble = new bubbleView();
     bar = new barView();
     form = new formView();
-    view = new View(document.body, ticks, step, bar, thumb, form);
+    view = new View(document.body, ticks, step, bar, thumb, form, options);
     view.init();
   });
   afterEach(() => {

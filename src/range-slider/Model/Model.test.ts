@@ -1,5 +1,5 @@
 import Model from './Model';
-import Options from "../component/globalOptions";
+import Options from '../component/globalOptions'
 
 describe('test model', () => {
     let model: Model;
