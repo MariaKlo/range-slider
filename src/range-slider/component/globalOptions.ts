@@ -10,6 +10,9 @@ export default interface Options {
     isVertical: boolean;
     showTicks: boolean;
     ticksValues: number[];
+    barColor: string;
+    thumbColor: string;
+    bubbleColor: string;
 }
 
 // export class DefaultOptions {
