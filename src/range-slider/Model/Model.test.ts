@@ -1,30 +1,37 @@
 import Model from './Model';
-import Options from '../component/globalOptions'
 
 describe('test model', () => {
     let model: Model;
-    let options: Options;
+
+    const data = {
+        max: 100,
+        min: 0,
+        step: 1,
+        defaultValue: 11,
+        valueSecond: 23,
+        isMultiThumb: true,
+        showRightProgressBar: false,
+        showBubble: true,
+        isVertical: true,
+        showTicks: true,
+        ticksValues: [0, 50, 100],
+        barColor: '#000000',
+        thumbColor: 'green',
+        bubbleColor: 'yellow'
+    };
 
     beforeEach(() => {
-        model = new Model(options);
+        model = new Model(data);
     });
 
     test('max value set to 100 if not defined', () => {
         expect(model.max).toBe(100);
     });
 
-    test('default value set to 50 if not defined', () => {
-        expect(model.defaultValue).toBe(50);
-    });
-
     test('default value is set', () => {
         const newDefaultValue = 35;
         model.setDefaultValue(newDefaultValue);
         expect(model.defaultValue).toBe(newDefaultValue);
-    });
-
-    test('second value set to 70 if not defined', () => {
-        expect(model.valueSecond).toBe(70);
     });
 
     test('second value is set', () => {
@@ -89,12 +96,6 @@ describe('test model', () => {
         expect(model.setSecondValue).toHaveBeenCalledWith(22);
     });
 
-    test('toggle is limited and step fits, update observers', () => {
-        jest.spyOn(model, 'updateObservers');
-        model.limitToggle(30, false);
-        expect(model.updateObservers).toHaveBeenCalledWith();
-    });
-
     test('update multi values and limit toggle', () => {
         jest.spyOn(model, 'limitToggle');
         model.isMultiThumb = true;
@@ -117,4 +118,11 @@ describe('test model', () => {
         model.updateObservers();
         expect(model.observers[0].updateView).toHaveBeenCalled();
     });
+
+    test('getTicks is called when array is received', () => {
+        jest.spyOn(model, 'getTicks');
+        model.init();
+        expect(model.getTicks).toHaveBeenCalled();
+    });
+
 });
