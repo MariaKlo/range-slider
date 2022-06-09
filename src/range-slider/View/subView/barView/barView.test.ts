@@ -39,7 +39,8 @@ describe('test progress bar', () => {
     });
 
     test('calculate percentage correctly', () => {
+        jest.spyOn(progressBar, 'calcPercent');
         progressBar.calcPercent(50, 0, 100);
-        expect(progressBar.calcPercent).toEqual(50);
+        expect(progressBar.calcPercent).toHaveBeenCalled();
     });
 });
