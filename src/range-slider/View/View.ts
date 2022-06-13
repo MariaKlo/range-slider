@@ -197,13 +197,7 @@ class View {
     };
     
     onClick = (newValue: number) => () => {
-      const halfOfBar: number = (this.options.valueSecond + this.options.defaultValue) / 2;
-      const isRightBar: boolean = this.options.isMultiThumb && newValue > halfOfBar;
-      if (isRightBar) {
-        this.update(newValue, false);
-      } else {
-        this.update(newValue, true);
-      }
+      this.update(newValue, true);
     };
     
     onMouseOverOut = (thumb: HTMLElement, bubbleOut: HTMLElement | undefined) => () => {

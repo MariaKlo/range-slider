@@ -43,4 +43,10 @@ describe('test progress bar', () => {
         progressBar.calcPercent(50, 0, 100);
         expect(progressBar.calcPercent).toHaveBeenCalled();
     });
+
+    test('bar color is changed correctly', () => {
+        const barColor = 'purple';
+        progressBar.changeBarColor(barColor);
+        expect(progressBar.bar.style.background).toEqual(barColor);
+    });
 });
