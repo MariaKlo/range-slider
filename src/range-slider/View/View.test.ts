@@ -25,7 +25,6 @@ describe('test view', () => {
     defaultValue: 11,
     valueSecond: 23,
     isMultiThumb: true,
-    showRightProgressBar: false,
     showBubble: true,
     isVertical: true,
     showTicks: true,
@@ -164,15 +163,14 @@ describe('test view', () => {
     expect(view.eventActive).toHaveBeenCalled();
   });
 
-  // test('activate onmouseupdown for second thumb', () => {
-  //   jest.spyOn(view, 'onMouseUpDown');
-  //   thumb.createThumb(document.body, false);
-  //   view.onMouseUpDown(false)();
-  //   thumb.secondThumb = document.createElement('div');
-  //   thumb.secondThumb.classList.add('range-slider__thumb');
-  //   thumb.secondThumb.classList.toggle('range-slider__thumb_active');
-  //   expect(thumb.secondThumb.classList.contains('range-slider__thumb_active')).toBe(true);
-  // });
+  test('activate onmouseupdown for second thumb', () => {
+    jest.spyOn(thumb, 'createThumb');
+    thumb.createThumb(document.body, true);
+    const { secondThumb } = view.thumb;
+    view.onMouseUpDown(false)();
+    jest.spyOn(secondThumb.classList, 'toggle');
+    expect(secondThumb.classList.contains('range-slider__thumb_active')).toBe(true);
+  });
 
   test('both values are updated on click', () => {
     options = {
