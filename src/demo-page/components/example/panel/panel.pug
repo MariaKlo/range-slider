@@ -19,9 +19,6 @@ mixin panel()
       div.panel__isMultiThumb
         p.panel__isMultiThumb-text Multi Thumb
         input(type="checkbox").input
-      div.panel__showRightBar
-        p.panel__showRightBar-text Show right progress bar
-        input(type="checkbox").input
       div.panel__showBubble
         p.panel__showBubble-text Show bubble
         input(type="checkbox").input
@@ -31,3 +28,15 @@ mixin panel()
       div.panel__showTicks
         p.panel__showTicks-text Show ticks
         input(type="checkbox").input
+      div.panel__ticksValues
+        p.panel__ticksValues-text Receive ticks
+        input(type="text" placeholder="[0, 10, 20, 30, 40, 50]").input
+      div.panel__barColor
+        p.panel__barColor-text Change progress bar color
+        input(type="text" placeholder="#000000").input
+      div.panel__thumbColor
+        p.panel__thumbColor-text Change thumb color
+        input(type="text" placeholder="#111111").input
+      div.panel__bubbleColor
+        p.panel__bubbleColor-text Change bubble color
+        input(type="text" placeholder="#222222").input

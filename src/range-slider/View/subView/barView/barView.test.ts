@@ -1,52 +1,47 @@
-import barView from "./barView";
+import BarView from './barView';
 
 describe('test progress bar', () => {
-    let progressBar: barView;
+  let progressBar: BarView;
     
-    beforeEach(() => {
-        progressBar = new barView();
-        progressBar.createProgressBar(document.body);
-        progressBar.calcPercent(50, 0, 100);
-    });
+  beforeEach(() => {
+    progressBar = new BarView();
+    progressBar.createProgressBar(document.body);
+    progressBar.calcPercent(50, 0, 100);
+  });
 
-    afterEach(() => {
-        document.body.innerHTML = '';
-    });
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
 
-    test('one thumb, left progress bar', () => {
-        progressBar.setDefault(false, 20, 0);
-        expect(progressBar.bar.style.left).toEqual('0px');
-    });
+  test('one thumb, left progress bar', () => {
+    progressBar.setDefault(false, 20, 0);
+    expect(progressBar.bar.style.left).toEqual('0px');
+  });
 
-    test('one thumb, right progress bar', () => {
-        progressBar.setDefault(false, 20, 0);
-        expect(progressBar.bar.style.right).toEqual('80%');
-    });
+  test('progress bar for two thumbs', () => {
+    progressBar.setDefault(true, 20, 60);
+    expect(progressBar.bar.style.left).toEqual('20%');
+  });
 
-    test('progress bar for two thumbs', () => {
-        progressBar.setDefault(true, 20, 60);
-        expect(progressBar.bar.style.left).toEqual('20%');
-    });
+  test('double thumbs, left progress bar', () => {
+    progressBar.setDefault(true, 20, 60);
+    expect(progressBar.bar.style.left).toEqual('20%');
+  });
 
-    test('double thumbs, left progress bar', () => {
-        progressBar.setDefault(true, 20, 60);
-        expect(progressBar.bar.style.left).toEqual('20%');
-      });
+  test('double thumbs, right progress bar', () => {
+    progressBar.setDefault(true, 20, 0);
+    expect(progressBar.bar.style.right).toEqual('100%');
+  });
 
-    test('double thumbs, right progress bar', () => {
-        progressBar.setDefault(true, 20, 0);
-        expect(progressBar.bar.style.right).toEqual('100%');
-    });
+  test('calculate percentage correctly', () => {
+    jest.spyOn(progressBar, 'calcPercent');
+    progressBar.calcPercent(50, 0, 100);
+    expect(progressBar.calcPercent).toHaveBeenCalled();
+  });
 
-    test('calculate percentage correctly', () => {
-        jest.spyOn(progressBar, 'calcPercent');
-        progressBar.calcPercent(50, 0, 100);
-        expect(progressBar.calcPercent).toHaveBeenCalled();
-    });
-
-    test('bar color is changed correctly', () => {
-        const barColor = 'purple';
-        progressBar.changeBarColor(barColor);
-        expect(progressBar.bar.style.background).toEqual(barColor);
-    });
+  test('bar color is changed correctly', () => {
+    const barColor = 'purple';
+    progressBar.changeBarColor(barColor);
+    expect(progressBar.bar.style.background).toEqual(barColor);
+  });
 });

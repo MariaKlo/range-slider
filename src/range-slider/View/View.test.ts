@@ -3,7 +3,7 @@
 import View from './View';
 import ticksView from './subView/ticksView/ticksView';
 import stepView from './subView/stepView/stepView';
-import barView from './subView/barView/barView';
+import BarView from './subView/barView/barView';
 import ThumbView from './subView/thumbView/thumbView';
 import formView from './subView/formView/formView';
 import Options from '../component/globalOptions';
@@ -12,7 +12,7 @@ describe('test view', () => {
   let view: View;
   let ticks: ticksView;
   let step: stepView;
-  let bar: barView;
+  let bar: BarView;
   let thumb: ThumbView;
   let form: formView;
 
@@ -31,13 +31,13 @@ describe('test view', () => {
     ticksValues: [0, 50, 100],
     barColor: '#000000',
     thumbColor: 'green',
-    bubbleColor: 'yellow'
+    bubbleColor: 'yellow',
   };
 
   beforeEach(() => {
     thumb = new ThumbView();
     ticks = new ticksView();
-    bar = new barView();
+    bar = new BarView();
     form = new formView();
     view = new View(document.body, ticks, step, bar, thumb, form, data);
     view.init();
@@ -177,7 +177,7 @@ describe('test view', () => {
       ...data,
       defaultValue: 0,
       valueSecond: 20,
-      isMultiThumb: true
+      isMultiThumb: true,
     };
     thumb.createBubbleElement(true, document.body, document.body);
     view.onClick(20)();
@@ -189,8 +189,8 @@ describe('test view', () => {
     form.createInput(true);
     const observers = {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      updateModel(_arg0: number, _arg1: boolean): void {}
-    }
+      updateModel(_arg0: number, _arg1: boolean): void {},
+    };
     view.subscribe(observers);
     jest.spyOn(view.observers[0], 'updateModel');
     view.update(30, true);
@@ -214,7 +214,7 @@ describe('test view', () => {
       y: 0,
       left: 0,
       right: 0,
-      toJSON: () => ''
+      toJSON: () => '',
     };
     const element = new MouseEvent('click', { clientY: 265 });
     expect(view.getValueByCoords(element, coords)).toBe(38);

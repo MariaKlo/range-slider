@@ -1,4 +1,4 @@
-class barView {
+class BarView {
   bar!: HTMLElement;
 
   createProgressBar(parent: HTMLElement): void {
@@ -26,4 +26,4 @@ class barView {
   }
 }
 
-export default barView;
+export default BarView;
