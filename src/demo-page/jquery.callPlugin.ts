@@ -14,7 +14,7 @@ $('#api_first').sliderPlugin({
   ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
   barColor: 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)',
   thumbColor: '',
-  bubbleColor: ''
+  bubbleColor: '',
 });
   
 $('#api_second').sliderPlugin({
@@ -30,7 +30,7 @@ $('#api_second').sliderPlugin({
   ticksValues: [0, 10, 20, 30, 40, 50],
   barColor: 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)',
   thumbColor: '',
-  bubbleColor: ''
+  bubbleColor: '',
 });
   
 $('#api_third').sliderPlugin({
@@ -46,5 +46,5 @@ $('#api_third').sliderPlugin({
   ticksValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
   barColor: 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)',
   thumbColor: '',
-  bubbleColor: ''
+  bubbleColor: '',
 });
