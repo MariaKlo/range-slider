@@ -26,4 +26,20 @@ describe('test view', () => {
       thumb.placeThumb(true, 10, 0);
       expect(thumb.secondThumb.style.right).toBe(`${100}%`);
     });
+
+    test('thumb color is changed correctly', () => {
+      const thumbColor = 'purple';
+      thumb.changeThumbColor(thumbColor, false);
+      expect(thumb.firstThumb.style.background).toEqual(thumbColor);
+      thumb.changeThumbColor(thumbColor, true);
+      expect(thumb.secondThumb.style.background).toEqual(thumbColor);
+    });
+
+    test('bubble color is changed correctly', () => {
+      const bubbleColor = 'purple';
+      thumb.changeBubbleColor(bubbleColor, false);
+      expect(thumb.showBubble.style.backgroundColor).toEqual(bubbleColor);
+      thumb.changeBubbleColor(bubbleColor, true);
+      expect(thumb.showSecondBubble.style.backgroundColor).toEqual(bubbleColor);
+    });
 });
