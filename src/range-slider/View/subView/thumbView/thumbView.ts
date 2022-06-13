@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 class ThumbView {
   firstThumb!: HTMLElement;
+
   secondThumb!: HTMLElement;
+
   showBubble!: HTMLElement;
+
   showSecondBubble!: HTMLElement;
 
   init(parent: HTMLElement, isDouble: boolean, toggleElement: boolean, defaultValue: number,
-      secondValue?: number) {
+    secondValue?: number) {
     this.createThumb(parent, isDouble);
     if (toggleElement) {
       this.createBubbleElement(isDouble, this.firstThumb, this.secondThumb);
@@ -43,7 +46,7 @@ class ThumbView {
     if (this.showBubble) {
       this.showBubble.textContent = `First value: ${String(value)}`;
       if (isMultiThumb) {
-        this.showSecondBubble.textContent = `Second value: ${String(secondValue)}`
+        this.showSecondBubble.textContent = `Second value: ${String(secondValue)}`;
       }
     }
   }

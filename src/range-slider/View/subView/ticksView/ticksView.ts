@@ -1,4 +1,4 @@
-class ticksView {
+class TicksView {
   createTicks = (ticksValues: Array<number>, width: number) => {
     const ticksElement = document.createElement('div');
     ticksElement.classList.add('range-slider__ticks');
@@ -30,4 +30,4 @@ class ticksView {
   placeTicks = (containerWidth: number): number => (0.42 * containerWidth + 777.8) / containerWidth;
 }
 
-export default ticksView;
+export default TicksView;

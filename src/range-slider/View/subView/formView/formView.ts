@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-class formView {
-    formDiv!: HTMLElement;
-    input!: HTMLInputElement;
-    secondInput!: HTMLInputElement;
+class FormView {
+  formDiv!: HTMLElement;
+
+  input!: HTMLInputElement;
+
+  secondInput!: HTMLInputElement;
 
   init(parent: HTMLElement, isDouble: boolean, min: number, max: number): void {
     this.createForm(parent);
@@ -11,13 +13,13 @@ class formView {
     this.setMax(isDouble, max);
   }
 
-    createForm(parent: HTMLElement): void {
-      this.formDiv = <HTMLElement>(document.createElement('div'));
-      this.formDiv.classList.add('range-slider__form');
-      parent.append(this.formDiv);
-    }
+  createForm(parent: HTMLElement): void {
+    this.formDiv = <HTMLElement>(document.createElement('div'));
+    this.formDiv.classList.add('range-slider__form');
+    parent.append(this.formDiv);
+  }
   
-    createInput(isDouble: boolean): void {
+  createInput(isDouble: boolean): void {
     if (isDouble) {
       this.input = document.createElement('input');
       this.input.type = 'range';
@@ -35,29 +37,29 @@ class formView {
       this.input.type = 'range';
       this.input.classList.add('range-slider__input');
       this.formDiv.append(this.input);
-      }
     }
+  }
   
-    setValues(isDouble: boolean, value: number, secondValue?: number): void {
-      this.input.value = String(value);
-      if (isDouble && this.secondInput) {
-        this.secondInput!.value = String(secondValue);
-      }
+  setValues(isDouble: boolean, value: number, secondValue?: number): void {
+    this.input.value = String(value);
+    if (isDouble && this.secondInput) {
+      this.secondInput!.value = String(secondValue);
     }
+  }
 
-    setMax(isDouble: boolean, max = 100): void {
-      this.input.max = String(max);
-      if (isDouble) {
-        this.secondInput!.max = String(max);
-      }
+  setMax(isDouble: boolean, max = 100): void {
+    this.input.max = String(max);
+    if (isDouble) {
+      this.secondInput!.max = String(max);
     }
+  }
 
-    setMin(isDouble: boolean, min: number) {
-      this.input.min = String(min);
-      if (isDouble) {
-        this.secondInput!.min = String(min);
-      }
+  setMin(isDouble: boolean, min: number) {
+    this.input.min = String(min);
+    if (isDouble) {
+      this.secondInput!.min = String(min);
     }
+  }
 }
 
-export default formView;
+export default FormView;
