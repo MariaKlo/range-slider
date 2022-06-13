@@ -3,24 +3,23 @@ import Model from './Model';
 describe('test model', () => {
     let model: Model;
 
-    const data = {
-        max: 100,
-        min: 0,
-        step: 1,
-        defaultValue: 11,
-        valueSecond: 23,
-        isMultiThumb: true,
-        showRightProgressBar: false,
-        showBubble: true,
-        isVertical: true,
-        showTicks: true,
-        ticksValues: [0, 50, 100],
-        barColor: '#000000',
-        thumbColor: 'green',
-        bubbleColor: 'yellow'
-    };
-
     beforeEach(() => {
+        const data = {
+            max: 100,
+            min: 0,
+            step: 1,
+            defaultValue: 11,
+            valueSecond: 23,
+            isMultiThumb: true,
+            showBubble: true,
+            isVertical: true,
+            showTicks: true,
+            ticksValues: [0, 50, 100],
+            barColor: '#000000',
+            thumbColor: 'green',
+            bubbleColor: 'yellow'
+        };
+
         model = new Model(data);
     });
 
@@ -125,4 +124,17 @@ describe('test model', () => {
         expect(model.getTicks).toHaveBeenCalled();
     });
 
+    test('second value set to the new value when it fits the step', () => {
+        jest.spyOn(model, 'setSecondValue');
+        model.step = 1;
+        model.limitStep(50, false);
+        expect(model.setSecondValue).toHaveBeenCalledWith(50);
+    });
+
+    test('update values when limitedStep is called', () => {
+        jest.spyOn(model, 'limitStep');
+        model.isMultiThumb = false;
+        model.update(10, false);
+        expect(model.limitStep).toHaveBeenCalledWith(10, false);
+    });
 });
