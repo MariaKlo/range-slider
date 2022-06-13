@@ -10,7 +10,8 @@
 }
 
 .panel__max, .panel__min, .panel__step, .panel__defaultValue, .panel__valueSecond,
-.panel__isMultiThumb, .panel__showRightBar, .panel__showBubble, .panel__isVertical, .panel__showTicks {
+.panel__isMultiThumb, .panel__showBubble, .panel__isVertical, .panel__showTicks,
+.panel__ticksValues, .panel__barColor, .panel__thumbColor, .panel__bubbleColor {
     display: flex;
     justify-content: space-between;
     align-items: center;
