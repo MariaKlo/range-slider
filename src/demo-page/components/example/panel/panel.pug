@@ -1,42 +1,128 @@
-mixin panel()
+mixin firstPanel()
   div.wrapper-panel
     div.panel
       div.panel__max
         p.panel__max-text Max
-        input(type="number" placeholder="0").input
+        input(type="number" id='max1').input
       div.panel__min
         p.panel__min-text Min
-        input(type="number" placeholder="100").input
+        input(type="number" id='min1').input
       div.panel__step
         p.panel__step-text Step
-        input(type="number" placeholder="1").input
+        input(type="number" id='step1').input
       div.panel__defaultValue
         p.panel__defaultValue-text Default value
-        input(type="number" placeholder="50").input
+        input(type="number" id='defaultValue1').input
       div.panel__valueSecond
         p.panel__valueSecond-text Second value
-        input(type="number" placeholder="70").input
+        input(type="number" id='valueSecond1').input
       div.panel__isMultiThumb
         p.panel__isMultiThumb-text Multi Thumb
-        input(type="checkbox").input
+        input(type="checkbox" id='isMultiThumb1').input
       div.panel__showBubble
         p.panel__showBubble-text Show bubble
-        input(type="checkbox").input
+        input(type="checkbox" id='showBubble1' checked).input
       div.panel__isVertical
         p.panel__isVertical-text Vertical position
-        input(type="checkbox").input
+        input(type="checkbox" id='isVertical1').input
       div.panel__showTicks
         p.panel__showTicks-text Show ticks
-        input(type="checkbox").input
+        input(type="checkbox" id='showTicks1' checked).input
       div.panel__ticksValues
         p.panel__ticksValues-text Receive ticks
-        input(type="text" placeholder="[0, 10, 20, 30, 40, 50]").input
+        input(type="text" id='ticksValues1').input
       div.panel__barColor
         p.panel__barColor-text Change progress bar color
-        input(type="text" placeholder="#000000").input
+        input(type="text" id='barColor1').input
       div.panel__thumbColor
         p.panel__thumbColor-text Change thumb color
-        input(type="text" placeholder="#111111").input
+        input(type="text" id='thumbColor1').input
       div.panel__bubbleColor
         p.panel__bubbleColor-text Change bubble color
-        input(type="text" placeholder="#222222").input
+        input(type="text" id='bubbleColor1').input
+
+mixin secondPanel()
+  div.wrapper-panel
+    div.panel
+      div.panel__max
+        p.panel__max-text Max
+        input(type="number" id='max2').input
+      div.panel__min
+        p.panel__min-text Min
+        input(type="number" id='min2').input
+      div.panel__step
+        p.panel__step-text Step
+        input(type="number" id='step2').input
+      div.panel__defaultValue
+        p.panel__defaultValue-text Default value
+        input(type="number" id='defaultValue2').input
+      div.panel__valueSecond
+        p.panel__valueSecond-text Second value
+        input(type="number" id='valueSecond2').input
+      div.panel__isMultiThumb
+        p.panel__isMultiThumb-text Multi Thumb
+        input(type="checkbox" id='isMultiThumb2' checked).input
+      div.panel__showBubble
+        p.panel__showBubble-text Show bubble
+        input(type="checkbox" id='showBubble2').input
+      div.panel__isVertical
+        p.panel__isVertical-text Vertical position
+        input(type="checkbox" id='isVertical2' checked).input
+      div.panel__showTicks
+        p.panel__showTicks-text Show ticks
+        input(type="checkbox" id='showTicks2').input
+      div.panel__ticksValues
+        p.panel__ticksValues-text Receive ticks
+        input(type="text" id='ticksValues2').input
+      div.panel__barColor
+        p.panel__barColor-text Change progress bar color
+        input(type="text" id='barColor2').input
+      div.panel__thumbColor
+        p.panel__thumbColor-text Change thumb color
+        input(type="text" id='thumbColor2').input
+      div.panel__bubbleColor
+        p.panel__bubbleColor-text Change bubble color
+        input(type="text" id='bubbleColor2').input
+
+mixin thirdPanel()
+  div.wrapper-panel
+    div.panel
+      div.panel__max
+        p.panel__max-text Max
+        input(type="number" id='max3').input
+      div.panel__min
+        p.panel__min-text Min
+        input(type="number" id='min3').input
+      div.panel__step
+        p.panel__step-text Step
+        input(type="number" id='step3').input
+      div.panel__defaultValue
+        p.panel__defaultValue-text Default value
+        input(type="number" id='defaultValue3').input
+      div.panel__valueSecond
+        p.panel__valueSecond-text Second value
+        input(type="number" id='valueSecond3').input
+      div.panel__isMultiThumb
+        p.panel__isMultiThumb-text Multi Thumb
+        input(type="checkbox" id='isMultiThumb3' checked).input
+      div.panel__showBubble
+        p.panel__showBubble-text Show bubble
+        input(type="checkbox" id='showBubble3' checked).input
+      div.panel__isVertical
+        p.panel__isVertical-text Vertical position
+        input(type="checkbox" id='isVertical3' checked).input
+      div.panel__showTicks
+        p.panel__showTicks-text Show ticks
+        input(type="checkbox" id='showTicks3' checked).input
+      div.panel__ticksValues
+        p.panel__ticksValues-text Receive ticks
+        input(type="text" id='ticksValues3').input
+      div.panel__barColor
+        p.panel__barColor-text Change progress bar color
+        input(type="text" id='barColor3').input
+      div.panel__thumbColor
+        p.panel__thumbColor-text Change thumb color
+        input(type="text" id='thumbColor3').input
+      div.panel__bubbleColor
+        p.panel__bubbleColor-text Change bubble color
+        input(type="text" id='bubbleColor3').input
