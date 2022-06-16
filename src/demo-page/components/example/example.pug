@@ -1,12 +1,14 @@
 include api/api.pug
 include panel/panel.pug
+- var idForSecondPanel = ['max2', 'min2', 'step2', 'defaultValue2', 'valueSecond2', 'isMultithumb2', 'showBubble2', 'isVertical2', 'showTicks2', 'ticksValues2', 'barColor2', 'thumbColor2', 'bubbleColor2'];
+- var idForThirdPanel = ['max3', 'min3', 'step3', 'defaultValue3', 'valueSecond3', 'isMultithumb3', 'showBubble3', 'isVertical3', 'showTicks3', 'ticksValues3', 'barColor3', 'thumbColor3', 'bubbleColor3'];
 mixin example()
   div.example-wrapper
     +api('api_first')
-    +panel()
+    +firstPanel()
   div.example-wrapper
     +api('api_second')
-    +panel()
+    +secondPanel()
   div.example-wrapper
     +api('api_third')
-    +panel()
+    +thirdPanel()
