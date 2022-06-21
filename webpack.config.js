@@ -3,6 +3,7 @@ var webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -48,6 +49,10 @@ module.exports = {
         chunkFilename: '[id].css'
       }),
       new ForkTsCheckerWebpackPlugin(),
+      new FaviconsWebpackPlugin({
+        logo: './src/favicon/Group.png',
+        cache: true,
+      }),
     ],
     devServer: {
         historyApiFallback: true,
