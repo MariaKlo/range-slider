@@ -1,15 +1,7 @@
 import $ from 'jquery';
 import './jquery.index';
 
-// get values from panel
-const getValue = (id) => Number(document.getElementById(id).value);
-const getBooleanValue = (id) => document.getElementById(id).checked;
-const getStringValue = (id) => document.getElementById(id).value;
 // arrays of id
-const rangeSliderNumbersId = ['max', 'min', 'step', 'defaultValue', 'valueSecond'];
-const rangeSliderBooleansId = ['isMultiThumb', 'showBubble', 'isVertical', 'showTicks'];
-const rangeSliderArrId = ['ticksValues'];
-const rangeSliderStringId = ['barColor', 'thumbColor', 'bubbleColor'];
 const rangeSliderId = ['api_first', 'api_second', 'api_third', 'api_fourth'];
 
 // set state to keep data
@@ -20,6 +12,11 @@ const setState = (name, options) => {
 
 // state gets data from panel
 for (let i = 1; i <= rangeSliderId.length; i += 1) {
+  // get values from panel
+  const getValue = (id) => Number(document.getElementById(id).value);
+  const getBooleanValue = (id) => document.getElementById(id).checked;
+  const getStringValue = (id) => document.getElementById(id).value;
+
   setState(rangeSliderId[i - 1], {
     max: getValue(`max${i}`),
     min: getValue(`min${i}`),
@@ -87,6 +84,10 @@ const renderRangeSlider = (id, panel) => {
 
 // slider gets data from state
 for (let i = 1; i <= rangeSliderId.length; i += 1) {
+  const rangeSliderNumbersId = ['max', 'min', 'step', 'defaultValue', 'valueSecond'];
+  const rangeSliderBooleansId = ['isMultiThumb', 'showBubble', 'isVertical', 'showTicks'];
+  const rangeSliderArrId = ['ticksValues'];
+  const rangeSliderStringId = ['barColor', 'thumbColor', 'bubbleColor'];
   // change number data
   rangeSliderNumbersId.forEach((item) => {
     const element = document.getElementById(item + i);
