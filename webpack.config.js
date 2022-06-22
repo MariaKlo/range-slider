@@ -16,7 +16,7 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './docs'),
         filename: '[name].js',
         clean: true,
     },
@@ -37,7 +37,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, 'src/demo-page/index.pug'),
-          filename: "index.html",
+          filename: "index-dev.html",
           inject: "body"
         }),
         new ESLintPlugin({
