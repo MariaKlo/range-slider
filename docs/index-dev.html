@@ -1,0 +1,267 @@
+<!DOCTYPE html >
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="range-slider"/>
+    <meta name="keywords" content="plugin, plugins, range, range-slider, jquery-plugin"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Range-slider plugin</title>
+  <link rel="icon" href="assets/favicon.png"></head>
+  <body>
+    <div class="main">
+      <div class="wrapper">
+        <h1 class="header">Demo-page</h1>
+                <div class="example-wrapper">
+                          <div class="wrapper-api">
+                            <div id="api_first"></div>
+                          </div>
+                          <div class="wrapper-panel">
+                            <h3 class="panel__title">First panel</h3>
+                            <div class="panel">
+                              <div class="panel__max">
+                                <p class="panel__max-text">Max</p>
+                                <input class="input" type="number" value="100" id="max1"/>
+                              </div>
+                              <div class="panel__min">
+                                <p class="panel__min-text">Min</p>
+                                <input class="input" type="number" value="0" id="min1"/>
+                              </div>
+                              <div class="panel__step">
+                                <p class="panel__step-text">Step</p>
+                                <input class="input" type="number" value="1" id="step1"/>
+                              </div>
+                              <div class="panel__defaultValue">
+                                <p class="panel__defaultValue-text">Default value</p>
+                                <input class="input" type="number" value="30" id="defaultValue1"/>
+                              </div>
+                              <div class="panel__valueSecond">
+                                <p class="panel__valueSecond-text">Second value</p>
+                                <input class="input" type="number" placeholder="Enter second value" id="valueSecond1"/>
+                              </div>
+                              <div class="panel__isMultiThumb">
+                                <p class="panel__isMultiThumb-text">Multi Thumb</p>
+                                <input class="input" type="checkbox" id="isMultiThumb1"/>
+                              </div>
+                              <div class="panel__showBubble">
+                                <p class="panel__showBubble-text">Show bubble</p>
+                                <input class="input" type="checkbox" id="showBubble1"/>
+                              </div>
+                              <div class="panel__isVertical">
+                                <p class="panel__isVertical-text">Vertical position</p>
+                                <input class="input" type="checkbox" id="isVertical1"/>
+                              </div>
+                              <div class="panel__showTicks">
+                                <p class="panel__showTicks-text">Show ticks</p>
+                                <input class="input" type="checkbox" id="showTicks1"/>
+                              </div>
+                              <div class="panel__ticksValues">
+                                <p class="panel__ticksValues-text">Receive ticks</p>
+                                <input class="input" type="text" placeholder="0,10,20 or 0 10 20 or 0, 10, 20" id="ticksValues1"/>
+                              </div>
+                              <div class="panel__barColor">
+                                <p class="panel__barColor-text">Change progress bar color</p>
+                                <input class="input" type="text" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="barColor1"/>
+                              </div>
+                              <div class="panel__thumbColor">
+                                <p class="panel__thumbColor-text">Change thumb color</p>
+                                <input class="input" type="text" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="thumbColor1"/>
+                              </div>
+                              <div class="panel__bubbleColor">
+                                <p class="panel__bubbleColor-text">Change bubble color</p>
+                                <input class="input" type="text" placeholder="word,hex,rgb,rgba,hsl" id="bubbleColor1"/>
+                              </div>
+                            </div>
+                          </div>
+                </div>
+                <div class="example-wrapper">
+                          <div class="wrapper-api">
+                            <div id="api_second"></div>
+                          </div>
+                          <div class="wrapper-panel">
+                            <h3 class="panel__title">Second panel</h3>
+                            <div class="panel">
+                              <div class="panel__max">
+                                <p class="panel__max-text">Max</p>
+                                <input class="input" type="number" value="100" id="max2"/>
+                              </div>
+                              <div class="panel__min">
+                                <p class="panel__min-text">Min</p>
+                                <input class="input" type="number" value="-50" id="min2"/>
+                              </div>
+                              <div class="panel__step">
+                                <p class="panel__step-text">Step</p>
+                                <input class="input" type="number" value="5" id="step2"/>
+                              </div>
+                              <div class="panel__defaultValue">
+                                <p class="panel__defaultValue-text">Default value</p>
+                                <input class="input" type="number" value="0" id="defaultValue2"/>
+                              </div>
+                              <div class="panel__valueSecond">
+                                <p class="panel__valueSecond-text">Second value</p>
+                                <input class="input" type="number" value="60" id="valueSecond2"/>
+                              </div>
+                              <div class="panel__isMultiThumb">
+                                <p class="panel__isMultiThumb-text">Multi Thumb</p>
+                                <input class="input" type="checkbox" id="isMultiThumb2" checked="checked"/>
+                              </div>
+                              <div class="panel__showBubble">
+                                <p class="panel__showBubble-text">Show bubble</p>
+                                <input class="input" type="checkbox" id="showBubble2" checked="checked"/>
+                              </div>
+                              <div class="panel__isVertical">
+                                <p class="panel__isVertical-text">Vertical position</p>
+                                <input class="input" type="checkbox" id="isVertical2"/>
+                              </div>
+                              <div class="panel__showTicks">
+                                <p class="panel__showTicks-text">Show ticks</p>
+                                <input class="input" type="checkbox" id="showTicks2"/>
+                              </div>
+                              <div class="panel__ticksValues">
+                                <p class="panel__ticksValues-text">Receive ticks</p>
+                                <input class="input" type="text" placeholder="0,10,20 or 0 10 20 or 0, 10, 20" id="ticksValues2"/>
+                              </div>
+                              <div class="panel__barColor">
+                                <p class="panel__barColor-text">Change progress bar color</p>
+                                <input class="input" type="text" value="red" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="barColor2"/>
+                              </div>
+                              <div class="panel__thumbColor">
+                                <p class="panel__thumbColor-text">Change thumb color</p>
+                                <input class="input" type="text" value="#488a55" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="thumbColor2"/>
+                              </div>
+                              <div class="panel__bubbleColor">
+                                <p class="panel__bubbleColor-text">Change bubble color</p>
+                                <input class="input" type="text" value="rgb(141, 136, 194)" placeholder="word,hex,rgb,rgba,hsl" id="bubbleColor2"/>
+                              </div>
+                            </div>
+                          </div>
+                </div>
+                <div class="example-wrapper">
+                          <div class="wrapper-api">
+                            <div id="api_third"></div>
+                          </div>
+                          <div class="wrapper-panel">
+                            <h3 class="panel__title">Third panel</h3>
+                            <div class="panel">
+                              <div class="panel__max">
+                                <p class="panel__max-text">Max</p>
+                                <input class="input" type="number" value="500" id="max3"/>
+                              </div>
+                              <div class="panel__min">
+                                <p class="panel__min-text">Min</p>
+                                <input class="input" type="number" value="100" id="min3"/>
+                              </div>
+                              <div class="panel__step">
+                                <p class="panel__step-text">Step</p>
+                                <input class="input" type="number" value="10" id="step3"/>
+                              </div>
+                              <div class="panel__defaultValue">
+                                <p class="panel__defaultValue-text">Default value</p>
+                                <input class="input" type="number" value="150" id="defaultValue3"/>
+                              </div>
+                              <div class="panel__valueSecond">
+                                <p class="panel__valueSecond-text">Second value</p>
+                                <input class="input" type="number" value="400" id="valueSecond3"/>
+                              </div>
+                              <div class="panel__isMultiThumb">
+                                <p class="panel__isMultiThumb-text">Multi Thumb</p>
+                                <input class="input" type="checkbox" id="isMultiThumb3" checked="checked"/>
+                              </div>
+                              <div class="panel__showBubble">
+                                <p class="panel__showBubble-text">Show bubble</p>
+                                <input class="input" type="checkbox" id="showBubble3" checked="checked"/>
+                              </div>
+                              <div class="panel__isVertical">
+                                <p class="panel__isVertical-text">Vertical position</p>
+                                <input class="input" type="checkbox" id="isVertical3" checked="checked"/>
+                              </div>
+                              <div class="panel__showTicks">
+                                <p class="panel__showTicks-text">Show ticks</p>
+                                <input class="input" type="checkbox" id="showTicks3" checked="checked"/>
+                              </div>
+                              <div class="panel__ticksValues">
+                                <p class="panel__ticksValues-text">Receive ticks</p>
+                                <input class="input" type="text" placeholder="0,10,20 or 0 10 20 or 0, 10, 20" id="ticksValues3"/>
+                              </div>
+                              <div class="panel__barColor">
+                                <p class="panel__barColor-text">Change progress bar color</p>
+                                <input class="input" type="text" value="rgba(64, 140, 136, 0.5)" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="barColor3"/>
+                              </div>
+                              <div class="panel__thumbColor">
+                                <p class="panel__thumbColor-text">Change thumb color</p>
+                                <input class="input" type="text" value="linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="thumbColor3"/>
+                              </div>
+                              <div class="panel__bubbleColor">
+                                <p class="panel__bubbleColor-text">Change bubble color</p>
+                                <input class="input" type="text" value="hsl(201, 100%, 50%)" placeholder="word,hex,rgb,rgba,hsl" id="bubbleColor3"/>
+                              </div>
+                            </div>
+                          </div>
+                </div>
+                <div class="example-wrapper">
+                          <div class="wrapper-api">
+                            <div id="api_fourth"></div>
+                          </div>
+                          <div class="wrapper-panel">
+                            <h3 class="panel__title">Fourth panel</h3>
+                            <div class="panel">
+                              <div class="panel__max">
+                                <p class="panel__max-text">Max</p>
+                                <input class="input" type="number" value="1500" id="max4"/>
+                              </div>
+                              <div class="panel__min">
+                                <p class="panel__min-text">Min</p>
+                                <input class="input" type="number" value="-500" id="min4"/>
+                              </div>
+                              <div class="panel__step">
+                                <p class="panel__step-text">Step</p>
+                                <input class="input" type="number" value="100" id="step4"/>
+                              </div>
+                              <div class="panel__defaultValue">
+                                <p class="panel__defaultValue-text">Default value</p>
+                                <input class="input" type="number" value="100" id="defaultValue4"/>
+                              </div>
+                              <div class="panel__valueSecond">
+                                <p class="panel__valueSecond-text">Second value</p>
+                                <input class="input" type="number" value="900" id="valueSecond4"/>
+                              </div>
+                              <div class="panel__isMultiThumb">
+                                <p class="panel__isMultiThumb-text">Multi Thumb</p>
+                                <input class="input" type="checkbox" id="isMultiThumb4" checked="checked"/>
+                              </div>
+                              <div class="panel__showBubble">
+                                <p class="panel__showBubble-text">Show bubble</p>
+                                <input class="input" type="checkbox" id="showBubble4" checked="checked"/>
+                              </div>
+                              <div class="panel__isVertical">
+                                <p class="panel__isVertical-text">Vertical position</p>
+                                <input class="input" type="checkbox" id="isVertical4" checked="checked"/>
+                              </div>
+                              <div class="panel__showTicks">
+                                <p class="panel__showTicks-text">Show ticks</p>
+                                <input class="input" type="checkbox" id="showTicks4" checked="checked"/>
+                              </div>
+                              <div class="panel__ticksValues">
+                                <p class="panel__ticksValues-text">Receive ticks</p>
+                                <input class="input" type="text" placeholder="0,10,20 or 0 10 20 or 0, 10, 20" id="ticksValues4"/>
+                              </div>
+                              <div class="panel__barColor">
+                                <p class="panel__barColor-text">Change progress bar color</p>
+                                <input class="input" type="text" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="barColor4"/>
+                              </div>
+                              <div class="panel__thumbColor">
+                                <p class="panel__thumbColor-text">Change thumb color</p>
+                                <input class="input" type="text" placeholder="word,hex,rgb,rgba,hsl,linear-gradient" id="thumbColor4"/>
+                              </div>
+                              <div class="panel__bubbleColor">
+                                <p class="panel__bubbleColor-text">Change bubble color</p>
+                                <input class="input" type="text" placeholder="word,hex,rgb,rgba,hsl" id="bubbleColor4"/>
+                              </div>
+                            </div>
+                          </div>
+                </div>
+      </div>
+    </div>
+  <script defer src="Model.js"></script><script defer src="src_range-slider_View_View_ts.js"></script><script defer src="View.js"></script><script defer src="Presenter.js"></script><script defer src="vendors-node_modules_css-loader_dist_runtime_api_js-node_modules_css-loader_dist_runtime_sour-4f68d2.js"></script><script defer src="Demo.js"></script></body>
+</html>
