@@ -1,14 +1,9 @@
 # range-slider
 This is range-slider written in TypeScript as a JQuery plugin. It has MVP architecture.
 <br>
-<b>How to use</b>
 <br>
-....
+<h3>How to use</h3>
 <br>
-<b>Parameters</b>
-<br>
-<br>
-<b>Project build</b>
 <br>
 <b>Clone repository: git clone ...</b>
 <br>
@@ -25,6 +20,11 @@ This is range-slider written in TypeScript as a JQuery plugin. It has MVP archit
 <b>To run tests: npm run test</b>
 <br>
 <br>
+<br>
+<b>Parameters</b>
+<br>
+<br>
+
 <b>Architecture description</b>
 <br>
 Plugin has MVP-architecture.
