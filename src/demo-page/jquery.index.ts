@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import './index.scss';
 import '../range-slider/index.scss';
-// import './panel.js';
 import Model from '../range-slider/Model/Model';
 import View from '../range-slider/View/View';
 import BarView from '../range-slider/View/subView/barView/barView';
