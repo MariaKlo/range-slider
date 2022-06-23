@@ -1,7 +1,6 @@
 <h1>Range slider Jquery plugin</h1>
 <p>This is range-slider written in TypeScript as a JQuery plugin. It has MVP architecture.</p>
-<br>
-<p>To see demo page and use range-slider, click here: </p>
+<p>To see demo page and use range-slider, click here: https://mariaklo.github.io/range-slider/</p>
 <h3>How to use</h3>
 <br>
 <p>Clone repository:<b> git clone https://github.com/MariaKlo/range-slider.git</b></p>
