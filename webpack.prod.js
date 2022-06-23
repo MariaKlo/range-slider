@@ -1,16 +1,19 @@
-const path = require("path");
-const config = require("./webpack.config.js");
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/extensions */
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
+const config = require('./webpack.config.js');
 const { merge } = require('webpack-merge');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = merge(config, {
-  mode: "production",
+  mode: 'production',
   output: {
-    filename: "[name].[contentHash].js",
-    path: path.resolve(__dirname, "./docs")
+    filename: '[name].js',
+    path: path.resolve(__dirname, './docs'),
   },
   optimization: {
     minimizer: [
@@ -18,17 +21,17 @@ module.exports = merge(config, {
       new TerserPlugin(),
       new HtmlWebpackPlugin({
         template: 'src/demo-page/index.pug',
-        filename: "./index.html",
+        filename: './index-prod.html',
         minify: {
           removeAttributeQuotes: true,
           collapseWhitespace: true,
-          removeComments: true
-        }
+          removeComments: true,
+        },
       }),
-    ] 
+    ],
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "[name].[contentHash].css" }),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
   ],
   module: {
     rules: [
@@ -36,10 +39,10 @@ module.exports = merge(config, {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader, //3. Extract css into files
-          "css-loader", //2. Turns css into commonjs
-          "sass-loader" //1. Turns sass into css
-        ]
-      }
-    ]
-  }
+          'css-loader', //2. Turns css into commonjs
+          'sass-loader', //1. Turns sass into css
+        ],
+      },
+    ],
+  },
 });

@@ -8,7 +8,7 @@
     "module": "es2015",                                
     "rootDir": "./src/",                                 
     /* Emit */                                
-    "outDir": "./dist/",                                   
+    "outDir": "./docs/",                                   
     "removeComments": true, 
     "pretty": true,                          
     /* Interop Constraints */           
