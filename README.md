@@ -135,4 +135,4 @@
 <p>Presenter is subscribed on Model and View, reacts on changes and updates them. Gives data from View to Model and vice versa.</p>
 <br>
 <h3>UML-diagram</h3>
-![uml](/uml/uml.png)
+<img src="https://user-images.githubusercontent.com/56316185/175383473-62aceb43-99b0-4aad-9762-871fe505e029.png" alt="uml-diagram">
