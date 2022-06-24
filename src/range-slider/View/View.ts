@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import TicksView from './subView/ticksView/ticksView';
 import StepView from './subView/stepView/stepView';
 import BarView from './subView/barView/barView';
@@ -90,8 +89,6 @@ class View {
     this.track.onmousedown = (elem) => {
       this.clickOnBar(elem);
     };
-    this.eventHover();
-    this.eventActive();
 
     if (this.options.isVertical) {
       this.wrapper.classList.add('range-slider_vertical');
@@ -163,14 +160,14 @@ class View {
       };
     }
     return () => {
-      this.update(Number(this.form.secondInput!.value), isDefault);
+      this.update(Number(this.form.secondInput.value), isDefault);
     };
   };
     
   eventInput = () => {
     this.form.input.addEventListener('input', this.onInput(true));
     if (this.options.isMultiThumb) {
-      this.form.secondInput!.addEventListener('input', this.onInput(false));
+      this.form.secondInput.addEventListener('input', this.onInput(false));
     }
   };
     
@@ -210,46 +207,6 @@ class View {
     
   onClick = (newValue: number) => () => {
     this.update(newValue, true);
-  };
-    
-  onMouseOverOut = (thumb: HTMLElement, bubbleOut: HTMLElement | undefined) => () => {
-    if (this.options.showBubble && bubbleOut) {
-      bubbleOut.classList.toggle('range-slider__bubble_big');
-    }
-    thumb.classList.toggle('range-slider__thumb_hover');
-  };
-    
-  eventHover = () => {
-    this.form.input.addEventListener('mouseover',
-      this.onMouseOverOut(this.thumb.firstThumb, this.thumb.showBubble));
-    this.form.input.addEventListener('mouseout',
-      this.onMouseOverOut(this.thumb.firstThumb, this.thumb.showBubble));
-    if (this.options.isMultiThumb) {
-      this.form.secondInput!.addEventListener('mouseover',
-        this.onMouseOverOut(this.thumb.secondThumb, this.thumb.showSecondBubble));
-      this.form.secondInput!.addEventListener('mouseout',
-        this.onMouseOverOut(this.thumb.secondThumb, this.thumb.showSecondBubble));
-    }
-  };
-    
-  onMouseUpDown = (isDefault: boolean) => {
-    if (isDefault) {
-      return () => {
-        this.thumb.firstThumb.classList.toggle('range-slider__thumb_active');
-      };
-    }
-    return () => {
-      this.thumb.secondThumb.classList.toggle('range-slider__thumb_active');
-    };
-  };
-    
-  eventActive = () => {
-    this.form.input.addEventListener('mousedown', this.onMouseUpDown(true));
-    this.form.input.addEventListener('mouseup', this.onMouseUpDown(true));
-    if (this.options.isMultiThumb) {
-      this.form.secondInput!.addEventListener('mousedown', this.onMouseUpDown(false));
-      this.form.secondInput!.addEventListener('mouseup', this.onMouseUpDown(false));
-    }
   };
 }
 
