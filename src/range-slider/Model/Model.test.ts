@@ -40,27 +40,27 @@ describe('test model', () => {
   });
 
   test('values for ticks recieved', () => {
-    expect(model.getTicks(0, 1, 1, false)).toEqual([]);
+    expect(model.getTicks(1, false)).toEqual([]);
     const expectArray = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-    expect(model.getTicks(0, 100, 10, true)).toEqual(expectArray);
+    expect(model.getTicks(10, true)).toEqual(expectArray);
   });
 
   test('step is overwritten when it is less or equal to 0', () => {
     const expectArray = [1, 2, 3, 4, 5];
-    expect(model.getTicks(1, 5, 0, true)).toEqual(expectArray);
-    expect(model.getTicks(1, 5, -100, true)).toEqual(expectArray);
+    expect(model.getTicks(0, true)).toEqual(expectArray);
+    expect(model.getTicks(-100, true)).toEqual(expectArray);
   });
 
   test('last value for ticks is equal to max value', () => {
     // even if it doesn't fit the step
     const expectArray = [0, 5, 10, 16];
-    expect(model.getTicks(0, 16, 5, true)).toEqual(expectArray);
+    expect(model.getTicks(5, true)).toEqual(expectArray);
   });
 
   test('nearest value is calculated', () => {
-    expect(model.calcNearestMaxValueConsideringStep(5, 2)).toBe(4);
-    expect(model.calcNearestMaxValueConsideringStep(8, 3)).toBe(9);
-    expect(model.calcNearestMaxValueConsideringStep(-1, 10)).toBe(0);
+    expect(model.calcNearestMinValueConsideringStep(5, 2)).toBe(4);
+    expect(model.calcNearestMinValueConsideringStep(8, 3)).toBe(9);
+    expect(model.calcNearestMinValueConsideringStep(-1, 10)).toBe(0);
   });
 
   test('update is called with limit toggle and limit step', () => {
@@ -104,7 +104,7 @@ describe('test model', () => {
 
   test('when there are more than 11 possible ticks, reduce them to 10-11 ticks', () => {
     const expectedArray = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-    expect(model.getTicks(0, 100, 1, true)).toEqual(expectedArray);
+    expect(model.getTicks(1, true)).toEqual(expectedArray);
   });
 
   test('updateObservers work correctly with updateView', () => {

@@ -101,7 +101,7 @@ class Model {
   }
 
   // calculate steps and ticks
-  calcNearestMaxValueConsideringStep(newValue: number, step: number = this.step): number {
+  calcNearestMinValueConsideringStep(newValue: number, step: number = this.step): number {
     const roundToMin = newValue - (newValue % step);
     if ((newValue % step) > (step / 2)) {
       return step + roundToMin;
@@ -109,7 +109,7 @@ class Model {
     return roundToMin;
   }
     
-  getTicks(min: number = this.min, max: number = this.max, step: number = this.step, 
+  getTicks(step: number = this.step, 
     showTicks: boolean = this.showTicks): number[] {
     if (step <= 0) {
       step = 1;
@@ -118,30 +118,6 @@ class Model {
     if (!showTicks) {
       return ticksValues;
     }
-    const possibleValues = (max - min) / step;
-
-    if (possibleValues <= 11) {
-      for (let i: number = min; i <= max; i += step) {
-        ticksValues.push(i);
-      }
-    } else {
-      const ticksStep = Math.round(possibleValues / 10);
-      let currentValue = min;
-      for (let i = 0; i < possibleValues; i += ticksStep) {
-        if (currentValue <= max) {
-          ticksValues.push(currentValue);
-        }
-        currentValue += step * ticksStep;
-      }
-      if (currentValue <= max) {
-        ticksValues.push(currentValue);
-      }
-    }
-    if (ticksValues[ticksValues.length - 1] !== max) {
-      ticksValues.pop();
-      ticksValues.push(max);
-    }
-
     return ticksValues;
   }
 
@@ -160,14 +136,14 @@ class Model {
       if (isInStep) {
         this.setDefaultValue(newValue);
       } else {
-        const value: number = this.calcNearestMaxValueConsideringStep(newValue);
+        const value: number = this.calcNearestMinValueConsideringStep(newValue);
         this.setDefaultValue(value);
         this.updateObservers();
       }
     } else if (isInStep) {
       this.setSecondValue(newValue);
     } else {
-      const value: number = this.calcNearestMaxValueConsideringStep(newValue);
+      const value: number = this.calcNearestMinValueConsideringStep(newValue);
       this.setSecondValue(value);
       this.updateObservers();
     }
