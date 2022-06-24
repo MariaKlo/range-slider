@@ -2,23 +2,35 @@
 <p>This is range-slider written in TypeScript as a JQuery plugin. It has MVP architecture.</p>
 <p>To see demo page and use range-slider, click here: https://mariaklo.github.io/range-slider/</p>
 <h3>How to use</h3>
-<br>
 <p>Clone repository:<b> git clone https://github.com/MariaKlo/range-slider.git</b></p>
-<br>
 <p>Go to project repository:<b> cd slider-plugin</b></p>
-<br>
 <p>Install dependencies:<b> npm i</b></p>
-<br>
 <p>To start development mode:<b> npm run dev</b></p>
-<br>
 <p>To build project:<b> npm run build</b></p>
-<br>
 <p>To run server:<b> npm run start</b></p>
-<br>
 <p>To run tests:<b> npm run test</b></p>
 <br>
+<h3>Or add slider to your page:</h3>
+<p>Include imports to your js files:</p>
+<p>import '/path/to/docs/slider.js'</p>
+<p>import '/path/to/docs/slider.css'</p>
+<p>And add api to any HTML-teg you want with the following options:</p>
+<p>$('your_class/id').sliderPlugin({</p>
+<p>max: 100,</p>
+<p>min: 0,</p>
+<p>step: 1,</p>
+<p>defaultValue: 10,</p>
+<p>valueSecond: 50,</p>
+<p>isMultithumb: false,</p>
+<p>showBubble: false,</p>
+<p>isVertical: false,</p>
+<p>showTicks: false,</p>
+<p>ticksValues: [],</p>
+<p>barColor: 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)',</p>
+<p>thumbColor: 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)',</p>
+<p>bubbleColor: '#eac966'</p>
+<p>});</p>
 <h3>Parameters</h3>
-<br>
 <table>
 	<tbody>
 		<tr>
@@ -47,13 +59,13 @@
 		</tr>
 		<tr>
 			<td>defaultValue</td>
-			<td>50</td>
+			<td>10</td>
 			<td>Number</td>
 			<td>Initial value for single thumb value or for first (left) thumb</td>
 		</tr>
 		<tr>
 			<td>valueSecond</td>
-			<td>70</td>
+			<td>50</td>
 			<td>Number</td>
 			<td>Initial value for second (right) thumb</td>
 		</tr>
@@ -135,4 +147,4 @@
 <p>Presenter is subscribed on Model and View, reacts on changes and updates them. Gives data from View to Model and vice versa.</p>
 <br>
 <h3>UML-diagram</h3>
-<img src="https://user-images.githubusercontent.com/56316185/175383473-62aceb43-99b0-4aad-9762-871fe505e029.png" alt="uml-diagram">
+<img src="https://user-images.githubusercontent.com/56316185/175525912-004fb53f-78b8-4783-b29a-ee5dcd7e7a16.png" alt="uml">
