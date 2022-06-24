@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import View from './View';
 import ticksView from './subView/ticksView/ticksView';
@@ -125,16 +124,6 @@ describe('test view', () => {
     expect(view.update).toHaveBeenCalledWith(50, false);
   });
 
-  test('should toggle class for default thumb when mouse up or down', () => {
-    jest.spyOn(thumb.firstThumb.classList, 'toggle');
-    jest.spyOn(view, 'onMouseUpDown');
-    view.onMouseUpDown(true)();
-    thumb.firstThumb = document.createElement('div');
-    thumb.firstThumb.className = 'range-slider__thumb';
-    thumb.firstThumb.classList.toggle('range-slider__thumb_active');
-    expect(thumb.firstThumb.classList.contains('range-slider__thumb_active')).toBe(true);
-  });
-
   test('update second event input', () => {
     jest.spyOn(view, 'eventInput');
     jest.spyOn(view, 'onInput');
@@ -142,47 +131,6 @@ describe('test view', () => {
     document.dispatchEvent(new MouseEvent('input'));
     view.eventInput();
     expect(view.eventInput).toHaveBeenCalled();
-  });
-
-  test('update second input event hover', () => {
-    jest.spyOn(view, 'eventHover');
-    jest.spyOn(view, 'onMouseOverOut');
-    options.isMultiThumb = true;
-    document.dispatchEvent(new MouseEvent('mouseover'));
-    view.eventHover();
-    expect(view.eventHover).toHaveBeenCalled();
-  });
-
-  test('update second input event active', () => {
-    jest.spyOn(view, 'eventActive');
-    jest.spyOn(view, 'onMouseUpDown');
-    options.isMultiThumb = true;
-    document.dispatchEvent(new MouseEvent('mousedown'));
-    document.dispatchEvent(new MouseEvent('mouseup'));
-    view.eventActive();
-    expect(view.eventActive).toHaveBeenCalled();
-  });
-
-  test('activate onmouseupdown for second thumb', () => {
-    jest.spyOn(thumb, 'createThumb');
-    thumb.createThumb(document.body, true);
-    const { secondThumb } = view.thumb;
-    view.onMouseUpDown(false)();
-    jest.spyOn(secondThumb.classList, 'toggle');
-    expect(secondThumb.classList.contains('range-slider__thumb_active')).toBe(true);
-  });
-
-  test('both values are updated on click', () => {
-    options = {
-      ...data,
-      defaultValue: 0,
-      valueSecond: 20,
-      isMultiThumb: true,
-    };
-    thumb.createBubbleElement(true, document.body, document.body);
-    view.onClick(20)();
-    expect(options.valueSecond).toBe(20);
-    expect(options.defaultValue).toBe(0);
   });
 
   test('updateObservers work correctly with updateView', () => {
@@ -218,24 +166,5 @@ describe('test view', () => {
     };
     const element = new MouseEvent('click', { clientY: 265 });
     expect(view.getValueByCoords(element, coords)).toBe(38);
-  });
-
-  test('activate onmouseoverout for default bubble', () => {
-    jest.spyOn(view, 'onMouseOverOut');
-    view.onMouseOverOut(document.body, document.body)();
-    view.thumb.showBubble = document.createElement('p');
-    view.thumb.showBubble.classList.add('range-slider__bubble');
-    thumb.showBubble.classList.toggle('range-slider__bubble_hover');
-    expect(thumb.showBubble.classList.contains('range-slider__bubble_hover')).toBe(true);
-  });
-
-  test('activate onmouseoverout for multi bubbles', () => {
-    jest.spyOn(view, 'onMouseOverOut');
-    options.showBubble = true;
-    view.onMouseOverOut(document.body, document.body)();
-    view.thumb.showSecondBubble = document.createElement('p');
-    view.thumb.showSecondBubble.classList.add('range-slider__bubble');
-    thumb.showSecondBubble!.classList.toggle('range-slider__bubble_big');
-    expect(thumb.showSecondBubble!.classList.contains('range-slider__bubble_big')).toBe(true);
   });
 });

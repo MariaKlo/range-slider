@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 class ThumbView {
   firstThumb!: HTMLElement;
 
@@ -12,7 +11,7 @@ class ThumbView {
     secondValue?: number) {
     this.createThumb(parent, isDouble);
     if (toggleElement) {
-      this.createBubbleElement(isDouble, this.firstThumb, this.secondThumb);
+      this.createBubbleElement(isDouble, this.firstThumb);
       this.writeBubbleValue(isDouble, defaultValue, secondValue);
     } 
   }
@@ -31,14 +30,14 @@ class ThumbView {
     }
   }
 
-  createBubbleElement(isDouble: boolean, parent: HTMLElement, secondParent?: HTMLElement): void {
+  createBubbleElement(isDouble: boolean, parent: HTMLElement): void {
     this.showBubble = document.createElement('p');
     this.showBubble.classList.add('range-slider__bubble');
     parent.append(this.showBubble);
     if (isDouble) {
       this.showSecondBubble = document.createElement('p');
       this.showSecondBubble.classList.add('range-slider__bubble');
-      secondParent!.append(this.showSecondBubble);
+      this.secondThumb.append(this.showSecondBubble);
     } 
   }
 
@@ -54,7 +53,7 @@ class ThumbView {
   placeThumb(isDouble: boolean, percent: number, percentSecond?: number): void {
     this.firstThumb.style.left = `${percent}%`;
     if (isDouble) {
-      this.secondThumb.style.right = `${100 - (percentSecond! || 0)}%`;
+      this.secondThumb.style.right = `${100 - (percentSecond || 0)}%`;
     }
   }
 

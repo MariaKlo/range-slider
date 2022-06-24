@@ -9,10 +9,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: 'development',
     entry: {
-        Model: './src/range-slider/Model/Model.ts',
-        View: './src/range-slider/View/View.ts',
-        Presenter: './src/range-slider/Presenter/Presenter.ts',
-        Demo: './src/demo-page/panel.js'
+        slider: './src/demo-page/jquery.index.ts',
+        demo: './src/demo-page/panel.js'
     },
     devtool: 'inline-source-map',
     output: {
@@ -37,7 +35,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
           template: path.resolve(__dirname, 'src/demo-page/index.pug'),
-          filename: "index-dev.html",
+          filename: "index.html",
           inject: "body"
         }),
         new ESLintPlugin({
@@ -45,7 +43,7 @@ module.exports = {
           exclude: 'node_modules'
        }),
        new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
+        filename: '[name].css',
         chunkFilename: '[id].css'
       }),
       new ForkTsCheckerWebpackPlugin(),
@@ -56,7 +54,7 @@ module.exports = {
     ],
     devServer: {
         historyApiFallback: true,
-        static: path.resolve(__dirname, 'dist'),
+        static: path.resolve(__dirname, 'docs'),
         open: true,
         compress: true,
         hot: true,

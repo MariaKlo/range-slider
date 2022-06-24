@@ -9,7 +9,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = merge(config, {
   mode: "production",
   output: {
-    filename: "[name].[contentHash].js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "./docs")
   },
   optimization: {
@@ -18,7 +18,7 @@ module.exports = merge(config, {
       new TerserPlugin(),
       new HtmlWebpackPlugin({
         template: 'src/demo-page/index.pug',
-        filename: "./index.html",
+        filename: "./index-prod.html",
         minify: {
           removeAttributeQuotes: true,
           collapseWhitespace: true,
@@ -28,7 +28,7 @@ module.exports = merge(config, {
     ] 
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: "[name].[contentHash].css" }),
+    new MiniCssExtractPlugin({ filename: "[name].css" }),
   ],
   module: {
     rules: [

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 class FormView {
   formDiv!: HTMLElement;
 
@@ -43,21 +42,21 @@ class FormView {
   setValues(isDouble: boolean, value: number, secondValue?: number): void {
     this.input.value = String(value);
     if (isDouble && this.secondInput) {
-      this.secondInput!.value = String(secondValue);
+      this.secondInput.value = String(secondValue);
     }
   }
 
   setMax(isDouble: boolean, max = 100): void {
     this.input.max = String(max);
     if (isDouble) {
-      this.secondInput!.max = String(max);
+      this.secondInput.max = String(max);
     }
   }
 
   setMin(isDouble: boolean, min: number) {
     this.input.min = String(min);
     if (isDouble) {
-      this.secondInput!.min = String(min);
+      this.secondInput.min = String(min);
     }
   }
 }
