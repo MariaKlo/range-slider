@@ -1,4 +1,4 @@
-import Options from '../component/globalOptions';
+import Options from '../component/Options';
 
 interface IObserverModel {
   updateView(): void

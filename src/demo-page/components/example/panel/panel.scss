@@ -1,18 +1,18 @@
 .wrapper-panel {
-    width: 18.75rem;
+  width: 18.75rem;
 }
 
 .panel {
-    border: 1px solid black;
-    border-radius: 1.25rem;
-    margin-bottom: .9375rem;
-    padding: .4375rem;
+  border: 1px solid black;
+  border-radius: 1.25rem;
+  margin-bottom: .9375rem;
+  padding: .4375rem;
 }
 
 .panel__max, .panel__min, .panel__step, .panel__defaultValue, .panel__valueSecond,
 .panel__isMultiThumb, .panel__showBubble, .panel__isVertical, .panel__showTicks,
 .panel__ticksValues, .panel__barColor, .panel__thumbColor, .panel__bubbleColor {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

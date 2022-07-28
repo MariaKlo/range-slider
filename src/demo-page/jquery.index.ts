@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import './index.scss';
+
 import '../range-slider/index.scss';
 import Model from '../range-slider/Model/Model';
-import View from '../range-slider/View/View';
-import BarView from '../range-slider/View/subView/barView/barView';
-import StepView from '../range-slider/View/subView/stepView/stepView';
-import TicksView from '../range-slider/View/subView/ticksView/ticksView';
-import ThumbView from '../range-slider/View/subView/thumbView/thumbView';
 import Presenter from '../range-slider/Presenter/Presenter';
-import FormView from '../range-slider/View/subView/formView/formView';
-import Options from '../range-slider/component/globalOptions';
+import View from '../range-slider/View/View';
+import BarView from '../range-slider/View/subView/barView/BarView';
+import FormView from '../range-slider/View/subView/formView/FormView';
+import StepView from '../range-slider/View/subView/stepView/StepView';
+import TicksView from '../range-slider/View/subView/ticksView/TicksView';
+import ThumbView from '../range-slider/View/subView/thumbView/ThumbView';
+import Options from '../range-slider/component/Options';
   
 // eslint-disable-next-line @typescript-eslint/no-namespace
 declare global {

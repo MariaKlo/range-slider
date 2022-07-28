@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import View from './View';
-import ticksView from './subView/ticksView/ticksView';
-import stepView from './subView/stepView/stepView';
-import BarView from './subView/barView/barView';
-import ThumbView from './subView/thumbView/thumbView';
-import formView from './subView/formView/formView';
-import Options from '../component/globalOptions';
+import BarView from './subView/barView/BarView';
+import formView from './subView/formView/FormView';
+import stepView from './subView/stepView/StepView';
+import ticksView from './subView/ticksView/TicksView';
+import ThumbView from './subView/thumbView/ThumbView';
+
+import Options from '../component/Options';
 
 describe('test view', () => {
   let view: View;

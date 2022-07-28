@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import TicksView from './subView/ticksView/ticksView';
-import StepView from './subView/stepView/stepView';
-import BarView from './subView/barView/barView';
-import ThumbView from './subView/thumbView/thumbView';
-import FormView from './subView/formView/formView';
-import Options from '../component/globalOptions';
+import BarView from './subView/barView/BarView';
+import FormView from './subView/formView/FormView';
+import StepView from './subView/stepView/StepView';
+import TicksView from './subView/ticksView/TicksView';
+import ThumbView from './subView/thumbView/ThumbView';
+
+import Options from '../component/Options';
 
 interface IObserverView {
   updateModel(arg0: number, arg1: boolean): void

@@ -1,5 +1,5 @@
-import View from '../View/View';
 import Model from '../Model/Model';
+import View from '../View/View';
 
 class Presenter {
   view: View;

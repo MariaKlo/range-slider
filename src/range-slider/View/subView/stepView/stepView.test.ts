@@ -1,4 +1,4 @@
-import StepView from './stepView';
+import StepView from './StepView';
 
 describe('test step', () => {
   let step: StepView;

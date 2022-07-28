@@ -18,10 +18,9 @@ module.exports = merge(config, {
       new TerserPlugin(),
       new HtmlWebpackPlugin({
         template: 'src/demo-page/index.pug',
-        filename: "./index-prod.html",
+        filename: "./index.html",
         minify: {
           removeAttributeQuotes: true,
-          collapseWhitespace: true,
           removeComments: true
         }
       }),
@@ -35,9 +34,9 @@ module.exports = merge(config, {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader, //3. Extract css into files
-          "css-loader", //2. Turns css into commonjs
-          "sass-loader" //1. Turns sass into css
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader" 
         ]
       }
     ]

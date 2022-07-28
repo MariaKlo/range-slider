@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 import './jquery.index';
 
 // arrays of id
