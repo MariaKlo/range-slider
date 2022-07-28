@@ -35,7 +35,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/demo-page/index.pug'),
-      filename: "index-dev.html",
+      filename: "index.html",
       inject: "body"
     }),
     new ESLintPlugin({
