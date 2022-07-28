@@ -1,4 +1,4 @@
-import ThumbView from './ThumbView';
+import ThumbView from './thumbView';
 
 describe('test thumb', () => {
   let thumb: ThumbView;

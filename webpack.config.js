@@ -14,7 +14,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   output: {
-    path: path.resolve(__dirname, './docs'),
+    path: path.resolve(__dirname, 'docs'),
     filename: '[name].js',
     clean: true,
   },
@@ -62,63 +62,63 @@ module.exports = {
   },
   module: {
     rules: [
-    {
-      test: /\.m?js$/,
-      exclude: /(node_modules|bower_components)/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-        presets: ['@babel/preset-env']
-        }
-      }
-    },
-    {
-      test: /\.tsx?$/,
-      use: 'ts-loader',
-      exclude: /node_modules|\.d\.ts$/,
-    },
-    {
-      test: /\.d\.ts$/,
-      loader: 'ignore-loader'
-    },
-    {
-      test: /\.(woff|woff2|eot|ttf|otf)$/i,
-      type: 'asset/resource',
-    },
-    {
-      test: /\.(png|svg|jpg|jpeg|gif)$/i,
-      type: 'asset/resource',
-    },
-    {
-      test: /\.pug$/,
-      loader: 'pug-loader',
-      options: {
-        pretty: true,
-      }
-    },
-    {
-      test: /\.svg$/,
-      use: [
-        {
-          loader: 'svgo-loader',
-        }
-      ]
-    },
-    {
-      test: /\.(scss|css)$/,
-      use: [
-        process.env.NODE_ENV !== 'production'
-          ? 'style-loader'
-          : MiniCssExtractPlugin.loader,
-        'css-loader',
-        {
-          loader: 'sass-loader',
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
           options: {
-            sourceMap: true
+          presets: ['@babel/preset-env']
           }
         }
-      ]
-    },
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules|\.d\.ts$/,
+      },
+      {
+        test: /\.d\.ts$/,
+        loader: 'ignore-loader'
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader',
+        options: {
+          pretty: true,
+        }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svgo-loader',
+          }
+        ]
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          process.env.NODE_ENV !== 'production'
+            ? 'style-loader'
+            : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
     ]
   }
 }

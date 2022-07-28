@@ -1,9 +1,9 @@
 import View from '../View/View';
-import stepView from '../View/subView/stepView/StepView';
-import barView from '../View/subView/barView/BarView';
-import ticksView from '../View/subView/ticksView/TicksView';
-import thumbView from '../View/subView/thumbView/ThumbView';
-import formView from '../View/subView/formView/FormView';
+import stepView from '../View/subView/stepView/stepView';
+import barView from '../View/subView/barView/barView';
+import ticksView from '../View/subView/ticksView/ticksView';
+import thumbView from '../View/subView/thumbView/thumbView';
+import formView from '../View/subView/formView/formView';
 import Model from '../Model/Model';
 import Presenter from './Presenter';
 

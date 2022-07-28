@@ -1,4 +1,4 @@
-import TicksView from './TicksView';
+import TicksView from './ticksView';
 
 describe('test ticks', () => {
   let ticks: TicksView;

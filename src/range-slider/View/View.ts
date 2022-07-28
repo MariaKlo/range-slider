@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import BarView from './subView/barView/BarView';
-import FormView from './subView/formView/FormView';
-import StepView from './subView/stepView/StepView';
-import TicksView from './subView/ticksView/TicksView';
-import ThumbView from './subView/thumbView/ThumbView';
+import BarView from './subView/barView/barView';
+import FormView from './subView/formView/formView';
+import StepView from './subView/stepView/stepView';
+import TicksView from './subView/ticksView/ticksView';
+import ThumbView from './subView/thumbView/thumbView';
 
 import Options from '../component/Options';
 

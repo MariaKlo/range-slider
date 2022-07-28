@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import FormView from './FormView';
+import FormView from './formView';
 
 describe('test view', () => {
   let form: FormView;

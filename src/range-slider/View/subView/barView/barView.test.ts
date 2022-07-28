@@ -1,4 +1,4 @@
-import BarView from './BarView';
+import BarView from './barView';
 
 describe('test progress bar', () => {
   let progressBar: BarView;
