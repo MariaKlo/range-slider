@@ -30,4 +30,5 @@ class Presenter {
     this.view.setInput();
   }
 }
+
 export default Presenter;

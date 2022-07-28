@@ -17,5 +17,4 @@ class StepView {
     }
   }
 }
-
 export default StepView;
