@@ -92,7 +92,10 @@ class View {
     if (this.options.isVertical) {
       this.wrapper.classList.add('range-slider_vertical');
     }
-    if (this.options.isVertical && this.options.showBubble) {
+
+    const verticalBubble = this.options.isVertical && this.options.showBubble;
+
+    if (verticalBubble) {
       this.thumb.rotateBubble();
     }
     

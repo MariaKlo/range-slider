@@ -10,7 +10,8 @@ class StepView {
   protected calcMaxValueConsideringStep(max: number, step: number): void {
     const valueFromMaxWithStep = max / step;
     const maxValueConsideringStep = Math.floor(valueFromMaxWithStep) * step;
-    if (maxValueConsideringStep > max || maxValueConsideringStep < max) {
+    const compareStepWithMax = maxValueConsideringStep > max || maxValueConsideringStep < max;
+    if (compareStepWithMax) {
       this.stepForm.max = String(maxValueConsideringStep);
     } else {
       this.stepForm.max = String(max);

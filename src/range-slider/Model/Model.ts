@@ -101,14 +101,14 @@ class Model {
   // calculate steps and ticks
   private calcNearestMinValueConsideringStep(newValue: number, step: number = this.step): number {
     const roundToMin = newValue - (newValue % step);
-    if ((newValue % step) > (step / 2)) {
+    const addStepToRoundToMin = (newValue % step) > (step / 2);
+    if (addStepToRoundToMin) {
       return step + roundToMin;
     }
     return roundToMin;
   }
     
-  getTicks(step: number = this.step, 
-    showTicks: boolean = this.showTicks): number[] {
+  getTicks(step: number = this.step, showTicks: boolean = this.showTicks): number[] {
     if (step <= 0) {
       step = 1;
     }

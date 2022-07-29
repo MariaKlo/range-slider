@@ -73,10 +73,11 @@ class ThumbView {
   }
 
   changeBubbleColor(color: string, isDouble: boolean): void {
+    const secondBubble = isDouble && this.showSecondBubble;
     if (this.showBubble) {
       this.showBubble.style.backgroundColor = color;
     }
-    if (isDouble && this.showSecondBubble) {
+    if (secondBubble) {
       this.showSecondBubble.style.backgroundColor = color;
     }
   }
