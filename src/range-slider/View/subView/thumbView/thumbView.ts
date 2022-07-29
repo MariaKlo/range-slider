@@ -1,11 +1,11 @@
 class ThumbView {
-  firstThumb!: HTMLElement;
+  private firstThumb!: HTMLElement;
 
-  secondThumb!: HTMLElement;
+  private secondThumb!: HTMLElement;
 
-  showBubble!: HTMLElement;
+  private showBubble!: HTMLElement;
 
-  showSecondBubble!: HTMLElement;
+  private showSecondBubble!: HTMLElement;
 
   init(parent: HTMLElement, isDouble: boolean, toggleElement: boolean, defaultValue: number,
     secondValue?: number) {
@@ -16,7 +16,7 @@ class ThumbView {
     } 
   }
 
-  createThumb(parent: HTMLElement, isDouble: boolean) {
+  private createThumb(parent: HTMLElement, isDouble: boolean) {
     this.firstThumb = document.createElement('div');
     this.firstThumb.className = 'range-slider__thumb';
     parent.append(this.firstThumb);
@@ -30,7 +30,7 @@ class ThumbView {
     }
   }
 
-  createBubbleElement(isDouble: boolean, parent: HTMLElement): void {
+  private createBubbleElement(isDouble: boolean, parent: HTMLElement): void {
     this.showBubble = document.createElement('p');
     this.showBubble.classList.add('range-slider__bubble');
     parent.append(this.showBubble);

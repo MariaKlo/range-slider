@@ -1,5 +1,5 @@
 class FormView {
-  formDiv!: HTMLElement;
+  private formDiv!: HTMLElement;
 
   input!: HTMLInputElement;
 
@@ -12,13 +12,13 @@ class FormView {
     this.setMax(isDouble, max);
   }
 
-  createForm(parent: HTMLElement): void {
+  private createForm(parent: HTMLElement): void {
     this.formDiv = <HTMLElement>(document.createElement('div'));
     this.formDiv.classList.add('range-slider__form');
     parent.append(this.formDiv);
   }
   
-  createInput(isDouble: boolean): void {
+  private createInput(isDouble: boolean): void {
     if (isDouble) {
       this.input = document.createElement('input');
       this.input.type = 'range';
@@ -46,14 +46,14 @@ class FormView {
     }
   }
 
-  setMax(isDouble: boolean, max = 100): void {
+  private setMax(isDouble: boolean, max = 100): void {
     this.input.max = String(max);
     if (isDouble) {
       this.secondInput.max = String(max);
     }
   }
 
-  setMin(isDouble: boolean, min: number) {
+  private setMin(isDouble: boolean, min: number) {
     this.input.min = String(min);
     if (isDouble) {
       this.secondInput.min = String(min);

@@ -14,32 +14,31 @@ interface IObserverView {
 
 class View {
   // vars for view
-  parent: HTMLElement | JQuery<HTMLElement>;
+  private parent: HTMLElement | JQuery<HTMLElement>;
 
-  wrapper!: HTMLDivElement;
+  private wrapper!: HTMLDivElement;
 
-  track!: HTMLDivElement;
+  private track!: HTMLDivElement;
 
-  input!: HTMLInputElement;
+  protected input!: HTMLInputElement;
 
-  firstInput!: HTMLElement;
+  protected firstInput!: HTMLElement;
 
-  secondInput!: HTMLInputElement;
-  // imported classes
+  protected secondInput!: HTMLInputElement;
 
-  ticks: TicksView;
+  private ticks: TicksView;
 
-  step: StepView;
+  protected step: StepView;
 
-  bar: BarView;
+  private bar: BarView;
 
-  thumb: ThumbView;
+  private thumb: ThumbView;
 
-  form!: FormView;
+  private form!: FormView;
 
   options!: Options;
 
-  observers!: IObserverView[];
+  private observers!: IObserverView[];
 
   constructor(parent: HTMLElement | JQuery<HTMLElement>, options: Options) {
     this.ticks = new TicksView();
@@ -110,20 +109,20 @@ class View {
     }
   };
 
-  createWrapper = () => {
+  private createWrapper = () => {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('range-slider');
     this.setAttributesValue();
     this.parent.append(this.wrapper);
   };
 
-  createTrack(parent: HTMLElement): void {
+  private createTrack(parent: HTMLElement): void {
     this.track = document.createElement('div');
     this.track.classList.add('range-slider__track');
     parent.append(this.track);
   }
 
-  setAttributesValue = () => {
+  private setAttributesValue = () => {
     if (this.options.isMultiThumb) {
       this.wrapper.setAttribute('first-value', String(this.options.defaultValue));
       this.wrapper.setAttribute('second-value', String(this.options.valueSecond));
@@ -153,7 +152,7 @@ class View {
     this.thumb.placeThumb(this.options.isMultiThumb, placeDefault, placeRight);
   };
 
-  onInput = (isDefault: boolean) => {
+  private onInput = (isDefault: boolean) => {
     if (isDefault) {
       return () => {
         this.update(Number(this.form.input.value), true);
@@ -164,14 +163,14 @@ class View {
     };
   };
     
-  eventInput = () => {
+  private eventInput = () => {
     this.form.input.addEventListener('input', this.onInput(true));
     if (this.options.isMultiThumb) {
       this.form.secondInput.addEventListener('input', this.onInput(false));
     }
   };
     
-  getValueByCoords = (element: MouseEvent, coords: DOMRect) => {
+  private getValueByCoords = (element: MouseEvent, coords: DOMRect) => {
     let length: number = coords.width;
     const range: number = this.options.max - this.options.min;
     let currentPosition: number = element.clientX - coords.left;
@@ -184,13 +183,13 @@ class View {
     return coordsValue;
   };
   
-  clickOnBar = (elem: MouseEvent) => {
+  private clickOnBar = (elem: MouseEvent) => {
     const coords: DOMRect = this.track.getBoundingClientRect();
     const newValue = this.getValueByCoords(elem, coords);
     this.onClick(newValue)();
   };
     
-  update = (newValue: number, isDefault: boolean) => {
+  private update = (newValue: number, isDefault: boolean) => {
     if (isDefault) {
       this.options.defaultValue = newValue;
     } else {
@@ -205,7 +204,7 @@ class View {
       this.options.defaultValue, this.options.valueSecond);
   };
     
-  onClick = (newValue: number) => () => {
+  private onClick = (newValue: number) => () => {
     this.update(newValue, true);
   };
 }

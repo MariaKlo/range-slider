@@ -27,7 +27,7 @@ class TicksView {
     };
   };
     
-  placeTicks = (containerWidth: number): number => (0.42 * containerWidth + 777.8) / containerWidth;
+  private placeTicks = (containerWidth: number): number => (0.42 * containerWidth + 777.8) / containerWidth;
 }
 
 export default TicksView;

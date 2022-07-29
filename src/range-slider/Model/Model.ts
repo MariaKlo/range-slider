@@ -7,35 +7,33 @@ interface IObserverModel {
 class Model {
   optionsForView!: Options;
 
-  max!: number;
+  private max!: number;
 
-  min!: number;
+  private min!: number;
 
-  step!: number;
+  private step!: number;
 
   defaultValue!: number;
 
   valueSecond!: number;
 
-  isMultiThumb!: boolean;
+  private isMultiThumb!: boolean;
 
-  showRightProgressBar!: boolean;
+  private showBubble!: boolean;
 
-  showBubble!: boolean;
+  private isVertical!: boolean;
 
-  isVertical!: boolean;
+  private showTicks!: boolean;
 
-  showTicks!: boolean;
+  protected ticksValues!: number[];
 
-  ticksValues!: number[];
+  private barColor!: string;
 
-  barColor!: string;
+  private thumbColor!: string;
 
-  thumbColor!: string;
+  private bubbleColor!: string;
 
-  bubbleColor!: string;
-
-  observers!: IObserverModel[];
+  private observers!: IObserverModel[];
 
   constructor(options: Options) {
     this.max = Number(options.max === 0 ? 0 : (options.max || 100));
@@ -86,22 +84,22 @@ class Model {
     }
   }
 
-  updateObservers() {
+  private updateObservers() {
     this.observers.forEach((observer) => {
       observer.updateView();
     });
   }
 
-  setDefaultValue(value: number) {
+  private setDefaultValue(value: number) {
     this.defaultValue = value;
   }
 
-  setSecondValue(value: number) {
+  private setSecondValue(value: number) {
     this.valueSecond = value;
   }
 
   // calculate steps and ticks
-  calcNearestMinValueConsideringStep(newValue: number, step: number = this.step): number {
+  private calcNearestMinValueConsideringStep(newValue: number, step: number = this.step): number {
     const roundToMin = newValue - (newValue % step);
     if ((newValue % step) > (step / 2)) {
       return step + roundToMin;
@@ -121,7 +119,7 @@ class Model {
     return ticksValues;
   }
 
-  limitToggle(newValue: number, isDefault: boolean) {
+  private limitToggle(newValue: number, isDefault: boolean) {
     const isInRange = isDefault ? newValue < this.valueSecond : newValue > this.defaultValue;
     if (isInRange) {
       this.limitStep(newValue, isDefault);
@@ -130,7 +128,7 @@ class Model {
     }
   }
     
-  limitStep(newValue: number, isDefault: boolean) {
+  private limitStep(newValue: number, isDefault: boolean) {
     const isInStep = newValue % this.step === 0;
     if (isDefault) {
       if (isInStep) {

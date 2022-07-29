@@ -1,13 +1,13 @@
 class StepView {
-  stepForm!: HTMLInputElement;
+  private stepForm!: HTMLInputElement;
 
-  createStep(): void {
+  protected createStep(): void {
     this.stepForm = document.createElement('input');
     this.stepForm.type = 'range';
     this.stepForm.step = '1';
   }
 
-  calcMaxValueConsideringStep(max: number, step: number): void {
+  protected calcMaxValueConsideringStep(max: number, step: number): void {
     const valueFromMaxWithStep = max / step;
     const maxValueConsideringStep = Math.floor(valueFromMaxWithStep) * step;
     if (maxValueConsideringStep > max || maxValueConsideringStep < max) {
@@ -17,4 +17,5 @@ class StepView {
     }
   }
 }
+
 export default StepView;
