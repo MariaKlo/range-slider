@@ -10,7 +10,7 @@ module.exports = {
   mode: 'development',
   entry: {
     slider: './src/demo-page/jquery.index.ts',
-    demo: './src/demo-page/panel.js'
+    demo: './src/demo-page/panel.ts'
   },
   devtool: 'inline-source-map',
   output: {

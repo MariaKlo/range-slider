@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import $ from 'jquery';
 
 import './jquery.index';
@@ -7,16 +8,16 @@ const rangeSliderId = ['api_first', 'api_second', 'api_third', 'api_fourth'];
 
 // set state to keep data
 const state = {};
-const setState = (name, options) => {
+const setState = (name: string, options: {}): void => {
   state[name] = options;
 };
 
 // state gets data from panel
 for (let i = 1; i <= rangeSliderId.length; i += 1) {
   // get values from panel
-  const getValue = (id) => Number(document.getElementById(id).value);
-  const getBooleanValue = (id) => document.getElementById(id).checked;
-  const getStringValue = (id) => document.getElementById(id).value;
+  const getValue = (id: string): void => Number(document.getElementById(id).value);
+  const getBooleanValue = (id: string): void => document.getElementById(id).checked;
+  const getStringValue = (id: string): void => document.getElementById(id).value;
 
   setState(rangeSliderId[i - 1], {
     max: getValue(`max${i}`),
@@ -37,7 +38,7 @@ for (let i = 1; i <= rangeSliderId.length; i += 1) {
 
 // set attributes for api (default value or first and second values)
 // set values for slider (default value, first value, second value)
-const spyOnSlider = (item, index) => {
+const spyOnSlider = (item: string, index: number): void => {
   const slider = document.getElementById(item).firstChild;
   const setSliderValue = () => {
     const newDefaultValue = slider.getAttribute('default-value');
@@ -60,7 +61,7 @@ const spyOnSlider = (item, index) => {
   slider.addEventListener('click', setSliderValue);
 };
 // render slider with info from panel
-const renderRangeSlider = (id, panel) => {
+const renderRangeSlider = (id: string, panel: string): void => {
   // delete duplicates of slider when panel is used
   const elem = document.getElementById(id);
   if (elem.firstElementChild) {
