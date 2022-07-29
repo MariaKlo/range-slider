@@ -5,6 +5,7 @@ import StepView from './subView/stepView/stepView';
 import TicksView from './subView/ticksView/ticksView';
 import ThumbView from './subView/thumbView/thumbView';
 
+// import Observer from '../Observer/Observer';
 import Options from '../component/Options';
 
 interface IObserverView {
@@ -40,17 +41,15 @@ class View {
 
   observers!: IObserverView[];
 
-  constructor(parent: HTMLElement | JQuery<HTMLElement>, ticks: TicksView, step: StepView, bar: BarView,
-    thumb: ThumbView, form: FormView, options: Options) {
+  constructor(parent: HTMLElement | JQuery<HTMLElement>, options: Options) {
+    this.ticks = new TicksView();
+    this.step = new StepView();
+    this.bar = new BarView();
+    this.thumb = new ThumbView();
+    this.form = new FormView();
+
     this.parent = parent;
-    this.ticks = ticks;
-    this.step = step;
-    this.bar = bar;
-    this.thumb = thumb;
-    this.form = form;
-
     this.options = options;
-
     this.observers = [];
   }
 

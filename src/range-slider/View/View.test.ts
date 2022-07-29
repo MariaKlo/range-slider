@@ -1,21 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import View from './View';
-import BarView from './subView/barView/barView';
 import formView from './subView/formView/formView';
-import stepView from './subView/stepView/stepView';
-import ticksView from './subView/ticksView/ticksView';
-import ThumbView from './subView/thumbView/thumbView';
 
 import Options from '../component/Options';
 
 describe('test view', () => {
   let view: View;
-  let ticks: ticksView;
-  let step: stepView;
-  let bar: BarView;
-  let thumb: ThumbView;
   let form: formView;
-
   let options: Options;
 
   const data = {
@@ -35,11 +26,8 @@ describe('test view', () => {
   };
 
   beforeEach(() => {
-    thumb = new ThumbView();
-    ticks = new ticksView();
-    bar = new BarView();
     form = new formView();
-    view = new View(document.body, ticks, step, bar, thumb, form, data);
+    view = new View(document.body, data);
     view.init();
   });
   afterEach(() => {

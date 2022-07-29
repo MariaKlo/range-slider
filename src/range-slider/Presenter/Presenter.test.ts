@@ -1,22 +1,12 @@
-import View from '../View/View';
-import stepView from '../View/subView/stepView/stepView';
-import barView from '../View/subView/barView/barView';
-import ticksView from '../View/subView/ticksView/ticksView';
-import thumbView from '../View/subView/thumbView/thumbView';
-import formView from '../View/subView/formView/formView';
-import Model from '../Model/Model';
 import Presenter from './Presenter';
+
+import View from '../View/View';
+import Model from '../Model/Model';
 
 describe('test Presenter', () => {
   let presenter: Presenter;
   let model: Model;
   let view: View;
-
-  let step: stepView;
-  let bar: barView;
-  let ticks: ticksView;
-  let thumb: thumbView;
-  let form: formView;
 
   const data = {
     max: 100,
@@ -36,12 +26,7 @@ describe('test Presenter', () => {
 
   beforeEach(() => {
     model = new Model(data);
-    step = new stepView();
-    bar = new barView();
-    ticks = new ticksView();
-    thumb = new thumbView();
-    form = new formView();
-    view = new View(document.body, ticks, step, bar, thumb, form, data);
+    view = new View(document.body, data);
 
     presenter = new Presenter(view, model);
   });
