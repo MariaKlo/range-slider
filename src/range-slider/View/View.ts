@@ -5,12 +5,12 @@ import StepView from './subView/stepView/stepView';
 import TicksView from './subView/ticksView/ticksView';
 import ThumbView from './subView/thumbView/thumbView';
 
-// import Observer from '../Observer/Observer';
+import { Observer, IObserverView } from '../Observer/Observer';
 import Options from '../component/Options';
 
-interface IObserverView {
-  updateModel(arg0: number, arg1: boolean): void
-}
+// interface IObserverView {
+//   updateModel(arg0: number, arg1: boolean): void
+// }
 
 class View {
   // vars for view
@@ -38,7 +38,13 @@ class View {
 
   options!: Options;
 
-  private observers!: IObserverView[];
+  // private observers!: IObserverView[];
+
+  observers!: IObserverView[];
+
+  observer!: Observer;
+
+  observerInView!: IObserverView;
 
   constructor(parent: HTMLElement | JQuery<HTMLElement>, options: Options) {
     this.ticks = new TicksView();
@@ -46,18 +52,22 @@ class View {
     this.bar = new BarView();
     this.thumb = new ThumbView();
     this.form = new FormView();
+    this.observer = new Observer();
 
     this.parent = parent;
     this.options = options;
+    // this.observers = [];
     this.observers = [];
   }
 
-  subscribe = (observer: IObserverView) => {
-    this.observers.push(observer);
-  };
+  // subscribe = (observer: IObserverView) => {
+  //   this.observers.push(observer);
+  // };
 
   init = () => {      
     this.createWrapper();
+
+    this.observer.subscribeInView(this.observerInView);
 
     this.form.init(
       this.wrapper,

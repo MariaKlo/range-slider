@@ -1,8 +1,9 @@
 import Options from '../component/Options';
+import { Observer, IObserverModel } from '../Observer/Observer';
 
-interface IObserverModel {
-  updateView(): void
-}
+// interface IObserverModel {
+//   updateView(): void
+// }
 
 class Model {
   optionsForView!: Options;
@@ -33,7 +34,13 @@ class Model {
 
   private bubbleColor!: string;
 
-  private observers!: IObserverModel[];
+  // private observers!: IObserverModel[];
+
+  observers!: IObserverModel[];
+
+  observer!: Observer;
+
+  observerInModel!: IObserverModel;
 
   constructor(options: Options) {
     this.max = Number(options.max === 0 ? 0 : (options.max || 100));
@@ -49,7 +56,9 @@ class Model {
     this.barColor = options.barColor || 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)';
     this.thumbColor = options.thumbColor || 'linear-gradient(180deg,  #cf6f7f 0%, #ea6666 100%)';
     this.bubbleColor = options.bubbleColor || '#eac966';
+    // this.observers = [];
     this.observers = [];
+    this.observer = new Observer();
 
     this.optionsForView = {
       max: this.max,
@@ -70,11 +79,13 @@ class Model {
 
   init() {
     this.getTicks();
+    this.observer.subscribeInModel(this.observerInModel);
+    this.observer.updateObserversInModel();
   }
 
-  subscribe(observer: IObserverModel) {
-    this.observers.push(observer);
-  }
+  // subscribe(observer: IObserverModel) {
+  //   this.observers.push(observer);
+  // }
     
   update(newVal: number, isDefault: boolean) {
     if (this.isMultiThumb) {
@@ -84,11 +95,11 @@ class Model {
     }
   }
 
-  private updateObservers() {
-    this.observers.forEach((observer) => {
-      observer.updateView();
-    });
-  }
+  // private updateObservers() {
+  //   this.observers.forEach((observer) => {
+  //     observer.updateView();
+  //   });
+  // }
 
   private setDefaultValue(value: number) {
     this.defaultValue = value;
@@ -124,7 +135,8 @@ class Model {
     if (isInRange) {
       this.limitStep(newValue, isDefault);
     } else {
-      this.updateObservers();
+      // this.updateObservers();
+      this.observer.updateObserversInModel();
     }
   }
     
@@ -136,14 +148,16 @@ class Model {
       } else {
         const value: number = this.calcNearestMinValueConsideringStep(newValue);
         this.setDefaultValue(value);
-        this.updateObservers();
+        // this.updateObservers();
+        this.observer.updateObserversInModel();
       }
     } else if (isInStep) {
       this.setSecondValue(newValue);
     } else {
       const value: number = this.calcNearestMinValueConsideringStep(newValue);
       this.setSecondValue(value);
-      this.updateObservers();
+      // this.updateObservers();
+      this.observer.updateObserversInModel();
     }
   }
 }

@@ -1,25 +1,39 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-class Observer {
-  observers!: (number | boolean)[];
+interface IObserverView {
+  updateModel(arg0: number, arg1: boolean): void
+}
 
-  observer!: number | boolean;
+interface IObserverModel {
+  updateView(): void
+}
+
+class Observer implements IObserverView, IObserverModel {
+  private observersInView!: IObserverView[];
+
+  private observersInModel!: IObserverModel[];
 
   constructor() {
-    this.init();
-  }
-
-  init(): void {
-    this.updateModel(5, false);
-    this.updateView();
+    this.observersInView = [];
+    this.observersInModel = [];
   }
 
   updateModel(_arg0: number, _arg1: boolean): void {}
 
   updateView(): void {}
 
-  subscribe = (): void => {
-    this.observers.push(this.observer);
+  subscribeInView = (observer: IObserverView): void => {
+    this.observersInView.push(observer);
   };
+
+  subscribeInModel = (observer: IObserverModel): void => {
+    this.observersInModel.push(observer);
+  };
+
+  updateObserversInModel() {
+    this.observersInModel.forEach((observer: IObserverModel) => {
+      observer.updateView();
+    });
+  }
 }
 
-export default Observer;
+export { Observer, IObserverModel, IObserverView };
