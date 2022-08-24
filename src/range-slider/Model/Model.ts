@@ -80,7 +80,7 @@ class Model {
   init() {
     this.getTicks();
     this.observer.subscribeInModel(this.observerInModel);
-    this.observer.updateObserversInModel();
+    this.updateObservers();
   }
 
   // subscribe(observer: IObserverModel) {
@@ -95,11 +95,11 @@ class Model {
     }
   }
 
-  // private updateObservers() {
-  //   this.observers.forEach((observer) => {
-  //     observer.updateView();
-  //   });
-  // }
+  private updateObservers() {
+    this.observers.forEach((observer) => {
+      observer.updateView();
+    });
+  }
 
   private setDefaultValue(value: number) {
     this.defaultValue = value;
@@ -135,8 +135,8 @@ class Model {
     if (isInRange) {
       this.limitStep(newValue, isDefault);
     } else {
-      // this.updateObservers();
-      this.observer.updateObserversInModel();
+      this.updateObservers();
+      // this.observer.updateObserversInModel();
     }
   }
     
@@ -148,16 +148,16 @@ class Model {
       } else {
         const value: number = this.calcNearestMinValueConsideringStep(newValue);
         this.setDefaultValue(value);
-        // this.updateObservers();
-        this.observer.updateObserversInModel();
+        this.updateObservers();
+        // this.observer.updateObserversInModel();
       }
     } else if (isInStep) {
       this.setSecondValue(newValue);
     } else {
       const value: number = this.calcNearestMinValueConsideringStep(newValue);
       this.setSecondValue(value);
-      // this.updateObservers();
-      this.observer.updateObserversInModel();
+      this.updateObservers();
+      // this.observer.updateObserversInModel();
     }
   }
 }

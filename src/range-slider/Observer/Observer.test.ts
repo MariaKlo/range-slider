@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Observer } from './Observer';
 
-import Model from '../Model/Model';
+// import Model from '../Model/Model';
 import View from '../View/View';
 import FormView from '../View/subView/formView/formView';
 
 describe('test view', () => {
   let observer: Observer;
-  let model: Model;
+  // let model: Model;
   let view: View;
 
   const data =     {
@@ -50,14 +50,14 @@ describe('test view', () => {
     expect(view.observers[0].updateModel).toHaveBeenCalled();
   });
 
-  test('updateObservers work correctly with updateView', () => {
-    const observers = {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      updateView(): void {},
-    };
-    observer.subscribeInModel(observers);
-    jest.spyOn(model.observers[0], 'updateView');
-    observer.updateObserversInModel();
-    expect(model.observers[0].updateView).toHaveBeenCalled();
-  });
+  // test('updateObservers work correctly with updateView', () => {
+  //   const observers = {
+  //     // eslint-disable-next-line @typescript-eslint/no-empty-function
+  //     updateView(): void {},
+  //   };
+  //   observer.subscribeInModel(observers);
+  //   jest.spyOn(model.observers[0], 'updateView');
+  //   observer.updateObserversInModel();
+  //   expect(model.observers[0].updateView).toHaveBeenCalled();
+  // });
 });

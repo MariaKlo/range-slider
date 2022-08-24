@@ -71,7 +71,10 @@ class CallPlugin {
       bubbleColor: 'orange',
     },
   ];
-  
+
+  constructor() {
+    this.init();
+  }
 
   init() {
     this.initialize();

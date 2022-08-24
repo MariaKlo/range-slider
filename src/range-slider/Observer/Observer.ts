@@ -29,11 +29,11 @@ class Observer implements IObserverView, IObserverModel {
     this.observersInModel.push(observer);
   };
 
-  updateObserversInModel() {
-    this.observersInModel.forEach((observer: IObserverModel) => {
-      observer.updateView();
-    });
-  }
+  // updateObserversInModel() {
+  //   this.observersInModel.forEach((observer: IObserverModel) => {
+  //     observer.updateView();
+  //   });
+  // }
 }
 
 export { Observer, IObserverModel, IObserverView };
