@@ -3,11 +3,12 @@ import View from './View';
 import formView from './subView/formView/formView';
 
 import Options from '../component/Options';
+import { Observer } from '../Observer/Observer';
 
 describe('test view', () => {
   let view: View;
-  let form: formView;
   let options: Options;
+  let observer: Observer;
 
   const data = {
     max: 100,
@@ -25,8 +26,13 @@ describe('test view', () => {
     bubbleColor: 'yellow',
   };
 
+  const viewCopy = new View(document.body, data);
+  const viewCopyProto = Object.getPrototypeOf(viewCopy);
+
+  const formCopy = new formView();
+  const formCopyProto = Object.getPrototypeOf(formCopy);
+
   beforeEach(() => {
-    form = new formView();
     view = new View(document.body, data);
     view.init();
   });
@@ -36,26 +42,26 @@ describe('test view', () => {
 
   test('wrapper is created', () => {
     jest.spyOn(document, 'createElement');
-    view.createWrapper();
+    viewCopyProto.createWrapper();
     expect(document.createElement).toHaveBeenCalledTimes(1);
-    jest.spyOn(view.parent, 'append');
-    view.createWrapper();
-    expect(view.parent.append).toHaveBeenCalledTimes(1);
+    jest.spyOn(viewCopyProto.parent, 'append');
+    viewCopyProto.createWrapper();
+    expect(viewCopyProto.parent.append).toHaveBeenCalledTimes(1);
   });
 
   test('attributes are set for single slider', () => {
     data.defaultValue = -100;
     data.isMultiThumb = false;
-    view.setAttributesValue();
-    expect(view.wrapper.getAttribute('default-value')).toBe('-100');
+    viewCopyProto.setAttributesValue();
+    expect(viewCopyProto.wrapper.getAttribute('default-value')).toBe('-100');
   });
 
   test('attributes are set for double slider', () => {
     data.isMultiThumb = true;
     data.defaultValue = 11;
-    view.setAttributesValue();
-    expect(view.wrapper.getAttribute('first-value')).toBe('11');
-    expect(view.wrapper.getAttribute('second-value')).toBe('23');
+    viewCopyProto.setAttributesValue();
+    expect(viewCopyProto.wrapper.getAttribute('first-value')).toBe('11');
+    expect(viewCopyProto.wrapper.getAttribute('second-value')).toBe('23');
   });
 
   test('one bubble is rotated when slider is vertical', () => {
@@ -64,9 +70,9 @@ describe('test view', () => {
       isVertical: true,
       showBubble: true,
     };
-    jest.spyOn(view.thumb, 'rotateBubble');
+    jest.spyOn(viewCopyProto.thumb, 'rotateBubble');
     view.init();
-    expect(view.thumb.rotateBubble).toHaveBeenCalled();
+    expect(viewCopyProto.thumb.rotateBubble).toHaveBeenCalled();
   });
 
   test('two bubbles are rotated when slider is vertical', () => {
@@ -76,61 +82,61 @@ describe('test view', () => {
       isVertical: true,
       showBubble: true,
     };
-    jest.spyOn(view.thumb, 'rotateBubble');
+    jest.spyOn(viewCopyProto.thumb, 'rotateBubble');
     view.init();
-    expect(view.thumb.rotateBubble).toHaveBeenCalled();
+    expect(viewCopyProto.thumb.rotateBubble).toHaveBeenCalled();
   });
 
   test('mousedown on ProgressBar should call clickOnBar function', () => {
-    jest.spyOn(view, 'clickOnBar');
-    view.bar.bar.dispatchEvent(new MouseEvent('mousedown'));
-    expect(view.clickOnBar).toHaveBeenCalled();
+    jest.spyOn(viewCopyProto, 'clickOnBar');
+    viewCopyProto.bar.bar.dispatchEvent(new MouseEvent('mousedown'));
+    expect(viewCopyProto.clickOnBar).toHaveBeenCalled();
   });
 
   test('mousedown on Track should call clickOnBar function', () => {
-    jest.spyOn(view, 'clickOnBar');
-    view.track.dispatchEvent(new MouseEvent('mousedown'));
-    expect(view.clickOnBar).toHaveBeenCalled();
+    jest.spyOn(viewCopyProto, 'clickOnBar');
+    viewCopyProto.track.dispatchEvent(new MouseEvent('mousedown'));
+    expect(viewCopyProto.clickOnBar).toHaveBeenCalled();
   });
 
   test('default value are changed by click', () => {
     data.isMultiThumb = false;
-    view.onClick(5)();
+    viewCopyProto.onClick(5)();
     expect(data.defaultValue).toBe(5);
   });
 
   test('input event calls update method with default settings', () => {
-    jest.spyOn(view, 'update');
-    form.createInput(false);
-    view.onInput(true)();
-    expect(view.update).toHaveBeenCalledWith(50, true);
+    jest.spyOn(viewCopyProto, 'update');
+    formCopyProto.createInput(false);
+    viewCopyProto.onInput(true)();
+    expect(viewCopyProto.update).toHaveBeenCalledWith(50, true);
   });
 
   test('input event calls update method with non-default settings', () => {
-    jest.spyOn(view, 'update');
-    form.createInput(true);
-    view.onInput(false)();
-    expect(view.update).toHaveBeenCalledWith(50, false);
+    jest.spyOn(viewCopyProto, 'update');
+    formCopyProto.createInput(true);
+    viewCopyProto.onInput(false)();
+    expect(viewCopyProto.update).toHaveBeenCalledWith(50, false);
   });
 
   test('update second event input', () => {
-    jest.spyOn(view, 'eventInput');
-    jest.spyOn(view, 'onInput');
+    jest.spyOn(viewCopyProto, 'eventInput');
+    jest.spyOn(viewCopyProto, 'onInput');
     options.isMultiThumb = true;
     document.dispatchEvent(new MouseEvent('input'));
-    view.eventInput();
-    expect(view.eventInput).toHaveBeenCalled();
+    viewCopyProto.eventInput();
+    expect(viewCopyProto.eventInput).toHaveBeenCalled();
   });
 
   test('updateObservers work correctly with updateView', () => {
-    form.createInput(true);
+    formCopyProto.createInput(true);
     const observers = {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       updateModel(_arg0: number, _arg1: boolean): void {},
     };
-    view.subscribe(observers);
+    observer.subscribeInView(observers);
     jest.spyOn(view.observers[0], 'updateModel');
-    view.update(30, true);
+    viewCopyProto.update(30, true);
     view.observers[0].updateModel(30, true);
     expect(view.observers[0].updateModel).toHaveBeenCalled();
   });
@@ -154,6 +160,6 @@ describe('test view', () => {
       toJSON: () => '',
     };
     const element = new MouseEvent('click', { clientY: 265 });
-    expect(view.getValueByCoords(element, coords)).toBe(38);
+    expect(viewCopyProto.getValueByCoords(element, coords)).toBe(38);
   });
 });

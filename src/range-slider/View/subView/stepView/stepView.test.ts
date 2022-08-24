@@ -1,11 +1,11 @@
 import StepView from './stepView';
 
 describe('test step', () => {
-  let step: StepView;
+  const stepCopy = new StepView();
+  const stepCopyProto = Object.getPrototypeOf(stepCopy);
 
   beforeEach(() => {
-    step = new StepView();
-    step.createStep();
+    stepCopyProto.createStep();
   });
 
   afterEach(() => {
@@ -13,12 +13,12 @@ describe('test step', () => {
   });
 
   test('Leave the same max value if step fits in number range', () => {
-    step.calcMaxValueConsideringStep(300, 2);
-    expect(step.stepForm.max).toEqual('300');
+    stepCopyProto.calcMaxValueConsideringStep(300, 2);
+    expect(stepCopyProto.stepForm.max).toEqual('300');
   });
 
   test('Calc max value with step correctly if step does not fit in number range', () => {
-    step.calcMaxValueConsideringStep(100, 3);
-    expect(step.stepForm.max).toEqual('99');
+    stepCopyProto.calcMaxValueConsideringStep(100, 3);
+    expect(stepCopyProto.stepForm.max).toEqual('99');
   });
 });

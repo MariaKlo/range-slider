@@ -2,6 +2,8 @@ import ThumbView from './thumbView';
 
 describe('test thumb', () => {
   let thumb: ThumbView;
+  const thumbCopy = new ThumbView();
+  const thumbCopyProto = Object.getPrototypeOf(thumbCopy);
 
   beforeEach(() => {
     thumb = new ThumbView();
@@ -13,33 +15,33 @@ describe('test thumb', () => {
 
   test('write thumb value', () => {
     thumb.writeBubbleValue(false, 10, undefined);
-    expect(thumb.firstThumb.textContent).toEqual(`First value: ${String(10)}`);
+    expect(thumbCopyProto.firstThumb.textContent).toEqual(`First value: ${String(10)}`);
     thumb.writeBubbleValue(true, 10, 30);
-    expect(thumb.secondThumb.textContent).toEqual(`Second value: ${String(30)}`);
+    expect(thumbCopyProto.secondThumb.textContent).toEqual(`Second value: ${String(30)}`);
   });
 
   test('place thumb on input', () => {
     thumb.placeThumb(false, 10, 0);
-    expect(thumb.firstThumb.style.left).toBe(`${10}%`);
+    expect(thumbCopyProto.firstThumb.style.left).toBe(`${10}%`);
     thumb.placeThumb(true, 10, 30);
-    expect(thumb.secondThumb.style.right).toBe(`${70}%`);
+    expect(thumbCopyProto.secondThumb.style.right).toBe(`${70}%`);
     thumb.placeThumb(true, 10, 0);
-    expect(thumb.secondThumb.style.right).toBe(`${100}%`);
+    expect(thumbCopyProto.secondThumb.style.right).toBe(`${100}%`);
   });
 
   test('thumb color is changed correctly', () => {
     const thumbColor = 'purple';
     thumb.changeThumbColor(thumbColor, false);
-    expect(thumb.firstThumb.style.background).toEqual(thumbColor);
+    expect(thumbCopyProto.firstThumb.style.background).toEqual(thumbColor);
     thumb.changeThumbColor(thumbColor, true);
-    expect(thumb.secondThumb.style.background).toEqual(thumbColor);
+    expect(thumbCopyProto.secondThumb.style.background).toEqual(thumbColor);
   });
 
   test('bubble color is changed correctly', () => {
     const bubbleColor = 'purple';
     thumb.changeBubbleColor(bubbleColor, false);
-    expect(thumb.showBubble.style.backgroundColor).toEqual(bubbleColor);
+    expect(thumbCopyProto.showBubble.style.backgroundColor).toEqual(bubbleColor);
     thumb.changeBubbleColor(bubbleColor, true);
-    expect(thumb.showSecondBubble.style.backgroundColor).toEqual(bubbleColor);
+    expect(thumbCopyProto.showSecondBubble.style.backgroundColor).toEqual(bubbleColor);
   });
 });
