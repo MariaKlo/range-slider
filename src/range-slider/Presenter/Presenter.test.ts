@@ -43,17 +43,17 @@ describe('test Presenter', () => {
     expect(presenter.view.init).toHaveBeenCalled();
   });
 
-  test('presenter subscribed to Model', () => {
-    jest.spyOn(presenter.model, 'subscribe');
-    presenter.init();
-    expect(presenter.model.subscribe).toHaveBeenCalledWith(presenter);
-  });
+  // test('presenter subscribed to Model', () => {
+  //   jest.spyOn(presenter.model, 'subscribe');
+  //   presenter.init();
+  //   expect(presenter.model.subscribe).toHaveBeenCalledWith(presenter);
+  // });
 
-  test('presenter subscribed to View', () => {
-    jest.spyOn(presenter.view, 'subscribe');
-    presenter.init();
-    expect(presenter.view.subscribe).toHaveBeenCalledWith(presenter);
-  });
+  // test('presenter subscribed to View', () => {
+  //   jest.spyOn(presenter.view, 'subscribe');
+  //   presenter.init();
+  //   expect(presenter.view.subscribe).toHaveBeenCalledWith(presenter);
+  // });
 
   test('transfer data from model to view', () => {
     presenter.view.options = data;
