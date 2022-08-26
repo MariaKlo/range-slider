@@ -8,22 +8,74 @@ class Panel {
   // arrays of id
   rangeSliderId = ['api_first', 'api_second', 'api_third', 'api_fourth'];
 
+  panelNumberValues = ['max', 'min', 'step', 'defaultValue'];
+
+  panelSecondThumbValue = ['valueSecond'];
+
+  panelBooleanValues = ['multiThumb', 'showBubble', 'isVertical', 'showTicks'];
+
+  panelTicksValues = ['ticksValues'];
+
+  panelStringValue = ['barColor', 'thumbColor', 'bubbleColor'];
+
   state: object = {};
 
-  initPlugin: CallPlugin;
+  initPlugin!: CallPlugin;
+
+  callPlugin: CallPlugin;
 
   constructor() {
     this.init();
-    this.initPlugin = new CallPlugin();
+    this.callPlugin = new CallPlugin();
   }
 
   init() {
+    this.getDataFromPanel();
+    this.getDataFromPanelToState();
+  }
 
+  getDataFromPanelToState() {
+    for (let i = 0; i < this.rangeSliderId.length; i++) {
+      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}${i}`)).value;
+      console.log(inputValue);
+    }
   }
 
   // panel gets data
-  
+  getDataFromPanel() {
+    // for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
+    // get values from panel
+    // const getValue = (id: string) => {
+    //   document.getElementById(id);
+    // };
+    // const getBooleanValue = (id: string) => {
+    //   document.getElementById(id);
+    // };
+    // const getStringValue = (id: string) => {
+    //   document.getElementById(id);
+    // };
+    // const getArrayValue = (id: string) => {
+    //   document.getElementById(id);
+    // };
 
+    // this.initPlugin.api[i] = {
+    //   max: getValue(`${this.panelNumberValues[i]}${i}`),
+    //   min: getValue(`${this.panelNumberValues[i]}${i}`),
+    //   step: getValue(`${this.panelNumberValues[i]}${i}`),
+    //   defaultValue: getValue(`${this.panelNumberValues[i]}${i}`),
+    //   valueSecond: getValue(`${this.panelNumberValues[i]}${i}`),
+    //   isMultiThumb: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
+    //   showBubble: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
+    //   isVertical: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
+    //   showTicks: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
+    //   ticksValues: getArrayValue(`${this.panelTicksValues[i]}${i}`),
+    //   barColor: getStringValue(`${this.panelStringValue[i]}${i}`),
+    //   thumbColor: getStringValue(`${this.panelStringValue[i]}${i}`),
+    //   bubbleColor: getStringValue(`${this.panelStringValue[i]}${i}`),
+    // };
+    // }
+  }
+  
 }
 
 const panel = new Panel();
