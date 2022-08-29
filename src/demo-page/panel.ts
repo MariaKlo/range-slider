@@ -8,9 +8,7 @@ class Panel {
   // arrays of id
   rangeSliderId = ['api_first', 'api_second', 'api_third', 'api_fourth'];
 
-  panelNumberValues = ['max', 'min', 'step', 'defaultValue'];
-
-  panelSecondThumbValue = ['valueSecond'];
+  panelNumberValues = ['max', 'min', 'step', 'defaultValue', 'valueSecond'];
 
   panelBooleanValues = ['multiThumb', 'showBubble', 'isVertical', 'showTicks'];
 
@@ -30,19 +28,35 @@ class Panel {
   }
 
   init() {
-    this.getDataFromPanel();
+    this.getDataFromStateToApi();
     this.getDataFromPanelToState();
   }
 
   getDataFromPanelToState() {
-    for (let i = 0; i < this.rangeSliderId.length; i++) {
-      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}${i}`)).value;
-      console.log(inputValue);
+    const arr = [];
+    for (let i = 0; i < this.panelNumberValues.length; i++) {
+      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}0`)).value;
+      arr.push(inputValue);
     }
+    for (let i = 0; i < this.panelBooleanValues.length; i++) {
+      const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[i]}0`)).checked;
+      console.log(inputChecked);
+    }
+    console.log(arr);
+    this.state = {
+      max: arr[0],
+      min: arr[1],
+      step: arr[2],
+      defaultValue: arr[3],
+      valueSecond: arr[4],
+    };
+    console.log(this.state);
   }
 
   // panel gets data
-  getDataFromPanel() {
+  getDataFromStateToApi() {
+    // $('#api_first').sliderPlugin(this.state);
+    
     // for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
     // get values from panel
     // const getValue = (id: string) => {
