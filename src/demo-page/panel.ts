@@ -10,13 +10,13 @@ class Panel {
 
   panelNumberValues = ['max', 'min', 'step', 'defaultValue', 'valueSecond'];
 
-  panelBooleanValues = ['multiThumb', 'showBubble', 'isVertical', 'showTicks'];
+  panelBooleanValues = ['isMultiThumb', 'showBubble', 'isVertical', 'showTicks'];
 
   panelTicksValues = ['ticksValues'];
 
-  panelStringValue = ['barColor', 'thumbColor', 'bubbleColor'];
+  panelStringValues = ['barColor', 'thumbColor', 'bubbleColor'];
 
-  state: object = {};
+  state = {};
 
   initPlugin!: CallPlugin;
 
@@ -40,17 +40,48 @@ class Panel {
     }
     for (let i = 0; i < this.panelBooleanValues.length; i++) {
       const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[i]}0`)).checked;
-      console.log(inputChecked);
+      arr.push(inputChecked);
+    }
+    for (let i = 0; i < this.panelTicksValues.length; i++) {
+      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelTicksValues[i]}0`)).value;
+      arr.push(inputValue);
+    }
+    for (let i = 0; i < this.panelStringValues.length; i++) {
+      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[i]}0`)).value;
+      arr.push(inputValue);
     }
     console.log(arr);
     this.state = {
-      max: arr[0],
-      min: arr[1],
-      step: arr[2],
-      defaultValue: arr[3],
-      valueSecond: arr[4],
+      max: Number(arr[0]),
+      min: Number(arr[1]),
+      step: Number(arr[2]),
+      defaultValue: Number(arr[3]),
+      valueSecond: Number(arr[4]),
+      isMultiThumb: arr[5],
+      showBubble: arr[6],
+      isVertical: arr[7],
+      showTicks: arr[8],
+      ticksValues: arr[9],
+      barColor: arr[10],
+      thumbColor: arr[11],
+      bubbleColor: arr[12],
     };
-    console.log(this.state);
+    // console.log(this.state);
+    // $('#api_first').sliderPlugin({
+    //   max: Number(arr[0]),
+    //   min: Number(arr[1]),
+    //   step: Number(arr[2]),
+    //   defaultValue: Number(arr[3]),
+    //   valueSecond: Number(arr[4]),
+    //   isMultiThumb: Boolean(arr[5]),
+    //   showBubble: Boolean(arr[6]),
+    //   isVertical: Boolean(arr[7]),
+    //   showTicks: Boolean(arr[8]),
+    //   ticksValues: Number(String(arr[9])),
+    //   barColor: String(arr[10]),
+    //   thumbColor: String(arr[11]),
+    //   bubbleColor: String(arr[12]),
+    // });
   }
 
   // panel gets data
