@@ -8,10 +8,6 @@ import ThumbView from './subView/thumbView/thumbView';
 import { Observer, IObserverView } from '../Observer/Observer';
 import Options from '../component/Options';
 
-// interface IObserverView {
-//   updateModel(arg0: number, arg1: boolean): void
-// }
-
 class View {
   // vars for view
   private parent: HTMLElement | JQuery<HTMLElement>;
@@ -38,8 +34,6 @@ class View {
 
   options!: Options;
 
-  // private observers!: IObserverView[];
-
   observers!: IObserverView[];
 
   observer!: Observer;
@@ -56,13 +50,8 @@ class View {
 
     this.parent = parent;
     this.options = options;
-    // this.observers = [];
     this.observers = [];
   }
-
-  // subscribe = (observer: IObserverView) => {
-  //   this.observers.push(observer);
-  // };
 
   init = () => {      
     this.createWrapper();
@@ -110,7 +99,14 @@ class View {
     }
     
     if (this.options.showTicks) {
-      const ticks = this.ticks.createTicks(this.options.ticksValues, this.wrapper.offsetWidth);
+      const max: number = this.options.max;
+      const count = max / 10;
+      const arr: number[] = [];
+      for (let i = 0; i <= max; i += count) {
+        arr.push(i);
+      }
+
+      const ticks = this.ticks.createTicks(arr, this.wrapper.offsetWidth);
       const { ticksElement } = ticks;
       const ticksValues = ticks.values;
 

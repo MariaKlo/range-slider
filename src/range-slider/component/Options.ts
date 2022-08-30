@@ -9,7 +9,6 @@ export default interface Options {
   showBubble: boolean;
   isVertical: boolean;
   showTicks: boolean;
-  ticksValues: number[];
   barColor: string;
   thumbColor: string;
   bubbleColor: string;

@@ -1,5 +1,5 @@
 class TicksView {
-  createTicks = (ticksValues: Array<number>, width: number) => {
+  createTicks = (ticksValues: number[], width: number) => {
     const ticksElement = document.createElement('div');
     ticksElement.classList.add('range-slider__ticks');
 

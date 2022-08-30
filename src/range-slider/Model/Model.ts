@@ -56,7 +56,6 @@ class Model {
     this.barColor = options.barColor || 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)';
     this.thumbColor = options.thumbColor || 'linear-gradient(180deg,  #cf6f7f 0%, #ea6666 100%)';
     this.bubbleColor = options.bubbleColor || '#eac966';
-    // this.observers = [];
     this.observers = [];
     this.observer = new Observer();
 
@@ -70,7 +69,6 @@ class Model {
       showBubble: this.showBubble,
       isVertical: this.isVertical,
       showTicks: this.showTicks,
-      ticksValues: this.getTicks(),
       barColor: this.barColor,
       thumbColor: this.thumbColor,
       bubbleColor: this.bubbleColor,
@@ -82,10 +80,6 @@ class Model {
     this.observer.subscribeInModel(this.observerInModel);
     this.updateObservers();
   }
-
-  // subscribe(observer: IObserverModel) {
-  //   this.observers.push(observer);
-  // }
     
   update(newVal: number, isDefault: boolean) {
     if (this.isMultiThumb) {
@@ -136,7 +130,6 @@ class Model {
       this.limitStep(newValue, isDefault);
     } else {
       this.updateObservers();
-      // this.observer.updateObserversInModel();
     }
   }
     
@@ -149,7 +142,6 @@ class Model {
         const value: number = this.calcNearestMinValueConsideringStep(newValue);
         this.setDefaultValue(value);
         this.updateObservers();
-        // this.observer.updateObserversInModel();
       }
     } else if (isInStep) {
       this.setSecondValue(newValue);
@@ -157,7 +149,6 @@ class Model {
       const value: number = this.calcNearestMinValueConsideringStep(newValue);
       this.setSecondValue(value);
       this.updateObservers();
-      // this.observer.updateObserversInModel();
     }
   }
 }

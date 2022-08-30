@@ -12,8 +12,6 @@ class Panel {
 
   panelBooleanValues = ['isMultiThumb', 'showBubble', 'isVertical', 'showTicks'];
 
-  panelTicksValues = ['ticksValues'];
-
   panelStringValues = ['barColor', 'thumbColor', 'bubbleColor'];
 
   state = {};
@@ -42,46 +40,42 @@ class Panel {
       const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[i]}0`)).checked;
       arr.push(inputChecked);
     }
-    for (let i = 0; i < this.panelTicksValues.length; i++) {
-      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelTicksValues[i]}0`)).value;
-      arr.push(inputValue);
-    }
     for (let i = 0; i < this.panelStringValues.length; i++) {
       const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[i]}0`)).value;
       arr.push(inputValue);
     }
     console.log(arr);
-    this.state = {
-      max: Number(arr[0]),
-      min: Number(arr[1]),
-      step: Number(arr[2]),
-      defaultValue: Number(arr[3]),
-      valueSecond: Number(arr[4]),
-      isMultiThumb: arr[5],
-      showBubble: arr[6],
-      isVertical: arr[7],
-      showTicks: arr[8],
-      ticksValues: arr[9],
-      barColor: arr[10],
-      thumbColor: arr[11],
-      bubbleColor: arr[12],
-    };
-    // console.log(this.state);
-    // $('#api_first').sliderPlugin({
+    // this.state = {
     //   max: Number(arr[0]),
     //   min: Number(arr[1]),
     //   step: Number(arr[2]),
     //   defaultValue: Number(arr[3]),
     //   valueSecond: Number(arr[4]),
-    //   isMultiThumb: Boolean(arr[5]),
-    //   showBubble: Boolean(arr[6]),
-    //   isVertical: Boolean(arr[7]),
-    //   showTicks: Boolean(arr[8]),
-    //   ticksValues: Number(String(arr[9])),
-    //   barColor: String(arr[10]),
-    //   thumbColor: String(arr[11]),
-    //   bubbleColor: String(arr[12]),
-    // });
+    //   isMultiThumb: arr[5],
+    //   showBubble: arr[6],
+    //   isVertical: arr[7],
+    //   showTicks: arr[8],
+    //   barColor: arr[9],
+    //   thumbColor: arr[10],
+    //   bubbleColor: arr[11],
+    // };
+    // console.log(this.state);
+    // const elem = (<HTMLDivElement>document.querySelector('.range-slider:nth-child(2)'));
+    // $('#api_first').removeChild(elem);
+    $('#api_first').sliderPlugin({
+      max: Number(arr[0]),
+      min: Number(arr[1]),
+      step: Number(arr[2]),
+      defaultValue: Number(arr[3]),
+      valueSecond: Number(arr[4]),
+      isMultiThumb: Boolean(arr[5]),
+      showBubble: Boolean(arr[6]),
+      isVertical: Boolean(arr[7]),
+      showTicks: Boolean(arr[8]),
+      barColor: String(arr[9]),
+      thumbColor: String(arr[10]),
+      bubbleColor: String(arr[11]),
+    });
   }
 
   // panel gets data

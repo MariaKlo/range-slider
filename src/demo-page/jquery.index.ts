@@ -25,7 +25,6 @@ declare global {
     showBubble: boolean;
     isVertical: boolean;
     showTicks: boolean;
-    ticksValues: number[];
     barColor: string;
     thumbColor: string;
     bubbleColor: string;
@@ -45,7 +44,6 @@ declare global {
         showBubble: settings.showBubble,
         isVertical: settings.isVertical,
         showTicks: settings.showTicks,
-        ticksValues: settings.ticksValues,
         barColor: settings.barColor,
         thumbColor: settings.thumbColor,
         bubbleColor: settings.bubbleColor,
