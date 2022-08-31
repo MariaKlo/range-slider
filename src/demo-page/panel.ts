@@ -31,33 +31,47 @@ class Panel {
 
   getDataFromPanelToApi() {
     const arr = [];
-    for (let i = 0; i < this.panelNumberValues.length; i++) {
-      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}0`)).value;
-      arr.push(inputValue);
+    for (let i = 0; i < this.rangeSliderId.length; i++) {
+      for (let j = 0; j < this.panelNumberValues.length; j++) {
+        const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[j]}${i}`)).value;
+        arr.push(inputValue);
+      }
     }
-    for (let i = 0; i < this.panelBooleanValues.length; i++) {
-      const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[i]}0`)).checked;
-      arr.push(inputChecked);
+
+    for (let i = 0; i < this.rangeSliderId.length; i++) {
+      for (let j = 0; j < this.panelBooleanValues.length; j++) {
+        const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[j]}${i}`)).checked;
+        arr.push(inputChecked);
+      }
     }
-    for (let i = 0; i < this.panelStringValues.length; i++) {
-      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[i]}0`)).value;
-      arr.push(inputValue);
+
+    for (let i = 0; i < this.rangeSliderId.length; i++) {
+      for (let j = 0; j < this.panelStringValues.length; j++) {
+        const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[j]}${i}`)).value;
+        arr.push(inputValue);
+      }
     }
+
+    for (let i = 0; i < this.rangeSliderId.length; i++) {
+      $(`#${this.rangeSliderId[i]}`).sliderPlugin({
+        max: Number(arr[0]),
+        min: Number(arr[1]),
+        step: Number(arr[2]),
+        defaultValue: Number(arr[3]),
+        valueSecond: Number(arr[4]),
+        isMultiThumb: Boolean(arr[5]),
+        showBubble: Boolean(arr[6]),
+        isVertical: Boolean(arr[7]),
+        showTicks: Boolean(arr[8]),
+        barColor: String(arr[9]),
+        thumbColor: String(arr[10]),
+        bubbleColor: String(arr[11]),
+      });
+    }
+    
     console.log(arr);
-    // $('#api_first').sliderPlugin({
-    //   max: Number(arr[0]),
-    //   min: Number(arr[1]),
-    //   step: Number(arr[2]),
-    //   defaultValue: Number(arr[3]),
-    //   valueSecond: Number(arr[4]),
-    //   isMultiThumb: Boolean(arr[5]),
-    //   showBubble: Boolean(arr[6]),
-    //   isVertical: Boolean(arr[7]),
-    //   showTicks: Boolean(arr[8]),
-    //   barColor: String(arr[9]),
-    //   thumbColor: String(arr[10]),
-    //   bubbleColor: String(arr[11]),
-    // });
+
+    
   }
 }
 
