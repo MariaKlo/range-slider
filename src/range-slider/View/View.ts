@@ -14,6 +14,8 @@ class View {
 
   private wrapper!: HTMLDivElement;
 
+  private warning!: HTMLElement;
+
   private track!: HTMLDivElement;
 
   protected input!: HTMLInputElement;
@@ -116,6 +118,7 @@ class View {
         ticksValues[i].element.addEventListener('click', this.onClick(ticksValues[i].value));
       }
     }
+    this.showWarnings();
   };
 
   private createWrapper = () => {
@@ -216,6 +219,18 @@ class View {
   private onClick = (newValue: number) => () => {
     this.update(newValue, true);
   };
+
+  private showWarnings() {
+    if (this.options.min >= this.options.max) {
+      this.warning = document.createElement('p');
+      this.warning.classList.add('range-slider__warning');
+      this.warning.innerText = 'Your min value is bigger than max value or equal to it. Please, change your values';
+      this.wrapper.append(this.warning);
+      if (this.options.isVertical) {
+        this.warning.classList.add('range-slider__warning_vertical');
+      }
+    }
+  }
 }
 
 export default View;

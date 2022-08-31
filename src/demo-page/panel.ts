@@ -26,11 +26,10 @@ class Panel {
   }
 
   init() {
-    this.getDataFromStateToApi();
-    this.getDataFromPanelToState();
+    this.getDataFromPanelToApi();
   }
 
-  getDataFromPanelToState() {
+  getDataFromPanelToApi() {
     const arr = [];
     for (let i = 0; i < this.panelNumberValues.length; i++) {
       const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}0`)).value;
@@ -45,76 +44,21 @@ class Panel {
       arr.push(inputValue);
     }
     console.log(arr);
-    // this.state = {
+    // $('#api_first').sliderPlugin({
     //   max: Number(arr[0]),
     //   min: Number(arr[1]),
     //   step: Number(arr[2]),
     //   defaultValue: Number(arr[3]),
     //   valueSecond: Number(arr[4]),
-    //   isMultiThumb: arr[5],
-    //   showBubble: arr[6],
-    //   isVertical: arr[7],
-    //   showTicks: arr[8],
-    //   barColor: arr[9],
-    //   thumbColor: arr[10],
-    //   bubbleColor: arr[11],
-    // };
-    // console.log(this.state);
-    // const elem = (<HTMLDivElement>document.querySelector('.range-slider:nth-child(2)'));
-    // $('#api_first').removeChild(elem);
-    $('#api_first').sliderPlugin({
-      max: Number(arr[0]),
-      min: Number(arr[1]),
-      step: Number(arr[2]),
-      defaultValue: Number(arr[3]),
-      valueSecond: Number(arr[4]),
-      isMultiThumb: Boolean(arr[5]),
-      showBubble: Boolean(arr[6]),
-      isVertical: Boolean(arr[7]),
-      showTicks: Boolean(arr[8]),
-      barColor: String(arr[9]),
-      thumbColor: String(arr[10]),
-      bubbleColor: String(arr[11]),
-    });
+    //   isMultiThumb: Boolean(arr[5]),
+    //   showBubble: Boolean(arr[6]),
+    //   isVertical: Boolean(arr[7]),
+    //   showTicks: Boolean(arr[8]),
+    //   barColor: String(arr[9]),
+    //   thumbColor: String(arr[10]),
+    //   bubbleColor: String(arr[11]),
+    // });
   }
-
-  // panel gets data
-  getDataFromStateToApi() {
-    // $('#api_first').sliderPlugin(this.state);
-    
-    // for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
-    // get values from panel
-    // const getValue = (id: string) => {
-    //   document.getElementById(id);
-    // };
-    // const getBooleanValue = (id: string) => {
-    //   document.getElementById(id);
-    // };
-    // const getStringValue = (id: string) => {
-    //   document.getElementById(id);
-    // };
-    // const getArrayValue = (id: string) => {
-    //   document.getElementById(id);
-    // };
-
-    // this.initPlugin.api[i] = {
-    //   max: getValue(`${this.panelNumberValues[i]}${i}`),
-    //   min: getValue(`${this.panelNumberValues[i]}${i}`),
-    //   step: getValue(`${this.panelNumberValues[i]}${i}`),
-    //   defaultValue: getValue(`${this.panelNumberValues[i]}${i}`),
-    //   valueSecond: getValue(`${this.panelNumberValues[i]}${i}`),
-    //   isMultiThumb: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
-    //   showBubble: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
-    //   isVertical: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
-    //   showTicks: getBooleanValue(`${this.panelBooleanValues[i]}${i}`),
-    //   ticksValues: getArrayValue(`${this.panelTicksValues[i]}${i}`),
-    //   barColor: getStringValue(`${this.panelStringValue[i]}${i}`),
-    //   thumbColor: getStringValue(`${this.panelStringValue[i]}${i}`),
-    //   bubbleColor: getStringValue(`${this.panelStringValue[i]}${i}`),
-    // };
-    // }
-  }
-  
 }
 
 const panel = new Panel();

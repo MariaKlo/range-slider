@@ -15,8 +15,6 @@ class Presenter {
   init() {
     this.view.init();
     this.model.init();
-    // this.model.subscribe(this);
-    // this.view.subscribe(this);
     this.view.options = this.model.optionsForView;
   }
 

@@ -1,10 +1,6 @@
 import Options from '../component/Options';
 import { Observer, IObserverModel } from '../Observer/Observer';
 
-// interface IObserverModel {
-//   updateView(): void
-// }
-
 class Model {
   optionsForView!: Options;
 
@@ -33,8 +29,6 @@ class Model {
   private thumbColor!: string;
 
   private bubbleColor!: string;
-
-  // private observers!: IObserverModel[];
 
   observers!: IObserverModel[];
 
@@ -84,8 +78,10 @@ class Model {
   update(newVal: number, isDefault: boolean) {
     if (this.isMultiThumb) {
       this.limitToggle(newVal, isDefault);
+
     } else {
       this.limitStep(newVal, isDefault);
+
     }
   }
 
