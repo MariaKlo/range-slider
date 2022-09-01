@@ -14,7 +14,7 @@ class Panel {
 
   panelStringValues = ['barColor', 'thumbColor', 'bubbleColor'];
 
-  state = {};
+  state: (number | string | boolean)[] = [];
 
   initPlugin!: CallPlugin;
 
@@ -27,51 +27,68 @@ class Panel {
 
   init() {
     this.getDataFromPanelToApi();
+    this.spyOnSlider();
+  }
+
+  // when slider changes default and second values, panel shows changes
+  spyOnSlider() {
+    const slider = <HTMLDivElement>document.querySelector('.range-slider');
+    const setSliderValue = () => {
+      const newDefaultValue = slider.getAttribute('default-value');
+      if (newDefaultValue) {
+        const element = <HTMLInputElement>document.getElementById('defaultValue0');
+        element.value = newDefaultValue;
+        this.state[3] = newDefaultValue;
+      }
+      const newDefaultLeftValue = slider.getAttribute('first-value');
+      if (newDefaultLeftValue) {
+        const element = <HTMLInputElement>document.getElementById('defaultValue0');
+        element.value = newDefaultLeftValue;
+        this.state[3] = newDefaultLeftValue;
+      }
+      const newRightValue = slider.getAttribute('second-value');
+      if (newRightValue) {
+        const element = <HTMLInputElement>document.getElementById('valueSecond0');
+        element.value = newRightValue;
+        this.state[4] = newRightValue;
+      }
+    };
+    slider.addEventListener('mousemove', setSliderValue);
+    slider.addEventListener('click', setSliderValue);
   }
 
   getDataFromPanelToApi() {
-    const arr = [];
-    for (let i = 0; i < this.rangeSliderId.length; i++) {
-      for (let j = 0; j < this.panelNumberValues.length; j++) {
-        const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[j]}${i}`)).value;
-        arr.push(inputValue);
-      }
+    for (let i = 0; i < this.panelNumberValues.length; i++) {
+      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}0`)).value;
+      this.state.push(inputValue);
     }
 
-    for (let i = 0; i < this.rangeSliderId.length; i++) {
-      for (let j = 0; j < this.panelBooleanValues.length; j++) {
-        const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[j]}${i}`)).checked;
-        arr.push(inputChecked);
-      }
+    for (let i = 0; i < this.panelBooleanValues.length; i++) {
+      const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[i]}0`)).checked;
+      this.state.push(inputChecked);
     }
 
-    for (let i = 0; i < this.rangeSliderId.length; i++) {
-      for (let j = 0; j < this.panelStringValues.length; j++) {
-        const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[j]}${i}`)).value;
-        arr.push(inputValue);
-      }
+    for (let i = 0; i < this.panelStringValues.length; i++) {
+      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[i]}0`)).value;
+      this.state.push(inputValue);
     }
 
-    for (let i = 0; i < this.rangeSliderId.length; i++) {
-      $(`#${this.rangeSliderId[i]}`).sliderPlugin({
-        max: Number(arr[0]),
-        min: Number(arr[1]),
-        step: Number(arr[2]),
-        defaultValue: Number(arr[3]),
-        valueSecond: Number(arr[4]),
-        isMultiThumb: Boolean(arr[5]),
-        showBubble: Boolean(arr[6]),
-        isVertical: Boolean(arr[7]),
-        showTicks: Boolean(arr[8]),
-        barColor: String(arr[9]),
-        thumbColor: String(arr[10]),
-        bubbleColor: String(arr[11]),
-      });
-    }
-    
-    console.log(arr);
+    console.log(this.state);
 
-    
+    $('#api_first').sliderPlugin({
+      max: Number(this.state[0]),
+      min: Number(this.state[1]),
+      step: Number(this.state[2]),
+      defaultValue: Number(this.state[3]),
+      valueSecond: Number(this.state[4]),
+      isMultiThumb: Boolean(this.state[5]),
+      showBubble: Boolean(this.state[6]),
+      isVertical: Boolean(this.state[7]),
+      showTicks: Boolean(this.state[8]),
+      barColor: String(this.state[9]),
+      thumbColor: String(this.state[10]),
+      bubbleColor: String(this.state[11]),
+    });
   }
 }
 
