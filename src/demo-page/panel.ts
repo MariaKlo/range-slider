@@ -4,6 +4,21 @@
 import CallPlugin from './callPlugin';
 import './jquery.index';
 
+interface State {
+  max: number;
+  min: number;
+  step: number;
+  defaultValue: number;
+  valueSecond: number;
+  isMultiThumb: boolean;
+  showBubble: boolean;
+  isVertical: boolean;
+  showTicks: boolean;
+  barColor: string;
+  thumbColor: string;
+  bubbleColor: string;
+}
+
 class Panel {
   // arrays of id
   rangeSliderId = ['api_first', 'api_second', 'api_third', 'api_fourth'];
@@ -14,7 +29,20 @@ class Panel {
 
   panelStringValues = ['barColor', 'thumbColor', 'bubbleColor'];
 
-  state: (number | string | boolean)[] = [];
+  state: State = {
+    max: 0,
+    min: 0,
+    step: 0,
+    defaultValue: 0,
+    valueSecond: 0,
+    isMultiThumb: false,
+    showBubble: false,
+    isVertical: false,
+    showTicks: false,
+    barColor: '',
+    thumbColor: '',
+    bubbleColor: '',
+  };
 
   initPlugin!: CallPlugin;
 
@@ -26,76 +54,180 @@ class Panel {
   }
 
   init() {
-    this.getDataFromPanelToApi();
-    this.spyOnSlider();
+    // this.getDataFromPanelToApi();
+    // this.spyOnSlider();
   }
 
+  setState(name: string, options: State): void {
+    this.state[name] = options;
+  }
+
+  // state gets data from panel
+  getDataFromPanel() {
+    for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
+      // get values from panel
+      const getValue = (id: string): number => {
+        const elem = <HTMLInputElement>document.getElementById(id);
+        return Number(elem.value);
+      };
+      const getBooleanValue = (id: string): boolean => {
+        const elem = <HTMLInputElement>document.getElementById(id);
+        return Boolean(elem.checked);
+      };
+      const getStringValue = (id: string): string => {
+        const elem = <HTMLInputElement>document.getElementById(id);
+        return String(elem.value);
+      };
+  
+      this.setState(this.rangeSliderId[i - 1], {
+        max: getValue(`max${i}`),
+        min: getValue(`min${i}`),
+        step: getValue(`step${i}`),
+        defaultValue: getValue(`defaultValue${i}`),
+        valueSecond: getValue(`valueSecond${i}`),
+        isMultiThumb: getBooleanValue(`isMultiThumb${i}`),
+        showBubble: getBooleanValue(`showBubble${i}`),
+        isVertical: getBooleanValue(`isVertical${i}`),
+        showTicks: getBooleanValue(`showTicks${i}`),
+        barColor: getStringValue(`barColor${i}`),
+        thumbColor: getStringValue(`thumbColor${i}`),
+        bubbleColor: getStringValue(`bubbleColor${i}`),
+      });
+    }
+  }
+  
+
   // when slider changes default and second values, panel shows changes
-  spyOnSlider() {
-    const slider = <HTMLDivElement>document.querySelector('.range-slider');
+  spyOnSlider(item: string, index: number) {
+    const slider = <HTMLDivElement>document.querySelector(item).firstElementChild;
     const setSliderValue = () => {
       const newDefaultValue = slider.getAttribute('default-value');
       if (newDefaultValue) {
-        const element = <HTMLInputElement>document.getElementById('defaultValue0');
+        const element = <HTMLInputElement>document.getElementById(`defaultValue${index}`);
         element.value = newDefaultValue;
-        this.state[3] = newDefaultValue;
+        this.state[this.rangeSliderId[index - 1]].defaultValue = newDefaultValue;
       }
       const newDefaultLeftValue = slider.getAttribute('first-value');
       if (newDefaultLeftValue) {
-        const element = <HTMLInputElement>document.getElementById('defaultValue0');
+        const element = <HTMLInputElement>document.getElementById(`defaultValue${index}`);
         element.value = newDefaultLeftValue;
-        this.state[3] = newDefaultLeftValue;
+        this.state[this.rangeSliderId[index - 1]].defaultValue = newDefaultLeftValue;
       }
       const newRightValue = slider.getAttribute('second-value');
       if (newRightValue) {
-        const element = <HTMLInputElement>document.getElementById('valueSecond0');
+        const element = <HTMLInputElement>document.getElementById(`valueSecond${index}`);
         element.value = newRightValue;
-        this.state[4] = newRightValue;
+        this.state[this.rangeSliderId[index - 1]].valueSecond = newRightValue;
       }
     };
     slider.addEventListener('mousemove', setSliderValue);
     slider.addEventListener('click', setSliderValue);
   }
 
-  getDataFromPanelToApi() {
-    for (let i = 0; i < this.panelNumberValues.length; i++) {
-      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}0`)).value;
-      this.state.push(inputValue);
+  renderAnotherSlider(id: string, panel: State) {
+    // render slider with info from panel
+    // delete duplicates of slider when panel is used
+    const elem = <HTMLDivElement>document.getElementById(id);
+    if (elem.firstElementChild) {
+      elem.removeChild(elem.firstElementChild);
     }
-
-    for (let i = 0; i < this.panelBooleanValues.length; i++) {
-      const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[i]}0`)).checked;
-      this.state.push(inputChecked);
-    }
-
-    for (let i = 0; i < this.panelStringValues.length; i++) {
-      const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[i]}0`)).value;
-      this.state.push(inputValue);
-    }
-
-    console.log(this.state);
-
-    $('#api_first').sliderPlugin({
-      max: Number(this.state[0]),
-      min: Number(this.state[1]),
-      step: Number(this.state[2]),
-      defaultValue: Number(this.state[3]),
-      valueSecond: Number(this.state[4]),
-      isMultiThumb: Boolean(this.state[5]),
-      showBubble: Boolean(this.state[6]),
-      isVertical: Boolean(this.state[7]),
-      showTicks: Boolean(this.state[8]),
-      barColor: String(this.state[9]),
-      thumbColor: String(this.state[10]),
-      bubbleColor: String(this.state[11]),
+    $(`#${id}`).sliderPlugin({
+      max: panel.max,
+      min: panel.min,
+      step: panel.step,
+      defaultValue: panel.defaultValue,
+      valueSecond: panel.valueSecond,
+      isMultiThumb: panel.isMultiThumb,
+      showBubble: panel.showBubble,
+      isVertical: panel.isVertical,
+      showTicks: panel.showTicks,
+      barColor: panel.barColor,
+      thumbColor: panel.thumbColor,
+      bubbleColor: panel.bubbleColor,
     });
   }
+
+  // slider gets data from state
+  getDataFromState() {
+    for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
+      // change number data
+      this.panelNumberValues.forEach((item) => {
+        const element = <HTMLInputElement>document.getElementById(item + i);
+        const changeNumberValue = () => {
+          this.state[this.rangeSliderId[i - 1]][item] = element.value;
+          this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
+          this.spyOnSlider(this.rangeSliderId[i - 1], i);
+        };
+        element.addEventListener('change', changeNumberValue);
+      });
+      // change boolean data
+      this.panelBooleanValues.forEach((item) => {
+        const element = <HTMLInputElement>document.getElementById(item + i);
+        const changeBooleanValue = () => {
+          this.state[this.rangeSliderId[i - 1]][item] = element.checked;
+          this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
+          this.spyOnSlider(this.rangeSliderId[i - 1], i);
+        };
+        element.addEventListener('change', changeBooleanValue);
+      });
+      // change string data
+      this.panelStringValues.forEach((item) => {
+        const element = <HTMLInputElement>document.getElementById(item + i);
+        const changeStringValue = () => {
+          this.state[this.rangeSliderId[i - 1]][item] = element.value;
+          this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
+          this.spyOnSlider(this.rangeSliderId[i - 1], i);
+        };
+        element.addEventListener('change', changeStringValue);
+      });
+      // render slider with data from panel
+      this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
+      this.spyOnSlider(this.rangeSliderId[i - 1], i);
+    }
+  }
+
+
+
+
+  // getDataFromPanelToApi() {
+  //   for (let i = 0; i < this.panelNumberValues.length; i++) {
+  //     const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelNumberValues[i]}0`)).value;
+  //     this.state.push(inputValue);
+  //   }
+
+  //   for (let i = 0; i < this.panelBooleanValues.length; i++) {
+  //     const inputChecked = (<HTMLInputElement>document.getElementById(`${this.panelBooleanValues[i]}0`)).checked;
+  //     this.state.push(inputChecked);
+  //   }
+
+  //   for (let i = 0; i < this.panelStringValues.length; i++) {
+  //     const inputValue = (<HTMLInputElement>document.getElementById(`${this.panelStringValues[i]}0`)).value;
+  //     this.state.push(inputValue);
+  //   }
+
+  //   console.log(this.state);
+
+  //   $('#api_first').sliderPlugin({
+  //     max: Number(this.state[0]),
+  //     min: Number(this.state[1]),
+  //     step: Number(this.state[2]),
+  //     defaultValue: Number(this.state[3]),
+  //     valueSecond: Number(this.state[4]),
+  //     isMultiThumb: Boolean(this.state[5]),
+  //     showBubble: Boolean(this.state[6]),
+  //     isVertical: Boolean(this.state[7]),
+  //     showTicks: Boolean(this.state[8]),
+  //     barColor: String(this.state[9]),
+  //     thumbColor: String(this.state[10]),
+  //     bubbleColor: String(this.state[11]),
+  //   });
+  // }
 }
 
 const panel = new Panel();
 export default panel;
 
-// const setState = (name: string, options: object): void => {
+// const setState = (name: string, options: string | boolean | number): void => {
 //   state[name] = options;
 // };
 
@@ -196,17 +328,6 @@ export default panel;
 //       spyOnSlider(rangeSliderId[i - 1], i);
 //     };
 //     element.addEventListener('change', changeBooleanValue);
-//   });
-//   // change array data
-//   rangeSliderArrId.forEach((item) => {
-//     const element = document.getElementById(item + i);
-//     const changeArrValue = () => {
-//       const string = String(element.value).split(/[, ]+/);
-//       state[rangeSliderId[i - 1]][item] = string;
-//       renderRangeSlider(rangeSliderId[i - 1], state[rangeSliderId[i - 1]]);
-//       spyOnSlider(rangeSliderId[i - 1], i);
-//     };
-//     element.addEventListener('change', changeArrValue);
 //   });
 //   // change string data
 //   rangeSliderStringId.forEach((item) => {
