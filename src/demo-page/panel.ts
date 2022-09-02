@@ -4,19 +4,30 @@
 import CallPlugin from './callPlugin';
 import './jquery.index';
 
-interface State {
-  max: number;
-  min: number;
-  step: number;
-  defaultValue: number;
-  valueSecond: number;
-  isMultiThumb: boolean;
-  showBubble: boolean;
-  isVertical: boolean;
-  showTicks: boolean;
-  barColor: string;
-  thumbColor: string;
-  bubbleColor: string;
+class State {
+  max!: number;
+
+  min!: number;
+  
+  step!: number;
+
+  defaultValue!: number;
+
+  valueSecond!: number;
+
+  isMultiThumb!: boolean;
+
+  showBubble!: boolean;
+
+  isVertical!: boolean;
+
+  showTicks!: boolean;
+
+  barColor!: string;
+
+  thumbColor!: string;
+
+  bubbleColor!: string;
 }
 
 class Panel {
@@ -29,20 +40,9 @@ class Panel {
 
   panelStringValues = ['barColor', 'thumbColor', 'bubbleColor'];
 
-  state: State = {
-    max: 0,
-    min: 0,
-    step: 0,
-    defaultValue: 0,
-    valueSecond: 0,
-    isMultiThumb: false,
-    showBubble: false,
-    isVertical: false,
-    showTicks: false,
-    barColor: '',
-    thumbColor: '',
-    bubbleColor: '',
-  };
+  states: State = new State;
+
+  state = {};
 
   initPlugin!: CallPlugin;
 
@@ -59,7 +59,11 @@ class Panel {
   }
 
   setState(name: string, options: State): void {
-    this.state[name] = options;
+    // this.state[name] = options;
+    const nameForState = this.state[name as keyof State];
+    this.state = {
+      [nameForState]: options,
+    };
   }
 
   // state gets data from panel
@@ -99,7 +103,8 @@ class Panel {
 
   // when slider changes default and second values, panel shows changes
   spyOnSlider(item: string, index: number) {
-    const slider = <HTMLDivElement>document.querySelector(item).firstElementChild;
+    const api = <HTMLDivElement>document.querySelector(item);
+    const slider = <HTMLDivElement>api.firstElementChild;
     const setSliderValue = () => {
       const newDefaultValue = slider.getAttribute('default-value');
       if (newDefaultValue) {
