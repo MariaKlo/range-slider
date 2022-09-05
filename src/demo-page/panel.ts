@@ -4,30 +4,30 @@
 import CallPlugin from './callPlugin';
 import './jquery.index';
 
-class State {
-  max!: number;
+interface State {
+  max: number;
 
-  min!: number;
+  min: number;
   
-  step!: number;
+  step: number;
 
-  defaultValue!: number;
+  defaultValue: number;
 
-  valueSecond!: number;
+  valueSecond: number;
 
-  isMultiThumb!: boolean;
+  isMultiThumb: boolean;
 
-  showBubble!: boolean;
+  showBubble: boolean;
 
-  isVertical!: boolean;
+  isVertical: boolean;
 
-  showTicks!: boolean;
+  showTicks: boolean;
 
-  barColor!: string;
+  barColor: string;
 
-  thumbColor!: string;
+  thumbColor: string;
 
-  bubbleColor!: string;
+  bubbleColor: string;
 }
 
 class Panel {
@@ -40,9 +40,9 @@ class Panel {
 
   panelStringValues = ['barColor', 'thumbColor', 'bubbleColor'];
 
-  states: State = new State;
-
-  state = {};
+  state = {
+    [name as unknown as string]: <State>{},
+  };
 
   initPlugin!: CallPlugin;
 
@@ -55,14 +55,14 @@ class Panel {
 
   init() {
     // this.getDataFromPanelToApi();
-    // this.spyOnSlider();
+    this.getDataFromPanel();
+    this.getDataFromState();
+    // this.renderAnotherSlider();
   }
 
   setState(name: string, options: State): void {
-    // this.state[name] = options;
-    const nameForState = this.state[name as keyof State];
     this.state = {
-      [nameForState]: options,
+      [name]: options,
     };
   }
 
@@ -110,19 +110,19 @@ class Panel {
       if (newDefaultValue) {
         const element = <HTMLInputElement>document.getElementById(`defaultValue${index}`);
         element.value = newDefaultValue;
-        this.state[this.rangeSliderId[index - 1]].defaultValue = newDefaultValue;
+        this.state[this.rangeSliderId[index - 1]].defaultValue = Number(newDefaultValue);
       }
       const newDefaultLeftValue = slider.getAttribute('first-value');
       if (newDefaultLeftValue) {
         const element = <HTMLInputElement>document.getElementById(`defaultValue${index}`);
         element.value = newDefaultLeftValue;
-        this.state[this.rangeSliderId[index - 1]].defaultValue = newDefaultLeftValue;
+        this.state[this.rangeSliderId[index - 1]].defaultValue = Number(newDefaultLeftValue);
       }
       const newRightValue = slider.getAttribute('second-value');
       if (newRightValue) {
         const element = <HTMLInputElement>document.getElementById(`valueSecond${index}`);
         element.value = newRightValue;
-        this.state[this.rangeSliderId[index - 1]].valueSecond = newRightValue;
+        this.state[this.rangeSliderId[index - 1]].valueSecond = Number(newRightValue);
       }
     };
     slider.addEventListener('mousemove', setSliderValue);
@@ -156,10 +156,12 @@ class Panel {
   getDataFromState() {
     for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
       // change number data
-      this.panelNumberValues.forEach((item) => {
+
+      /**  Collect item into array and replace [item] on 164 line */
+      this.panelNumberValues.forEach((item: string) => {
         const element = <HTMLInputElement>document.getElementById(item + i);
         const changeNumberValue = () => {
-          this.state[this.rangeSliderId[i - 1]][item] = element.value;
+          this.state[this.rangeSliderId[i - 1]][item] = Number(element.value);
           this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
           this.spyOnSlider(this.rangeSliderId[i - 1], i);
         };
