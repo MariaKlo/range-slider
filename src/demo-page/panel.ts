@@ -40,6 +40,8 @@ class Panel {
 
   panelStringValues = ['barColor', 'thumbColor', 'bubbleColor'];
 
+  obj!: State;
+
   state = {
     [name as unknown as string]: <State>{},
   };
@@ -54,10 +56,13 @@ class Panel {
   }
 
   init() {
-    // this.getDataFromPanelToApi();
+    for (let i = 0; i < this.rangeSliderId.length; i++) {
+      this.spyOnSlider(this.rangeSliderId[i], i);
+      this.renderAnotherSlider(this.rangeSliderId[i], this.obj);
+      this.setState(this.rangeSliderId[i], this.obj);
+    }
     this.getDataFromPanel();
     this.getDataFromState();
-    // this.renderAnotherSlider();
   }
 
   setState(name: string, options: State): void {
@@ -103,7 +108,7 @@ class Panel {
 
   // when slider changes default and second values, panel shows changes
   spyOnSlider(item: string, index: number) {
-    const api = <HTMLDivElement>document.querySelector(item);
+    const api = <HTMLDivElement>document.getElementById(item);
     const slider = <HTMLDivElement>api.firstElementChild;
     const setSliderValue = () => {
       const newDefaultValue = slider.getAttribute('default-value');
@@ -156,12 +161,17 @@ class Panel {
   getDataFromState() {
     for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
       // change number data
-
-      /**  Collect item into array and replace [item] on 164 line */
       this.panelNumberValues.forEach((item: string) => {
+        const valuesOfState = [
+          this.state[this.rangeSliderId[i - 1]].max, 
+          this.state[this.rangeSliderId[i - 1]].min, 
+          this.state[this.rangeSliderId[i - 1]].step, 
+          this.state[this.rangeSliderId[i - 1]].defaultValue, 
+          this.state[this.rangeSliderId[i - 1]].valueSecond,
+        ];
         const element = <HTMLInputElement>document.getElementById(item + i);
         const changeNumberValue = () => {
-          this.state[this.rangeSliderId[i - 1]][item] = Number(element.value);
+          valuesOfState[i] = Number(element.value);
           this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
           this.spyOnSlider(this.rangeSliderId[i - 1], i);
         };
@@ -169,9 +179,15 @@ class Panel {
       });
       // change boolean data
       this.panelBooleanValues.forEach((item) => {
+        const valuesOfState = [
+          this.state[this.rangeSliderId[i - 1]].isMultiThumb,
+          this.state[this.rangeSliderId[i - 1]].showBubble,
+          this.state[this.rangeSliderId[i - 1]].isVertical,
+          this.state[this.rangeSliderId[i - 1]].showTicks,
+        ];
         const element = <HTMLInputElement>document.getElementById(item + i);
         const changeBooleanValue = () => {
-          this.state[this.rangeSliderId[i - 1]][item] = element.checked;
+          valuesOfState[i] = element.checked;
           this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
           this.spyOnSlider(this.rangeSliderId[i - 1], i);
         };
@@ -179,9 +195,14 @@ class Panel {
       });
       // change string data
       this.panelStringValues.forEach((item) => {
+        const valuesOfState = [
+          this.state[this.rangeSliderId[i - 1]].barColor,
+          this.state[this.rangeSliderId[i - 1]].thumbColor,
+          this.state[this.rangeSliderId[i - 1]].bubbleColor,
+        ];
         const element = <HTMLInputElement>document.getElementById(item + i);
         const changeStringValue = () => {
-          this.state[this.rangeSliderId[i - 1]][item] = element.value;
+          valuesOfState[i] = element.value;
           this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state[this.rangeSliderId[i - 1]]);
           this.spyOnSlider(this.rangeSliderId[i - 1], i);
         };
