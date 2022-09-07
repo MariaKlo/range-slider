@@ -82,6 +82,15 @@ class CallPlugin {
       $(`#${this.rangeSliderId[i]}`).sliderPlugin(this.api[i]);
     }
   }
+
+  removeInitialCall() {
+    for (let i = 0; i < this.rangeSliderId.length; i++) {
+      const elem = <HTMLDivElement>document.getElementById(`${this.rangeSliderId[i]}`);
+      if (elem.firstElementChild) { 
+        elem.removeChild(elem.firstElementChild);
+      }
+    }
+  }
     
 }
 
