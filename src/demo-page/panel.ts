@@ -60,77 +60,72 @@ class Panel {
   init() {
     // this.getDataFromPanelToApi();
     // this.updateData();
-    for (let i = 0; i < this.rangeSliderId.length; i++) {
-      this.spyOnSlider(this.rangeSliderId[i], i);
-      this.renderAnotherSlider(this.rangeSliderId[i], this.state);
-      this.setState(this.state);
-    }
+    // for (let i = 0; i < this.rangeSliderId.length; i++) {
+    //   this.spyOnSlider(this.rangeSliderId[i], i);
+    //   this.renderAnotherSlider(this.rangeSliderId[i], this.state);
+    //   this.setState(this.state);
+    // }
     this.getDataFromPanel();
     this.getDataFromState();
   }
 
   setState(options: (number | boolean | string)[]): void {
     this.state = options;
-
   }
 
   // state gets data from panel
   getDataFromPanel() {
-    for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
-      // get values from panel
-      const getValue = (id: string): number => {
-        const elem = <HTMLInputElement>document.getElementById(id);
-        return Number(elem.value);
-      };
-      const getBooleanValue = (id: string): boolean => {
-        const elem = <HTMLInputElement>document.getElementById(id);
-        return Boolean(elem.checked);
-      };
-      const getStringValue = (id: string): string => {
-        const elem = <HTMLInputElement>document.getElementById(id);
-        return String(elem.value);
-      };
-  
-      this.setState([
-        getValue('max1'),
-        getValue('min1'),
-        getValue('step1'),
-        getValue('defaultValue1'),
-        getValue('valueSecond1'),
-        getBooleanValue('isMultiThumb1'),
-        getBooleanValue('showBubble1'),
-        getBooleanValue('isVertical1'),
-        getBooleanValue('showTicks1'),
-        getStringValue('barColor1'),
-        getStringValue('thumbColor1'),
-        getStringValue('bubbleColor1'),
-      ]);
-    }
+    // get values from panel
+    const getValue = (id: string): number => {
+      const elem = <HTMLInputElement>document.getElementById(id);
+      return Number(elem.value);
+    };
+    const getBooleanValue = (id: string): boolean => {
+      const elem = <HTMLInputElement>document.getElementById(id);
+      return Boolean(elem.checked);
+    };
+    const getStringValue = (id: string): string => {
+      const elem = <HTMLInputElement>document.getElementById(id);
+      return String(elem.value);
+    };
+
+    this.setState([
+      getValue('max1'),
+      getValue('min1'),
+      getValue('step1'),
+      getValue('defaultValue1'),
+      getValue('valueSecond1'),
+      getBooleanValue('isMultiThumb1'),
+      getBooleanValue('showBubble1'),
+      getBooleanValue('isVertical1'),
+      getBooleanValue('showTicks1'),
+      getStringValue('barColor1'),
+      getStringValue('thumbColor1'),
+      getStringValue('bubbleColor1'),
+    ]);
   }
   
   // when slider changes default and second values, panel shows changes
-  spyOnSlider(item: string, index: number) {
+  spyOnSlider(item: string) {
     const slider = <HTMLDivElement>document.getElementById(item);
     const setSliderValue = () => {
-      if (slider.firstElementChild !== null) {
-        const newDefaultValue = slider.getAttribute('default-value');
-        if (newDefaultValue) {
-          const element = <HTMLInputElement>document.getElementById(`defaultValue${index}`);
-          element.value = newDefaultValue;
-          this.state[3] = Number(newDefaultValue);
-        }
-        const newDefaultLeftValue = slider.getAttribute('first-value');
-        if (newDefaultLeftValue) {
-          const element = <HTMLInputElement>document.getElementById(`defaultValue${index}`);
-          element.value = newDefaultLeftValue;
-          this.state[3] = Number(newDefaultLeftValue);
-        }
-        const newRightValue = slider.getAttribute('second-value');
-        if (newRightValue) {
-          const element = <HTMLInputElement>document.getElementById(`valueSecond${index}`);
-          element.value = newRightValue;
-          this.state[4] = Number(newRightValue);
-        }
+      const newDefaultValue = slider.getAttribute('default-value');
+      if (newDefaultValue) {
+        const element = <HTMLInputElement>document.getElementById('defaultValue1');
+        element.value = newDefaultValue;
+        this.state[3] = Number(newDefaultValue);
+      }
+      const newDefaultLeftValue = slider.getAttribute('first-value');
+      if (newDefaultLeftValue) {
+        const element = <HTMLInputElement>document.getElementById('defaultValue1');
+        element.value = newDefaultLeftValue;
+        this.state[3] = Number(newDefaultLeftValue);
+      }
+      const newRightValue = slider.getAttribute('second-value');
+      if (newRightValue) {
+        const element = <HTMLInputElement>document.getElementById('valueSecond1');
+        element.value = newRightValue;
+        this.state[4] = Number(newRightValue);
       }
     };
     // setSliderValue();
@@ -145,7 +140,7 @@ class Panel {
     if (elem.firstElementChild) {
       elem.removeChild(elem.firstElementChild);
     }
-    $(`#${id}`).sliderPlugin({
+    $('#api_first').sliderPlugin({
       max: Number(panel[0]),
       min: Number(panel[1]),
       step: Number(panel[2]),
@@ -166,18 +161,21 @@ class Panel {
     for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
       // change number data
       this.panelNumberValues.forEach((item: string) => {
-        const valuesOfState = [
-          Number(this.state[0]), 
-          Number(this.state[1]), 
-          Number(this.state[2]), 
-          Number(this.state[3]), 
-          Number(this.state[4]),
-        ];
-        const element = <HTMLInputElement>document.getElementById(item + i);
+        // const valuesOfState = [
+        //   Number(this.state[0]), 
+        //   Number(this.state[1]), 
+        //   Number(this.state[2]), 
+        //   Number(this.state[3]), 
+        //   Number(this.state[4]),
+        // ];
+        
+        const element = <HTMLInputElement>document.getElementById(item + '1');
         const changeNumberValue = () => {
-          valuesOfState[i] = Number(element.value);
-          this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state);
-          this.spyOnSlider(this.rangeSliderId[i - 1], i);
+          this.state[0] = Number(element.value);
+          // valuesOfState[i] = Number(element.value);
+          this.renderAnotherSlider('api_first', this.state);
+          this.spyOnSlider('api_first');
+          console.log(this.state[0]);
         };
         element.addEventListener('change', changeNumberValue);
       });
@@ -189,11 +187,11 @@ class Panel {
           Boolean(this.state[7]),
           Boolean(this.state[8]),
         ];
-        const element = <HTMLInputElement>document.getElementById(item + i);
+        const element = <HTMLInputElement>document.getElementById(item + '1');
         const changeBooleanValue = () => {
           valuesOfState[i] = element.checked;
-          this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state);
-          this.spyOnSlider(this.rangeSliderId[i - 1], i);
+          this.renderAnotherSlider('api_first', this.state);
+          this.spyOnSlider('api_first');
         };
         element.addEventListener('change', changeBooleanValue);
       });
@@ -204,17 +202,17 @@ class Panel {
           String(this.state[10]),
           String(this.state[11]),
         ];
-        const element = <HTMLInputElement>document.getElementById(item + i);
+        const element = <HTMLInputElement>document.getElementById(item + '1');
         const changeStringValue = () => {
           valuesOfState[i] = element.value;
-          this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state);
-          this.spyOnSlider(this.rangeSliderId[i - 1], i);
+          this.renderAnotherSlider('api_first', this.state);
+          this.spyOnSlider('api_first');
         };
         element.addEventListener('change', changeStringValue);
       });
       // render slider with data from panel
-      this.renderAnotherSlider(this.rangeSliderId[i - 1], this.state);
-      this.spyOnSlider(this.rangeSliderId[i - 1], i);
+      this.renderAnotherSlider('api_first', this.state);
+      this.spyOnSlider('api_first');
     }
   }
 
