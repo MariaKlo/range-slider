@@ -107,7 +107,7 @@ class Panel {
   
   // when slider changes default and second values, panel shows changes
   spyOnSlider(item: string) {
-    const slider = <HTMLDivElement>document.getElementById(item);
+    const slider = <HTMLDivElement>document.getElementById(item)?.firstChild;
     const setSliderValue = () => {
       const newDefaultValue = slider.getAttribute('default-value');
       if (newDefaultValue) {
@@ -158,62 +158,84 @@ class Panel {
 
   // slider gets data from state
   getDataFromState() {
-    for (let i = 1; i <= this.rangeSliderId.length; i += 1) {
-      // change number data
-      this.panelNumberValues.forEach((item: string) => {
-        // const valuesOfState = [
-        //   Number(this.state[0]), 
-        //   Number(this.state[1]), 
-        //   Number(this.state[2]), 
-        //   Number(this.state[3]), 
-        //   Number(this.state[4]),
-        // ];
-        
-        const element = <HTMLInputElement>document.getElementById(item + '1');
-        const changeNumberValue = () => {
-          this.state[0] = Number(element.value);
-          // valuesOfState[i] = Number(element.value);
-          this.renderAnotherSlider('api_first', this.state);
-          this.spyOnSlider('api_first');
-          console.log(this.state[0]);
-        };
-        element.addEventListener('change', changeNumberValue);
-      });
-      // change boolean data
-      this.panelBooleanValues.forEach((item) => {
-        const valuesOfState = [
-          Boolean(this.state[5]),
-          Boolean(this.state[6]),
-          Boolean(this.state[7]),
-          Boolean(this.state[8]),
-        ];
-        const element = <HTMLInputElement>document.getElementById(item + '1');
-        const changeBooleanValue = () => {
-          valuesOfState[i] = element.checked;
-          this.renderAnotherSlider('api_first', this.state);
-          this.spyOnSlider('api_first');
-        };
-        element.addEventListener('change', changeBooleanValue);
-      });
-      // change string data
-      this.panelStringValues.forEach((item) => {
-        const valuesOfState = [
-          String(this.state[9]),
-          String(this.state[10]),
-          String(this.state[11]),
-        ];
-        const element = <HTMLInputElement>document.getElementById(item + '1');
-        const changeStringValue = () => {
-          valuesOfState[i] = element.value;
-          this.renderAnotherSlider('api_first', this.state);
-          this.spyOnSlider('api_first');
-        };
-        element.addEventListener('change', changeStringValue);
-      });
-      // render slider with data from panel
+    // change number data
+    // const valuesOfState = [
+    //   Number(this.state[0]), 
+    //   Number(this.state[1]), 
+    //   Number(this.state[2]), 
+    //   Number(this.state[3]), 
+    //   Number(this.state[4]),
+    // ];
+
+    const maxElement = <HTMLInputElement>document.getElementById('max1');
+    const minElement = <HTMLInputElement>document.getElementById('min1');
+    const stepElement = <HTMLInputElement>document.getElementById('step1');
+    const defaultValueElement = <HTMLInputElement>document.getElementById('defaultValue1');
+    const valueSecondElement = <HTMLInputElement>document.getElementById('valueSecond1');
+    const changeNumberValue = () => {
+      this.state[0] = Number(maxElement.value);
+      this.state[1] = Number(minElement.value);
+      this.state[2] = Number(stepElement.value);
+      this.state[3] = Number(defaultValueElement.value);
+      this.state[4] = Number(valueSecondElement.value);
+      // valuesOfState[i] = Number(maxElement.value);
       this.renderAnotherSlider('api_first', this.state);
       this.spyOnSlider('api_first');
-    }
+    };
+    maxElement.addEventListener('change', changeNumberValue);
+    minElement.addEventListener('change', changeNumberValue);
+    stepElement.addEventListener('change', changeNumberValue);
+    defaultValueElement.addEventListener('change', changeNumberValue);
+    valueSecondElement.addEventListener('change', changeNumberValue);
+
+    // change boolean data
+    // const valuesOfState = [
+    //   Boolean(this.state[5]),
+    //   Boolean(this.state[6]),
+    //   Boolean(this.state[7]),
+    //   Boolean(this.state[8]),
+    // ];
+    const multiElement = <HTMLInputElement>document.getElementById('isMultiThumb1');
+    const bubbleElement = <HTMLInputElement>document.getElementById('showBubble1');
+    const isVerticalElement = <HTMLInputElement>document.getElementById('isVertical1');
+    const ticksElement = <HTMLInputElement>document.getElementById('showTicks1');
+    const changeBooleanValue = () => {
+      this.state[5] = Boolean(multiElement.checked);
+      this.state[6] = Boolean(bubbleElement.checked);
+      this.state[7] = Boolean(isVerticalElement.checked);
+      this.state[8] = Boolean(ticksElement.checked);
+      // valuesOfState[i] = element.checked;
+      this.renderAnotherSlider('api_first', this.state);
+      this.spyOnSlider('api_first');
+    };
+    multiElement.addEventListener('change', changeBooleanValue);
+    bubbleElement.addEventListener('change', changeBooleanValue);
+    isVerticalElement.addEventListener('change', changeBooleanValue);
+    ticksElement.addEventListener('change', changeBooleanValue);
+
+    // change string data
+    // const valuesOfState = [
+    //   String(this.state[9]),
+    //   String(this.state[10]),
+    //   String(this.state[11]),
+    // ];
+    const barColorElement = <HTMLInputElement>document.getElementById('barColor1');
+    const thumbColorElement = <HTMLInputElement>document.getElementById('thumbColor1');
+    const bubbleColorElement = <HTMLInputElement>document.getElementById('bubbleColor1');
+    const changeStringValue = () => {
+      this.state[9] = String(barColorElement.value);
+      this.state[10] = String(thumbColorElement.value);
+      this.state[11] = String(bubbleColorElement.value);
+      this.renderAnotherSlider('api_first', this.state);
+      this.spyOnSlider('api_first');
+    };
+    barColorElement.addEventListener('change', changeStringValue);
+    thumbColorElement.addEventListener('change', changeStringValue);
+    bubbleColorElement.addEventListener('change', changeStringValue);
+    
+    // render slider with data from panel
+    this.renderAnotherSlider('api_first', this.state);
+    this.spyOnSlider('api_first');
   }
 
 
