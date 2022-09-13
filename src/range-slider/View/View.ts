@@ -118,7 +118,9 @@ class View {
         ticksValues[i].element.addEventListener('click', this.onClick(ticksValues[i].value));
       }
     }
-    this.showWarnings();
+    this.showWarningsForMaxAndMin();
+    this.showWarningForWrongDefaultAndMaxValues();
+    this.showWarningForWrongDefaultAndMinValues();
   };
 
   private createWrapper = () => {
@@ -220,7 +222,7 @@ class View {
     this.update(newValue, true);
   };
 
-  private showWarnings() {
+  private showWarningsForMaxAndMin() {
     if (this.options.min >= this.options.max) {
       this.warning = document.createElement('p');
       this.warning.classList.add('range-slider__warning');
@@ -228,6 +230,52 @@ class View {
       this.wrapper.append(this.warning);
       if (this.options.isVertical) {
         this.warning.classList.add('range-slider__warning_vertical');
+      }
+    }
+  }
+
+  private showWarningForWrongDefaultAndMaxValues() {
+    if (this.options.defaultValue > this.options.max) {
+      this.warning = document.createElement('p');
+      this.warning.classList.add('range-slider__warning');
+      this.warning.innerText = 'Your default value is bigger than max value. Please, change your values';
+      this.wrapper.append(this.warning);
+      if (this.options.isVertical) {
+        this.warning.classList.add('range-slider__warning_vertical');
+      }
+    }
+    if (this.options.isMultiThumb) {
+      if (this.options.valueSecond > this.options.max) {
+        this.warning = document.createElement('p');
+        this.warning.classList.add('range-slider__warning');
+        this.warning.innerText = 'Your second value is bigger than max value. Please, change your values';
+        this.wrapper.append(this.warning);
+        if (this.options.isVertical) {
+          this.warning.classList.add('range-slider__warning_vertical');
+        }
+      }
+    }
+  }
+
+  private showWarningForWrongDefaultAndMinValues() {
+    if (this.options.defaultValue < this.options.min) {
+      this.warning = document.createElement('p');
+      this.warning.classList.add('range-slider__warning');
+      this.warning.innerText = 'Your default value is less than min value. Please, change your values';
+      this.wrapper.append(this.warning);
+      if (this.options.isVertical) {
+        this.warning.classList.add('range-slider__warning_vertical');
+      }
+    }
+    if (this.options.isMultiThumb) {
+      if (this.options.valueSecond < this.options.min) {
+        this.warning = document.createElement('p');
+        this.warning.classList.add('range-slider__warning');
+        this.warning.innerText = 'Your second value is less than min value. Please, change your values';
+        this.wrapper.append(this.warning);
+        if (this.options.isVertical) {
+          this.warning.classList.add('range-slider__warning_vertical');
+        }
       }
     }
   }

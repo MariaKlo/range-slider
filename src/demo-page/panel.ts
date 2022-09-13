@@ -30,6 +30,12 @@ import './jquery.index';
 //   bubbleColor: string;
 // }
 
+/** TODO
+ * 
+ * step doesnt work
+ * ticks dont consider min value
+ */
+
 class Panel {
   // arrays of id
   rangeSliderId = ['api_first', 'api_second', 'api_third', 'api_fourth'];
@@ -237,9 +243,6 @@ class Panel {
     this.renderAnotherSlider('api_first', this.state);
     this.spyOnSlider('api_first');
   }
-
-
-
 
   // getDataFromPanelToApi() {
   //   for (let i = 0; i < this.panelNumberValues.length; i++) {
