@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import BarView from './subView/barView/barView';
 import FormView from './subView/formView/formView';
-import StepView from './subView/stepView/stepView';
+// import StepView from './subView/stepView/stepView';
 import TicksView from './subView/ticksView/ticksView';
 import ThumbView from './subView/thumbView/thumbView';
 
@@ -26,7 +26,7 @@ class View {
 
   private ticks: TicksView;
 
-  protected step: StepView;
+  // protected step: StepView;
 
   private bar: BarView;
 
@@ -44,7 +44,7 @@ class View {
 
   constructor(parent: HTMLElement | JQuery<HTMLElement>, options: Options) {
     this.ticks = new TicksView();
-    this.step = new StepView();
+    // this.step = new StepView();
     this.bar = new BarView();
     this.thumb = new ThumbView();
     this.form = new FormView();
@@ -90,6 +90,8 @@ class View {
       this.clickOnBar(elem);
     };
 
+    this.setStep();
+
     if (this.options.isVertical) {
       this.wrapper.classList.add('range-slider_vertical');
     }
@@ -121,6 +123,7 @@ class View {
     this.showWarningsForMaxAndMin();
     this.showWarningForWrongDefaultAndMaxValues();
     this.showWarningForWrongDefaultAndMinValues();
+    this.showWarningSecondValIsLessThanFirst();
   };
 
   private createWrapper = () => {
@@ -144,6 +147,13 @@ class View {
       this.wrapper.setAttribute('default-value', String(this.options.defaultValue));
     }
   };
+
+  private setStep() {
+    this.form.input.setAttribute('step', String(this.options.step));
+    if (this.options.isMultiThumb) {
+      this.form.secondInput.setAttribute('step', String(this.options.step));
+    }
+  }
 
   setInput = () => {
     this.form.setValues(this.options.isMultiThumb, this.options.defaultValue,
@@ -276,6 +286,18 @@ class View {
         if (this.options.isVertical) {
           this.warning.classList.add('range-slider__warning_vertical');
         }
+      }
+    }
+  }
+
+  private showWarningSecondValIsLessThanFirst() {
+    if (this.options.isMultiThumb && this.options.defaultValue > this.options.valueSecond) {
+      this.warning = document.createElement('p');
+      this.warning.classList.add('range-slider__warning');
+      this.warning.innerText = 'Your second value is less than first value. Please, change your values';
+      this.wrapper.append(this.warning);
+      if (this.options.isVertical) {
+        this.warning.classList.add('range-slider__warning_vertical');
       }
     }
   }

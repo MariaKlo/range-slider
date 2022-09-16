@@ -39,7 +39,7 @@ class Model {
   constructor(options: Options) {
     this.max = Number(options.max === 0 ? 0 : (options.max || 100));
     this.min = Number(options.min || 0);
-    this.step = Number(options.step || 1);
+    this.step = Number(options.step);
     this.defaultValue = Number(options.defaultValue === 0 ? 0 : (options.defaultValue || 50));
     this.valueSecond = Number(options.valueSecond === 0 ? 0 : (options.valueSecond || 70));
     this.isMultiThumb = options.isMultiThumb || false;
@@ -100,7 +100,7 @@ class Model {
   }
 
   // calculate steps and ticks
-  private calcNearestMinValueConsideringStep(newValue: number, step: number = this.step): number {
+  private calcNearestMinValueConsideringStep(newValue: number, step: number = this.optionsForView.step): number {
     const roundToMin = newValue - (newValue % step);
     const addStepToRoundToMin = (newValue % step) > (step / 2);
     if (addStepToRoundToMin) {
@@ -109,7 +109,7 @@ class Model {
     return roundToMin;
   }
     
-  getTicks(step: number = this.step, showTicks: boolean = this.showTicks): number[] {
+  getTicks(step: number = this.optionsForView.step, showTicks: boolean = this.showTicks): number[] {
     if (step <= 0) {
       step = 1;
     }

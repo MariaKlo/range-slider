@@ -33,7 +33,6 @@ import './jquery.index';
 /** TODO
  * 
  * step doesnt work
- * ticks dont consider min value
  */
 
 class Panel {
@@ -64,6 +63,7 @@ class Panel {
   }
 
   init() {
+    this.callSecApi();
     // this.getDataFromPanelToApi();
     // this.updateData();
     // for (let i = 0; i < this.rangeSliderId.length; i++) {
@@ -242,6 +242,23 @@ class Panel {
     // render slider with data from panel
     this.renderAnotherSlider('api_first', this.state);
     this.spyOnSlider('api_first');
+  }
+
+  callSecApi() {
+    $('#api_second').sliderPlugin({
+      max: 1500,
+      min: 100,
+      step: 100,
+      defaultValue: 200,
+      valueSecond: 500,
+      isMultiThumb: true,
+      showBubble: true,
+      isVertical: true,
+      showTicks: true,
+      barColor: 'purple',
+      thumbColor: 'black',
+      bubbleColor: 'orange',
+    });
   }
 
   // getDataFromPanelToApi() {

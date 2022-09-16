@@ -1,20 +1,22 @@
+import Options from '../../../component/Options';
+
 class StepView {
-  private stepForm!: HTMLInputElement;
+  options!: Options;
 
-  protected createStep(): void {
-    this.stepForm = document.createElement('input');
-    this.stepForm.type = 'range';
-    this.stepForm.step = '1';
-  }
+  calcMaxValueConsideringStep(step: number = this.options.step): void {
+    // const valueFromMaxWithStep = max / step;
+    // const maxValueConsideringStep = Math.floor(valueFromMaxWithStep) * step;
+    // const compareStepWithMax = maxValueConsideringStep > max || maxValueConsideringStep < max;
+    // if (compareStepWithMax) {
+    //   this.options.max = maxValueConsideringStep;
+    // } else {
+    //   this.options.max = max;
+    // }
 
-  protected calcMaxValueConsideringStep(max: number, step: number): void {
-    const valueFromMaxWithStep = max / step;
-    const maxValueConsideringStep = Math.floor(valueFromMaxWithStep) * step;
-    const compareStepWithMax = maxValueConsideringStep > max || maxValueConsideringStep < max;
-    if (compareStepWithMax) {
-      this.stepForm.max = String(maxValueConsideringStep);
-    } else {
-      this.stepForm.max = String(max);
+    if (step <= 1) {
+      this.options.step = 1;
+    } else if (step > 1) {
+      this.options.step = step;
     }
   }
 }
