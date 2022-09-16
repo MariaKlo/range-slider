@@ -102,9 +102,9 @@ class View {
     
     if (this.options.showTicks) {
       const max: number = this.options.max;
-      const count = max / 10;
+      const count = Math.floor(max / 10);
       const arr: number[] = [];
-      for (let i = 0; i <= max; i += count) {
+      for (let i = this.options.min; i <= max; i += count) {
         arr.push(i);
       }
 
