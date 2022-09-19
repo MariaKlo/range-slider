@@ -153,6 +153,20 @@ class View {
     if (this.options.isMultiThumb) {
       this.form.secondInput.setAttribute('step', String(this.options.step));
     }
+    // if step is negative
+    if (this.options.step <= 0) {
+      this.form.input.setAttribute('step', String(1));
+      if (this.options.isMultiThumb) {
+        this.form.secondInput.setAttribute('step', String(1));
+      }
+    }
+    // if step is bigger than max value
+    if (this.options.step > this.options.max) {
+      this.form.input.setAttribute('step', String(1));
+      if (this.options.isMultiThumb) {
+        this.form.secondInput.setAttribute('step', String(1));
+      } 
+    }
   }
 
   setInput = () => {
@@ -247,21 +261,21 @@ class View {
   private showWarningForWrongDefaultAndMaxValues() {
     if (this.options.defaultValue > this.options.max) {
       this.warning = document.createElement('p');
-      this.warning.classList.add('range-slider__warning');
+      this.warning.classList.add('range-slider__second-warning');
       this.warning.innerText = 'Your default value is bigger than max value. Please, change your values';
       this.wrapper.append(this.warning);
       if (this.options.isVertical) {
-        this.warning.classList.add('range-slider__warning_vertical');
+        this.warning.classList.add('range-slider__second-warning_vertical');
       }
     }
     if (this.options.isMultiThumb) {
       if (this.options.valueSecond > this.options.max) {
         this.warning = document.createElement('p');
-        this.warning.classList.add('range-slider__warning');
+        this.warning.classList.add('range-slider__third-warning');
         this.warning.innerText = 'Your second value is bigger than max value. Please, change your values';
         this.wrapper.append(this.warning);
         if (this.options.isVertical) {
-          this.warning.classList.add('range-slider__warning_vertical');
+          this.warning.classList.add('range-slider__third-warning_vertical');
         }
       }
     }
@@ -270,21 +284,21 @@ class View {
   private showWarningForWrongDefaultAndMinValues() {
     if (this.options.defaultValue < this.options.min) {
       this.warning = document.createElement('p');
-      this.warning.classList.add('range-slider__warning');
+      this.warning.classList.add('range-slider__fourth-warning');
       this.warning.innerText = 'Your default value is less than min value. Please, change your values';
       this.wrapper.append(this.warning);
       if (this.options.isVertical) {
-        this.warning.classList.add('range-slider__warning_vertical');
+        this.warning.classList.add('range-slider__fourth-warning_vertical');
       }
     }
     if (this.options.isMultiThumb) {
       if (this.options.valueSecond < this.options.min) {
         this.warning = document.createElement('p');
-        this.warning.classList.add('range-slider__warning');
+        this.warning.classList.add('range-slider__fifth-warning');
         this.warning.innerText = 'Your second value is less than min value. Please, change your values';
         this.wrapper.append(this.warning);
         if (this.options.isVertical) {
-          this.warning.classList.add('range-slider__warning_vertical');
+          this.warning.classList.add('range-slider__fifth-warning_vertical');
         }
       }
     }
@@ -293,11 +307,11 @@ class View {
   private showWarningSecondValIsLessThanFirst() {
     if (this.options.isMultiThumb && this.options.defaultValue > this.options.valueSecond) {
       this.warning = document.createElement('p');
-      this.warning.classList.add('range-slider__warning');
+      this.warning.classList.add('range-slider__sixth-warning');
       this.warning.innerText = 'Your second value is less than first value. Please, change your values';
       this.wrapper.append(this.warning);
       if (this.options.isVertical) {
-        this.warning.classList.add('range-slider__warning_vertical');
+        this.warning.classList.add('range-slider__sixth-warning_vertical');
       }
     }
   }

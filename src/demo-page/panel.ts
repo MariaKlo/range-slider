@@ -247,13 +247,13 @@ class Panel {
   callSecApi() {
     $('#api_second').sliderPlugin({
       max: 1500,
-      min: 100,
+      min: 1700,
       step: 100,
-      defaultValue: 200,
-      valueSecond: 500,
+      defaultValue: 1900,
+      valueSecond: 1800,
       isMultiThumb: true,
       showBubble: true,
-      isVertical: true,
+      isVertical: false,
       showTicks: true,
       barColor: 'purple',
       thumbColor: 'black',
