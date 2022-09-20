@@ -17,6 +17,7 @@ class Panel {
   init() {
     this.callFirstApi();
     this.callSecondApi();
+    this.callThirdApi();
   }
 
   setState(options: (number | boolean | string)[]): void {
@@ -34,6 +35,11 @@ class Panel {
   callSecondApi() {
     this.getDataFromSecondPanel();
     this.getDataFromSecondState();
+  }
+
+  callThirdApi() {
+    this.getDataFromThirdPanel();
+    this.getDataFromThirdState();
   }
 
   // FIRST PANEL AND API
@@ -276,6 +282,127 @@ class Panel {
     // render slider with data from panel
     test.renderSecondSlider('api_second', this.stateForSecondApi);
     this.spyOnSecondSlider('api_second');
+  }
+
+  // THIRD PANEL AND API
+  // state gets data from panel
+  getDataFromThirdPanel() {
+    // get values from panel
+    const getValue = (id: string): number => {
+      const elem = <HTMLInputElement>document.getElementById(id);
+      return Number(elem.value);
+    };
+    const getBooleanValue = (id: string): boolean => {
+      const elem = <HTMLInputElement>document.getElementById(id);
+      return Boolean(elem.checked);
+    };
+    const getStringValue = (id: string): string => {
+      const elem = <HTMLInputElement>document.getElementById(id);
+      return String(elem.value);
+    };
+
+    this.setState([
+      getValue('max3'),
+      getValue('min3'),
+      getValue('step3'),
+      getValue('defaultValue3'),
+      getValue('valueSecond3'),
+      getBooleanValue('isMultiThumb3'),
+      getBooleanValue('showBubble3'),
+      getBooleanValue('isVertical3'),
+      getBooleanValue('showTicks3'),
+      getStringValue('barColor3'),
+      getStringValue('thumbColor3'),
+      getStringValue('bubbleColor3'),
+    ]);
+  }
+  
+  // when slider changes default and second values, panel shows changes
+  spyOnThirdSlider(item: string) {
+    const slider = <HTMLDivElement>document.getElementById(item)?.firstChild;
+    const setSliderValue = () => {
+      const newDefaultValue = slider.getAttribute('default-value');
+      if (newDefaultValue) {
+        const element = <HTMLInputElement>document.getElementById('defaultValue3');
+        element.value = newDefaultValue;
+        this.stateForThirdApi[3] = Number(newDefaultValue);
+      }
+      const newDefaultLeftValue = slider.getAttribute('first-value');
+      if (newDefaultLeftValue) {
+        const element = <HTMLInputElement>document.getElementById('defaultValue3');
+        element.value = newDefaultLeftValue;
+        this.stateForThirdApi[3] = Number(newDefaultLeftValue);
+      }
+      const newRightValue = slider.getAttribute('second-value');
+      if (newRightValue) {
+        const element = <HTMLInputElement>document.getElementById('valueSecond3');
+        element.value = newRightValue;
+        this.stateForThirdApi[4] = Number(newRightValue);
+      }
+    };
+    slider.addEventListener('mousemove', setSliderValue);
+    slider.addEventListener('click', setSliderValue);
+  }
+
+  // slider gets data from state
+  getDataFromThirdState() {
+    const maxElement = <HTMLInputElement>document.getElementById('max3');
+    const minElement = <HTMLInputElement>document.getElementById('min3');
+    const stepElement = <HTMLInputElement>document.getElementById('step3');
+    const defaultValueElement = <HTMLInputElement>document.getElementById('defaultValue3');
+    const valueSecondElement = <HTMLInputElement>document.getElementById('valueSecond3');
+    // change number value
+    const changeNumberValue = () => {
+      this.stateForThirdApi[0] = Number(maxElement.value);
+      this.stateForThirdApi[1] = Number(minElement.value);
+      this.stateForThirdApi[2] = Number(stepElement.value);
+      this.stateForThirdApi[3] = Number(defaultValueElement.value);
+      this.stateForThirdApi[4] = Number(valueSecondElement.value);
+      test.renderThirdSlider('api_third', this.stateForThirdApi);
+      this.spyOnThirdSlider('api_third');
+    };
+    maxElement.addEventListener('change', changeNumberValue);
+    minElement.addEventListener('change', changeNumberValue);
+    stepElement.addEventListener('change', changeNumberValue);
+    defaultValueElement.addEventListener('change', changeNumberValue);
+    valueSecondElement.addEventListener('change', changeNumberValue);
+
+    // change boolean data
+    const multiElement = <HTMLInputElement>document.getElementById('isMultiThumb3');
+    const bubbleElement = <HTMLInputElement>document.getElementById('showBubble3');
+    const isVerticalElement = <HTMLInputElement>document.getElementById('isVertical3');
+    const ticksElement = <HTMLInputElement>document.getElementById('showTicks3');
+    const changeBooleanValue = () => {
+      this.stateForThirdApi[5] = Boolean(multiElement.checked);
+      this.stateForThirdApi[6] = Boolean(bubbleElement.checked);
+      this.stateForThirdApi[7] = Boolean(isVerticalElement.checked);
+      this.stateForThirdApi[8] = Boolean(ticksElement.checked);
+      test.renderThirdSlider('api_third', this.stateForThirdApi);
+      this.spyOnThirdSlider('api_third');
+    };
+    multiElement.addEventListener('change', changeBooleanValue);
+    bubbleElement.addEventListener('change', changeBooleanValue);
+    isVerticalElement.addEventListener('change', changeBooleanValue);
+    ticksElement.addEventListener('change', changeBooleanValue);
+
+    // change string data
+    const barColorElement = <HTMLInputElement>document.getElementById('barColor3');
+    const thumbColorElement = <HTMLInputElement>document.getElementById('thumbColor3');
+    const bubbleColorElement = <HTMLInputElement>document.getElementById('bubbleColor3');
+    const changeStringValue = () => {
+      this.stateForThirdApi[9] = String(barColorElement.value);
+      this.stateForThirdApi[10] = String(thumbColorElement.value);
+      this.stateForThirdApi[11] = String(bubbleColorElement.value);
+      test.renderThirdSlider('api_third', this.stateForThirdApi);
+      this.spyOnThirdSlider('api_third');
+    };
+    barColorElement.addEventListener('change', changeStringValue);
+    thumbColorElement.addEventListener('change', changeStringValue);
+    bubbleColorElement.addEventListener('change', changeStringValue);
+    
+    // render slider with data from panel
+    test.renderThirdSlider('api_third', this.stateForThirdApi);
+    this.spyOnThirdSlider('api_third');
   }
 }
 
