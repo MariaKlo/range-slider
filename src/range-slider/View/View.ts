@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import BarView from './subView/barView/barView';
 import FormView from './subView/formView/formView';
-// import StepView from './subView/stepView/stepView';
 import TicksView from './subView/ticksView/ticksView';
 import ThumbView from './subView/thumbView/thumbView';
 
@@ -26,8 +24,6 @@ class View {
 
   private ticks: TicksView;
 
-  // protected step: StepView;
-
   private bar: BarView;
 
   private thumb: ThumbView;
@@ -44,7 +40,6 @@ class View {
 
   constructor(parent: HTMLElement | JQuery<HTMLElement>, options: Options) {
     this.ticks = new TicksView();
-    // this.step = new StepView();
     this.bar = new BarView();
     this.thumb = new ThumbView();
     this.form = new FormView();
