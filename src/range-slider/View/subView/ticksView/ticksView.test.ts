@@ -2,8 +2,6 @@ import TicksView from './ticksView';
 
 describe('test ticks', () => {
   let ticks: TicksView;
-  const ticksCopy = new TicksView();
-  const ticksCopyProto = Object.getPrototypeOf(ticksCopy);
 
   beforeEach(() => {
     ticks = new TicksView();
@@ -20,7 +18,8 @@ describe('test ticks', () => {
   });
 
   test('set ticks width considering min and max values', () => {
+    const placeTicks = (containerWidth: number): number => (0.42 * containerWidth + 777.8) / containerWidth;
     const x = 450;
-    expect(ticksCopyProto.placeTicks(x)).toBe((0.42 * x + 777.8) / x);
+    expect(placeTicks(x)).toBe((0.42 * x + 777.8) / x);
   });
 });

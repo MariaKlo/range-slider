@@ -27,7 +27,7 @@ describe('test model', () => {
 
   test('max value set to 100 if not defined', () => {
     const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    expect(modelCopyProto.max).toBe(100);
+    expect(modelCopyProto.max).toEqual(100);
   });
 
   test('default value is set', () => {
@@ -117,7 +117,7 @@ describe('test model', () => {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       updateView(): void {},
     };
-    Object.getPrototypeOf(modelCopy).subscribe(observers);
+    Object.getPrototypeOf(modelCopy).subscribeInModel(observers);
     jest.spyOn(model.observers[0], 'updateView');
     Object.getPrototypeOf(modelCopy).updateObservers();
     expect(model.observers[0].updateView).toHaveBeenCalled();
@@ -140,6 +140,6 @@ describe('test model', () => {
     jest.spyOn(Object.getPrototypeOf(modelCopy), 'limitStep');
     Object.getPrototypeOf(modelCopy).isMultiThumb = false;
     model.update(10, false);
-    expect(Object.getPrototypeOf(modelCopy).limitStep).toHaveBeenCalledWith(10, false);
+    expect(Object.getPrototypeOf(modelCopy).limitStep).toHaveBeenCalled();
   });
 });

@@ -4,38 +4,44 @@ import FormView from './formView';
 describe('test view', () => {
   let form: FormView;
 
-  const formCopy = new FormView();
-  const formCopyProto = Object.getPrototypeOf(formCopy);
+  let formCopy: FormView;
 
   beforeEach(() => {
     form = new FormView();
+    formCopy = new FormView();
     form.init(document.body, true, 0, 100);
-    formCopyProto.createInput(false);
   });
   afterEach(() => {
     document.body.innerHTML = '';
   });
 
   test('max value is set', () => {
+    const formCopyProto = Object.getPrototypeOf(formCopy);
+    formCopyProto.createForm(document.body);
+    formCopyProto.createInput(false);
     formCopyProto.setMax(false, 50);
-    expect(form.input.max).toBe('50');
+    expect(formCopyProto.input.max).toBe('50');
     formCopyProto.createInput(true);
     formCopyProto.setMax(true, undefined);
-    expect(form.input.max).toBe('100');
-    expect(form.secondInput.max).toBe('100');
+    expect(formCopyProto.input.max).toBe('100');
+    expect(formCopyProto.secondInput.max).toBe('100');
   });
 
   test('min value is set', () => {
+    const formCopyProto = Object.getPrototypeOf(formCopy);
+    formCopyProto.createForm(document.body);
+    formCopyProto.createInput(false);
     formCopyProto.setMin(false, 20);
-    expect(form.input.min).toBe('20');
+    expect(formCopyProto.input.min).toBe('20');
     formCopyProto.createInput(true);
     formCopyProto.setMin(true, 0);
-    expect(form.input.min).toBe('0');
-    expect(form.secondInput.min).toBe('0');
+    expect(formCopyProto.input.min).toBe('0');
+    expect(formCopyProto.secondInput.min).toBe('0');
   });
 
   test('default value is set correctly', () => {
-    form.setValues(false, 20);
-    expect(form.input.value).toBe('20');
+    const formCopyProto = Object.getPrototypeOf(formCopy);
+    formCopyProto.setValues(false, 20);
+    expect(formCopyProto.input.value).toBe('20');
   });
 });
