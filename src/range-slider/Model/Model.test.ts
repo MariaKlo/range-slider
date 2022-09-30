@@ -1,9 +1,14 @@
 import Model from './Model';
+// import { IObserverModel } from '../Observer/Observer';
 
 describe('test model', () => {
   let model: Model;
 
   let modelCopy: Model;
+
+  // let observers: IObserverModel[];
+
+  // let observer: Observer;
 
   const data = {
     max: 100,
@@ -117,18 +122,6 @@ describe('test model', () => {
     expect(modelCopyProto.limitToggle).toHaveBeenCalledWith(10, true);
   });
 
-  // test('updateObservers work correctly with updateView', () => {
-  //   const modelCopyProto = Object.getPrototypeOf(modelCopy);
-  //   const observers = {
-  //     // eslint-disable-next-line @typescript-eslint/no-empty-function
-  //     updateView(): void {},
-  //   };
-  //   modelCopyProto.observer.subscribeInModel(observers);
-  //   jest.spyOn(modelCopyProto.observers[0], 'updateView');
-  //   modelCopyProto.updateObservers();
-  //   expect(modelCopyProto.observers[0].updateView).toHaveBeenCalled();
-  // });
-
   test('getTicks is called when array is received', () => {
     jest.spyOn(model, 'getTicks');
     model.init();
@@ -151,13 +144,17 @@ describe('test model', () => {
     expect(modelCopyProto.limitStep).toHaveBeenCalled();
   });
 
+  // failed tests
   test('limit step was called when step does not fit and values are updated', () => {
     const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'limitStep');
-    jest.spyOn(modelCopyProto, 'calcNearestMinValueConsideringStep');
+    // jest.spyOn(modelCopyProto, 'limitStep');
+    jest.spyOn(modelCopyProto, 'setDefaultValue');
     modelCopyProto.step = 3;
-    model.optionsForView.step = 3;
+    // model.optionsForView.step = 3;
     modelCopyProto.limitStep(10, true);
-    expect(modelCopyProto.limitStep).toHaveBeenCalledWith(modelCopyProto.calcNearestMinValueConsideringStep(10, 3));
+    modelCopyProto.updateObservers();
+    // modelCopyProto.setDefaultValue(10);
+    expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(10);
+    expect(modelCopyProto.updateObservers).toHaveBeenCalled();
   });
 });
