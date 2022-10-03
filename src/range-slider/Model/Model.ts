@@ -85,7 +85,7 @@ class Model {
     }
   }
 
-  private updateObservers() {
+  updateObservers() {
     this.observers.forEach((observer) => {
       observer.updateView();
     });
@@ -100,7 +100,7 @@ class Model {
   }
 
   // calculate steps and ticks
-  private calcNearestMinValueConsideringStep(newValue: number, step: number = this.optionsForView.step): number {
+  private calcNearestMinValueConsideringStep(newValue: number, step: number = this.step): number {
     const roundToMin = newValue - (newValue % step);
     const addStepToRoundToMin = (newValue % step) > (step / 2);
     if (addStepToRoundToMin) {

@@ -1,12 +1,12 @@
 import Model from './Model';
-// import { IObserverModel } from '../Observer/Observer';
+import { IObserverModel } from '../Observer/Observer';
 
 describe('test model', () => {
   let model: Model;
 
   let modelCopy: Model;
 
-  // let observers: IObserverModel[];
+  let observers: IObserverModel[];
 
   // let observer: Observer;
 
@@ -145,16 +145,64 @@ describe('test model', () => {
   });
 
   // failed tests
-  test('limit step was called when step does not fit and values are updated', () => {
+  test('observer was created', () => {
     const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    // jest.spyOn(modelCopyProto, 'limitStep');
+
+    observers.forEach((observer) => {
+      observer.updateView();
+    });
+
     jest.spyOn(modelCopyProto, 'setDefaultValue');
-    modelCopyProto.step = 3;
-    // model.optionsForView.step = 3;
-    modelCopyProto.limitStep(10, true);
-    modelCopyProto.updateObservers();
-    // modelCopyProto.setDefaultValue(10);
-    expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(10);
+    const limitData = {
+      step: 10,
+      newValue: 33,
+      closestStepValue: 30,
+      isDefault: true,
+    };
+    modelCopyProto.step = limitData.step;
+    modelCopyProto.limitStep(limitData.newValue, limitData.isDefault);
+    expect(modelCopyProto.setDefaultValue).not.toHaveBeenCalledWith(limitData.newValue);
+    expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(limitData.closestStepValue);
+    // const modelCopyProto = Object.getPrototypeOf(modelCopy);
+    // // jest.spyOn(modelCopyProto, 'limitStep');
+    // jest.spyOn(modelCopyProto, 'setDefaultValue');
+    // modelCopyProto.step = 3;
+    // // model.optionsForView.step = 3;
+    // modelCopyProto.limitStep(10, true);
+    // modelCopyProto.updateObservers();
+    // // modelCopyProto.setDefaultValue(10);
+    // expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(10);
+    // expect(modelCopyProto.updateObservers).toHaveBeenCalled();
+  });
+
+  test('default value set to the different value when it does not fit the step', () => {
+    // limitStep function call setRightValue with the closest value, which fits the step
+    const modelCopyProto = Object.getPrototypeOf(modelCopy);
+    jest.spyOn(modelCopyProto, 'setSecondValue');
+    const limitData = {
+      step: 5,
+      newValue: 33,
+      closestStepValue: 35,
+      isDefault: false,
+    };
+    modelCopyProto.step = limitData.step;
+    modelCopyProto.limitStep(limitData.newValue, limitData.isDefault);
+    expect(modelCopyProto.setSecondValue).not.toHaveBeenCalledWith(limitData.newValue);
+    expect(modelCopyProto.setSecondValue).toHaveBeenCalledWith(limitData.closestStepValue);
+  });
+
+  test('thumb is limited when left value is more then right, observers update', () => {
+    const modelCopyProto = Object.getPrototypeOf(modelCopy);
+    const thumbValues = {
+      right: 10,
+      newValue: 11,
+      isNewForLeft: true,
+    };
+    jest.spyOn(modelCopyProto, 'limitStep');
+    jest.spyOn(modelCopyProto, 'updateObservers');
+    modelCopyProto.rightValue = thumbValues.right;
+    modelCopyProto.limitToggle(thumbValues.newValue, thumbValues.isNewForLeft);
+    expect(modelCopyProto.limitStep).not.toHaveBeenCalled();
     expect(modelCopyProto.updateObservers).toHaveBeenCalled();
   });
 });
