@@ -8,7 +8,7 @@ class Model {
 
   private min!: number;
 
-  private step!: number;
+  step!: number;
 
   defaultValue!: number;
 
@@ -91,11 +91,11 @@ class Model {
     });
   }
 
-  private setDefaultValue(value: number) {
+  setDefaultValue(value: number) {
     this.defaultValue = value;
   }
 
-  private setSecondValue(value: number) {
+  setSecondValue(value: number) {
     this.valueSecond = value;
   }
 
@@ -120,7 +120,7 @@ class Model {
     return ticksValues;
   }
 
-  private limitToggle(newValue: number, isDefault: boolean) {
+  limitToggle(newValue: number, isDefault: boolean) {
     const isInRange = isDefault ? newValue < this.valueSecond : newValue > this.defaultValue;
     if (isInRange) {
       this.limitStep(newValue, isDefault);
@@ -129,7 +129,7 @@ class Model {
     }
   }
     
-  private limitStep(newValue: number, isDefault: boolean) {
+  limitStep(newValue: number, isDefault: boolean) {
     const isInStep = newValue % this.step === 0;
     if (isDefault) {
       if (isInStep) {

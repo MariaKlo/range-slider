@@ -1,12 +1,12 @@
 import Model from './Model';
-import { IObserverModel } from '../Observer/Observer';
+// import { Observer, IObserverModel } from '../Observer/Observer';
 
 describe('test model', () => {
   let model: Model;
 
   let modelCopy: Model;
 
-  let observers: IObserverModel[];
+  // let observers: IObserverModel;
 
   // let observer: Observer;
 
@@ -28,6 +28,7 @@ describe('test model', () => {
   beforeEach(() => {
     model = new Model(data);
     modelCopy = new Model(data);
+    // observer = new Observer();
   });
 
   test('max value set to 100 if not defined', () => {
@@ -144,65 +145,44 @@ describe('test model', () => {
     expect(modelCopyProto.limitStep).toHaveBeenCalled();
   });
 
-  // failed tests
-  test('observer was created', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-
-    observers.forEach((observer) => {
-      observer.updateView();
-    });
-
-    jest.spyOn(modelCopyProto, 'setDefaultValue');
+  test('default value is set when limitStep is called', () => {
+    jest.spyOn(model, 'setDefaultValue');
     const limitData = {
       step: 10,
       newValue: 33,
       closestStepValue: 30,
       isDefault: true,
     };
-    modelCopyProto.step = limitData.step;
-    modelCopyProto.limitStep(limitData.newValue, limitData.isDefault);
-    expect(modelCopyProto.setDefaultValue).not.toHaveBeenCalledWith(limitData.newValue);
-    expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(limitData.closestStepValue);
-    // const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    // // jest.spyOn(modelCopyProto, 'limitStep');
-    // jest.spyOn(modelCopyProto, 'setDefaultValue');
-    // modelCopyProto.step = 3;
-    // // model.optionsForView.step = 3;
-    // modelCopyProto.limitStep(10, true);
-    // modelCopyProto.updateObservers();
-    // // modelCopyProto.setDefaultValue(10);
-    // expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(10);
-    // expect(modelCopyProto.updateObservers).toHaveBeenCalled();
+    model.step = limitData.step;
+    model.limitStep(limitData.newValue, limitData.isDefault);
+    expect(model.setDefaultValue).not.toHaveBeenCalledWith(limitData.newValue);
+    expect(model.setDefaultValue).toHaveBeenCalledWith(limitData.closestStepValue);
   });
 
   test('default value set to the different value when it does not fit the step', () => {
-    // limitStep function call setRightValue with the closest value, which fits the step
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'setSecondValue');
+    jest.spyOn(model, 'setSecondValue');
     const limitData = {
       step: 5,
       newValue: 33,
       closestStepValue: 35,
       isDefault: false,
     };
-    modelCopyProto.step = limitData.step;
-    modelCopyProto.limitStep(limitData.newValue, limitData.isDefault);
-    expect(modelCopyProto.setSecondValue).not.toHaveBeenCalledWith(limitData.newValue);
-    expect(modelCopyProto.setSecondValue).toHaveBeenCalledWith(limitData.closestStepValue);
+    model.step = limitData.step;
+    model.limitStep(limitData.newValue, limitData.isDefault);
+    expect(model.setSecondValue).not.toHaveBeenCalledWith(limitData.newValue);
+    expect(model.setSecondValue).toHaveBeenCalledWith(limitData.closestStepValue);
   });
 
   test('thumb is limited when left value is more then right, observers update', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
     const thumbValues = {
       right: 10,
       newValue: 11,
       isNewForLeft: true,
     };
-    jest.spyOn(modelCopyProto, 'limitStep');
-    jest.spyOn(modelCopyProto, 'updateObservers');
-    modelCopyProto.rightValue = thumbValues.right;
-    modelCopyProto.limitToggle(thumbValues.newValue, thumbValues.isNewForLeft);
-    expect(modelCopyProto.limitStep).not.toHaveBeenCalled();
-    expect(modelCopyProto.updateObservers).toHaveBeenCalled();
+    jest.spyOn(model, 'limitStep');
+    jest.spyOn(model, 'updateObservers');
+    model.valueSecond = thumbValues.right;
+    model.limitToggle(thumbValues.newValue, thumbValues.isNewForLeft);
+    expect(model.updateObservers).toHaveBeenCalled();
   });
 });
