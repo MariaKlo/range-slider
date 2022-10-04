@@ -26,7 +26,7 @@ class View {
 
   private bar: BarView;
 
-  private thumb: ThumbView;
+  thumb: ThumbView;
 
   private form!: FormView;
 

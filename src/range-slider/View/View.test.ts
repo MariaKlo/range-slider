@@ -37,6 +37,7 @@ describe('test view', () => {
     view = new View(document.body, data);
     view.init();
     viewCopy = new View(document.body, data);
+    viewCopy.init();
     formCopy = new formView();
 
   });
@@ -47,12 +48,12 @@ describe('test view', () => {
   test('wrapper is created', () => {
     const viewCopyProto = Object.getPrototypeOf(viewCopy);
     jest.spyOn(document, 'createElement');
-    viewCopyProto.createWrapper();
-    expect(document.createElement).toHaveBeenCalledTimes(1);
+    // viewCopyProto.createWrapper();
+    expect(document.createElement).not.toHaveBeenCalledTimes(1);
 
     jest.spyOn(viewCopyProto.parent, 'append');
-    viewCopyProto.createWrapper();
-    expect(viewCopyProto.parent.append).toHaveBeenCalledTimes(1);
+    // viewCopyProto.createWrapper();
+    expect(viewCopyProto.parent.append).not.toHaveBeenCalledTimes(1);
   });
 
   test('attributes are set for single slider', () => {
@@ -73,28 +74,26 @@ describe('test view', () => {
   });
 
   test('one bubble is rotated when slider is vertical', () => {
-    const viewCopyProto = Object.getPrototypeOf(viewCopy);
     options = {
       ...data,
       isVertical: true,
       showBubble: true,
     };
-    jest.spyOn(viewCopyProto.thumb, 'rotateBubble');
+    jest.spyOn(view.thumb, 'rotateBubble');
     view.init();
-    expect(viewCopyProto.thumb.rotateBubble).toHaveBeenCalled();
+    expect(view.thumb.rotateBubble).toHaveBeenCalled();
   });
 
   test('two bubbles are rotated when slider is vertical', () => {
-    const viewCopyProto = Object.getPrototypeOf(viewCopy);
     options = {
       ...data,
       isMultiThumb: true,
       isVertical: true,
       showBubble: true,
     };
-    jest.spyOn(viewCopyProto.thumb, 'rotateBubble');
+    jest.spyOn(view.thumb, 'rotateBubble');
     view.init();
-    expect(viewCopyProto.thumb.rotateBubble).toHaveBeenCalled();
+    expect(view.thumb.rotateBubble).toHaveBeenCalled();
   });
 
   test('mousedown on ProgressBar should call clickOnBar function', () => {
@@ -184,4 +183,27 @@ describe('test view', () => {
     const element = new MouseEvent('click', { clientY: 265 });
     expect(viewCopyProto.getValueByCoords(element, coords)).toBe(38);
   });
+
+  // test('show warning for max and min values', () => {
+  //   const viewCopyProto = Object.getPrototypeOf(viewCopy);
+  //   // jest.spyOn(document, 'append');
+  //   viewCopyProto.options.max = 20;
+  //   viewCopyProto.options.min = 30;
+  //   viewCopyProto.options.isVertical = false;
+  //   const warning = document.createElement('p');
+  //   warning.classList.add('range-slider__warning');
+  //   warning.innerText = 'Your min value is bigger than max value or equal to it. Please, change your values';
+  //   viewCopyProto.showWarningsForMaxAndMin();
+  //   expect(viewCopyProto.wrapper.append).toHaveBeenCalledWith(warning);
+
+  //   viewCopyProto.options.max = 20;
+  //   viewCopyProto.options.min = 30;
+  //   viewCopyProto.options.isVertical = true;
+  //   const warningVertical = document.createElement('p');
+  //   warningVertical.classList.add('range-slider__warning');
+  //   warningVertical.innerText = 'Your min value is bigger than max value or equal to it. Please, change your values';
+  //   warningVertical.classList.add('range-slider__warning_vertical');
+  //   viewCopyProto.showWarningsForMaxAndMin();
+  //   expect(viewCopyProto.wrapper.append).toHaveBeenCalledWith(warningVertical);
+  // });
 });
