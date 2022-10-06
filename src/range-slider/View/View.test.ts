@@ -73,35 +73,77 @@ describe('test view', () => {
   //   expect(viewCopyProto.wrapper.getAttribute('second-value')).toBe('23');
   // });
 
+  // test('mousedown on ProgressBar should call clickOnBar function', () => {
+  //   const viewCopyProto = Object.getPrototypeOf(viewCopy);
+  //   jest.spyOn(viewCopyProto, 'clickOnBar');
+  //   view.bar.bar.dispatchEvent(new MouseEvent('mousedown'));
+  //   expect(viewCopyProto.clickOnBar).toHaveBeenCalled();
+  // });
+
   test('one bubble is rotated when slider is vertical', () => {
-    // const options = {
-    //   ...data,
-    //   isVertical: true,
-    //   showBubble: true,
-    // };
     jest.spyOn(view.thumb, 'rotateBubble');
     view.init();
     expect(view.thumb.rotateBubble).toHaveBeenCalled();
   });
 
   test('two bubbles are rotated when slider is vertical', () => {
-    // const options = {
-    //   ...data,
-    //   isMultiThumb: true,
-    //   isVertical: true,
-    //   showBubble: true,
-    // };
     jest.spyOn(view.thumb, 'rotateBubble');
     view.init();
     expect(view.thumb.rotateBubble).toHaveBeenCalled();
   });
 
-  // test('mousedown on ProgressBar should call clickOnBar function', () => {
-  //   const viewCopyProto = Object.getPrototypeOf(viewCopy);
-  //   jest.spyOn(viewCopyProto, 'clickOnBar');
-  //   viewCopyProto.bar.bar.dispatchEvent(new MouseEvent('mousedown'));
-  //   expect(viewCopyProto.clickOnBar).toHaveBeenCalled();
-  // });
+  test('show warnings when min is bigger than max value', () => {
+    view.options.max = 10;
+    view.options.min = 20;
+    jest.spyOn(view, 'showWarnings');
+    view.showWarnings();
+    expect(view.showWarnings).toHaveBeenCalled();
+  });
+
+  test('show warnings when default value is less than min value', () => {
+    view.options.defaultValue = 10;
+    view.options.min = 20;
+    jest.spyOn(view, 'showWarnings');
+    view.showWarnings();
+    expect(view.showWarnings).toHaveBeenCalled();
+  });
+
+  test('show warnings when second value is less than min value (multithumb)', () => {
+    view.options.isMultiThumb = true;
+    view.options.defaultValue = 10;
+    view.options.valueSecond = 15;
+    view.options.min = 20;
+    jest.spyOn(view, 'showWarnings');
+    view.showWarnings();
+    expect(view.showWarnings).toHaveBeenCalled();
+  });
+
+  test('show warnings when default value is less than min value', () => {
+    view.options.defaultValue = 30;
+    view.options.max = 20;
+    jest.spyOn(view, 'showWarnings');
+    view.showWarnings();
+    expect(view.showWarnings).toHaveBeenCalled();
+  });
+
+  test('show warnings when second value is less than min value (multithumb)', () => {
+    view.options.isMultiThumb = true;
+    view.options.defaultValue = 25;
+    view.options.valueSecond = 35;
+    view.options.max = 20;
+    jest.spyOn(view, 'showWarnings');
+    view.showWarnings();
+    expect(view.showWarnings).toHaveBeenCalled();
+  });
+
+  test('show warnings when second value is less than first value', () => {
+    view.options.isMultiThumb = true;
+    view.options.defaultValue = 30;
+    view.options.valueSecond = 15;
+    jest.spyOn(view, 'showWarnings');
+    view.showWarnings();
+    expect(view.showWarnings).toHaveBeenCalled();
+  });
 
   // test('mousedown on Track should call clickOnBar function', () => {
   //   const viewCopyProto = Object.getPrototypeOf(viewCopy);
@@ -117,14 +159,14 @@ describe('test view', () => {
   //   expect(data.defaultValue).toBe(5);
   // });
 
-  test('input event calls update method with default settings', () => {
-    const viewCopyProto = Object.getPrototypeOf(viewCopy);
-    // const formCopyProto = Object.getPrototypeOf(formCopy);
-    jest.spyOn(viewCopyProto, 'update');
-    // formCopyProto.createInput(false);
-    viewCopyProto.onInput(true)();
-    expect(viewCopyProto.update).toHaveBeenCalledWith(50, true);
-  });
+  // test('input event calls update method with default settings', () => {
+  //   const viewCopyProto = Object.getPrototypeOf(viewCopy);
+  //   // const formCopyProto = Object.getPrototypeOf(formCopy);
+  //   jest.spyOn(viewCopyProto, 'update');
+  //   // formCopyProto.createInput(false);
+  //   viewCopyProto.onInput(true)();
+  //   expect(viewCopyProto.update).toHaveBeenCalledWith(50, true);
+  // });
 
   // test('input event calls update method with non-default settings', () => {
   //   const viewCopyProto = Object.getPrototypeOf(viewCopy);

@@ -24,7 +24,7 @@ class View {
 
   private ticks: TicksView;
 
-  private bar: BarView;
+  bar: BarView;
 
   thumb: ThumbView;
 
@@ -115,10 +115,7 @@ class View {
         ticksValues[i].element.addEventListener('click', this.onClick(ticksValues[i].value));
       }
     }
-    this.showWarningsForMaxAndMin();
-    this.showWarningForWrongDefaultAndMaxValues();
-    this.showWarningForWrongDefaultAndMinValues();
-    this.showWarningSecondValIsLessThanFirst();
+    this.showWarnings();
   };
 
   private createWrapper = () => {
@@ -240,6 +237,13 @@ class View {
   private onClick = (newValue: number) => () => {
     this.update(newValue, true);
   };
+
+  showWarnings() {
+    this.showWarningsForMaxAndMin();
+    this.showWarningForWrongDefaultAndMaxValues();
+    this.showWarningForWrongDefaultAndMinValues();
+    this.showWarningSecondValIsLessThanFirst();
+  }
 
   private showWarningsForMaxAndMin() {
     if (this.options.min >= this.options.max) {
