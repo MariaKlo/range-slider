@@ -10,11 +10,11 @@ class View {
   // vars for view
   private parent: HTMLElement | JQuery<HTMLElement>;
 
-  private wrapper!: HTMLDivElement;
+  wrapper!: HTMLDivElement;
 
   private warning!: HTMLElement;
 
-  private track!: HTMLDivElement;
+  track!: HTMLDivElement;
 
   protected input!: HTMLInputElement;
 
@@ -28,7 +28,7 @@ class View {
 
   thumb: ThumbView;
 
-  private form!: FormView;
+  form!: FormView;
 
   options!: Options;
 
@@ -85,7 +85,9 @@ class View {
       this.clickOnBar(elem);
     };
 
-    this.setStep();
+    if (this.options.step) {
+      this.setStep();
+    }
 
     if (this.options.isVertical) {
       this.wrapper.classList.add('range-slider_vertical');
@@ -182,7 +184,7 @@ class View {
     this.thumb.placeThumb(this.options.isMultiThumb, placeDefault, placeRight);
   };
 
-  private onInput = (isDefault: boolean) => {
+  onInput = (isDefault: boolean) => {
     if (isDefault) {
       return () => {
         this.update(Number(this.form.input.value), true);
@@ -219,7 +221,7 @@ class View {
     this.onClick(newValue)();
   };
     
-  private update = (newValue: number, isDefault: boolean) => {
+  update = (newValue: number, isDefault: boolean) => {
     if (isDefault) {
       this.options.defaultValue = newValue;
     } else {

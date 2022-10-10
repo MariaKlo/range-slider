@@ -1,14 +1,9 @@
 import Model from './Model';
-// import { Observer, IObserverModel } from '../Observer/Observer';
 
 describe('test model', () => {
   let model: Model;
 
   let modelCopy: Model;
-
-  // let observers: IObserverModel;
-
-  // let observer: Observer;
 
   const data = {
     max: 100,
@@ -28,7 +23,6 @@ describe('test model', () => {
   beforeEach(() => {
     model = new Model(data);
     modelCopy = new Model(data);
-    // observer = new Observer();
   });
 
   test('max value set to 100 if not defined', () => {
