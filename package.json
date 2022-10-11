@@ -8,7 +8,8 @@
     "build": "webpack --config webpack.prod.js",
     "start": "webpack serve --mode development",
     "test": "jest --collect-coverage",
-    "lint": "./node_modules/.bin/eslint"
+    "lint": "./node_modules/.bin/eslint",
+    "deploy": "gh-pages -d docs -r https://github.com/MariaKlo/range-slider.git"
   },
   "author": "Maria Klochkova",
   "license": "ISC",
