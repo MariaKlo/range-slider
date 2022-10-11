@@ -14,7 +14,7 @@
 <p>Include imports to your js files:</p>
 <p>import '/path/to/docs/slider.js'</p>
 <p>import '/path/to/docs/slider.css'</p>
-<p>And add api to any HTML-teg you want with the following options:</p>
+<p>And add api to any HTML-teg nad any class/id you want with the following default options:</p>
 <p>$('your_class/id').sliderPlugin({</p>
 <p>max: 100,</p>
 <p>min: 0,</p>
@@ -25,7 +25,6 @@
 <p>showBubble: false,</p>
 <p>isVertical: false,</p>
 <p>showTicks: false,</p>
-<p>ticksValues: [],</p>
 <p>barColor: 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)',</p>
 <p>thumbColor: 'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)',</p>
 <p>bubbleColor: '#eac966'</p>
@@ -94,12 +93,6 @@
 			<td>false - no scale showed, true - shows scale above slider or on the right side for vertical slider</td>
 		</tr>
 		<tr>
-			<td>ticksValues</td>
-			<td>[]</td>
-			<td>Array of numbers</td>
-			<td>Sets numbers for scale</td>
-		</tr>
-		<tr>
 			<td>barColor</td>
 			<td>'linear-gradient(180deg, #cf6f7f 0%, #ea6666 100%)'</td>
 			<td>String</td>
@@ -137,7 +130,6 @@
 <ul>
   <li>barView: creates progress bar for slider</li>
   <li>formView: creates HTML elements for slider</li>
-  <li>stepView: sets step for slider</li>
   <li>thumbView: creates thumbs and bubble elements (bubble is an element above thumb)</li>
   <li>ticksView: creates scale</li>
 </ul>
@@ -146,5 +138,9 @@
 <br>
 <p>Presenter is subscribed on Model and View, reacts on changes and updates them. Gives data from View to Model and vice versa.</p>
 <br>
+<p><b>Observer</b></p>
+<br>
+<p>Observer handles updates made in both View and Model. Observer notifies Model when View is updated and vice versa: Observer notifies View when Model is updated.</p>
+<br>
 <h3>UML-diagram</h3>
-<img src="https://user-images.githubusercontent.com/56316185/175525912-004fb53f-78b8-4783-b29a-ee5dcd7e7a16.png" alt="uml">
+<img src="https://github.com/MariaKlo/range-slider/blob/master/uml/uml.png" alt="uml">
