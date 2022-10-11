@@ -1,11 +1,11 @@
 class ThumbView {
-  private firstThumb!: HTMLElement;
+  firstThumb!: HTMLElement;
 
-  private secondThumb!: HTMLElement;
+  secondThumb!: HTMLElement;
 
-  private showBubble!: HTMLElement;
+  showBubble!: HTMLElement;
 
-  private showSecondBubble!: HTMLElement;
+  showSecondBubble!: HTMLElement;
 
   init(parent: HTMLElement, isDouble: boolean, toggleElement: boolean, defaultValue: number,
     secondValue?: number) {

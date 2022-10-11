@@ -4,9 +4,9 @@ import { Observer, IObserverModel } from '../Observer/Observer';
 class Model {
   optionsForView!: Options;
 
-  private max!: number;
+  max!: number;
 
-  private min!: number;
+  min!: number;
 
   step!: number;
 
@@ -14,7 +14,7 @@ class Model {
 
   valueSecond!: number;
 
-  private isMultiThumb!: boolean;
+  isMultiThumb!: boolean;
 
   private showBubble!: boolean;
 

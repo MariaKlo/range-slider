@@ -26,28 +26,24 @@ describe('test model', () => {
   });
 
   test('max value set to 100 if not defined', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    modelCopyProto.max = 100;
-    expect(modelCopyProto.max).toEqual(100);
+    model.max = 100;
+    expect(model.max).toEqual(100);
   });
 
   test('default value is set', () => {
     const newDefaultValue = 35;
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    modelCopyProto.setDefaultValue(newDefaultValue);
-    expect(modelCopyProto.defaultValue).toBe(newDefaultValue);
+    model.setDefaultValue(newDefaultValue);
+    expect(model.defaultValue).toBe(newDefaultValue);
   });
 
   test('second value is set', () => {
     const newValueSecond = 123;
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    modelCopyProto.setSecondValue(newValueSecond);
-    expect(modelCopyProto.valueSecond).toBe(newValueSecond);
+    model.setSecondValue(newValueSecond);
+    expect(model.valueSecond).toBe(newValueSecond);
   });
 
   test('values for ticks recieved', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    expect(modelCopyProto.getTicks(1, false)).toEqual([]);
+    expect(model.getTicks(1, false)).toEqual([]);
   });
 
   test('step is overwritten when it is less or equal to 0', () => {
@@ -59,10 +55,9 @@ describe('test model', () => {
 
   test('get array for ticks values when step does not fit', () => {
     // even if it doesn't fit the step
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    modelCopyProto.step = 5;
-    modelCopyProto.max = 16;
-    expect(modelCopyProto.getTicks(5, true)).toEqual([]);
+    model.step = 5;
+    model.max = 16;
+    expect(model.getTicks(5, true)).toEqual([]);
   });
 
   test('nearest value is calculated', () => {
@@ -73,48 +68,43 @@ describe('test model', () => {
   });
 
   test('update is called with limit toggle and limit step', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'update');
-    modelCopyProto.update(40, true);
-    jest.spyOn(modelCopyProto, 'limitToggle');
-    modelCopyProto.limitToggle(40, true);
-    jest.spyOn(modelCopyProto, 'limitStep');
-    modelCopyProto.limitStep(40, true);
-    expect(modelCopyProto.limitToggle).toHaveBeenCalled();
-    expect(modelCopyProto.limitStep).toHaveBeenCalled();
+    jest.spyOn(model, 'update');
+    model.update(40, true);
+    jest.spyOn(model, 'limitToggle');
+    model.limitToggle(40, true);
+    jest.spyOn(model, 'limitStep');
+    model.limitStep(40, true);
+    expect(model.limitToggle).toHaveBeenCalled();
+    expect(model.limitStep).toHaveBeenCalled();
   });
 
   test('default value set to the new normal value when it fits the step', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'setDefaultValue');
-    modelCopyProto.step = 5;
-    modelCopyProto.limitStep(5, true);
-    expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(5);
+    jest.spyOn(model, 'setDefaultValue');
+    model.step = 5;
+    model.limitStep(5, true);
+    expect(model.setDefaultValue).toHaveBeenCalledWith(5);
   });
 
   test('default value set to the proper value when it does not fit the step', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'setDefaultValue');
-    modelCopyProto.step = 7;
-    modelCopyProto.limitStep(7, true);
-    expect(modelCopyProto.setDefaultValue).toHaveBeenCalledWith(5);
+    jest.spyOn(model, 'setDefaultValue');
+    model.step = 7;
+    model.limitStep(7, true);
+    expect(model.setDefaultValue).toHaveBeenCalledWith(7);
   });
 
   test('default value (when two thumbs) set to the proper value when it does not fit the step', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'setSecondValue');
-    modelCopyProto.step = 23;
-    modelCopyProto.limitStep(23, false);
-    expect(modelCopyProto.setSecondValue).toHaveBeenCalledWith(23);
+    jest.spyOn(model, 'setSecondValue');
+    model.step = 23;
+    model.limitStep(23, false);
+    expect(model.setSecondValue).toHaveBeenCalledWith(23);
   });
 
   test('update multi values and limit toggle', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'limitToggle');
-    modelCopyProto.step = 1;
-    modelCopyProto.isMultiThumb = true;
-    modelCopyProto.update(10, true);
-    expect(modelCopyProto.limitToggle).toHaveBeenCalledWith(10, true);
+    jest.spyOn(model, 'limitToggle');
+    model.step = 1;
+    model.isMultiThumb = true;
+    model.update(10, true);
+    expect(model.limitToggle).toHaveBeenCalledWith(10, true);
   });
 
   test('getTicks is called when array is received', () => {
@@ -124,19 +114,17 @@ describe('test model', () => {
   });
 
   test('second value set to the new value when it fits the step', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'setSecondValue');
-    modelCopyProto.step = 1;
-    modelCopyProto.limitStep(50, false);
-    expect(modelCopyProto.setSecondValue).toHaveBeenCalledWith(50);
+    jest.spyOn(model, 'setSecondValue');
+    model.step = 1;
+    model.limitStep(50, false);
+    expect(model.setSecondValue).toHaveBeenCalledWith(50);
   });
 
   test('update values when limitedStep is called', () => {
-    const modelCopyProto = Object.getPrototypeOf(modelCopy);
-    jest.spyOn(modelCopyProto, 'limitStep');
-    modelCopyProto.isMultiThumb = false;
+    jest.spyOn(model, 'limitStep');
+    model.isMultiThumb = false;
     model.update(10, false);
-    expect(modelCopyProto.limitStep).toHaveBeenCalled();
+    expect(model.limitStep).toHaveBeenCalled();
   });
 
   test('default value is set when limitStep is called', () => {

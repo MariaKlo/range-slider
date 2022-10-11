@@ -11,6 +11,7 @@ describe('test view', () => {
     formCopy = new FormView();
     form.init(document.body, true, 0, 100);
   });
+
   afterEach(() => {
     document.body.innerHTML = '';
   });
@@ -21,6 +22,7 @@ describe('test view', () => {
     formCopyProto.createInput(false);
     formCopyProto.setMax(false, 50);
     expect(formCopyProto.input.max).toBe('50');
+    
     formCopyProto.createInput(true);
     formCopyProto.setMax(true, undefined);
     expect(formCopyProto.input.max).toBe('100');
@@ -33,6 +35,7 @@ describe('test view', () => {
     formCopyProto.createInput(false);
     formCopyProto.setMin(false, 20);
     expect(formCopyProto.input.min).toBe('20');
+
     formCopyProto.createInput(true);
     formCopyProto.setMin(true, 0);
     expect(formCopyProto.input.min).toBe('0');
@@ -40,8 +43,8 @@ describe('test view', () => {
   });
 
   test('default value is set correctly', () => {
-    const formCopyProto = Object.getPrototypeOf(formCopy);
-    formCopyProto.setValues(false, 20);
-    expect(formCopyProto.input.value).toBe('20');
+    // const formCopyProto = Object.getPrototypeOf(formCopy);
+    form.setValues(false, 20);
+    expect(form.input.value).toBe('20');
   });
 });
